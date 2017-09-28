@@ -1,7 +1,10 @@
-# lspt_project1
+# lspt_project1: Z
 Large Scale Programming &amp; Testing Project 1 (Search Engine Architecture)
 
-Team "Z"
+Members:
+* Lee Cattarin
+* Charles Schmitter
+* Zachary Wimer
 
 # Design preferences:
 1. Indexing: Map out where in each document any given word can be found. Notate extant fields like title and author.

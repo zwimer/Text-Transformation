@@ -1,0 +1,57 @@
+@startuml
+participant Web
+participant Crawler
+database "Main database"
+participant "Link Analysis"
+participant "Text transformation"
+participant Index
+participant Ranking
+participant "Search queries/retrieval"
+actor User
+
+group Thread one
+Crawler -> Crawler: Decides website must be indexed
+
+loop While websites must be indexed
+Crawler -> Web: Request Website
+Web -> Crawler: Send website html
+Crawler -> Crawler: Mark website as visited
+Crawler -> "Link Analysis": Send html
+"Link Analysis" -> "Link Analysis": Determine what links to links
+"Link Analysis" -> "Link Analysis": Determine importance of links
+"Link Analysis" -> "Main database": Store link analysis results
+"Link Analysis" -> Crawler: Return list of links
+Crawler -> Crawler: Add new links to todo list
+Crawler -> "Text transformation": Send html
+"Text transformation" -> "Text transformation": Strip html data from the next itself
+"Text transformation" -> "Text transformation": Transform text as needed
+"Text transformation" -> Index: Send relevant text
+Index -> Index: Index words and analyzes text as needed
+Index -> "Main database": Store text analysis results
+end
+
+end
+
+Group Thread 2
+User -> "Search queries/retrieval": User makes query
+"Search queries/retrieval" -> Ranking: Requests rank list on search query
+Ranking -> Ranking: Decides what is related to search query
+Ranking -> Index: Request all documents from index containing the query or related
+Index -> "Main database": Request all documents from index containing the query or related
+"Main database" -> Index: Return all documents requested
+Index -> Ranking: Return all documents requested
+Ranking -> "Link Analysis": Request link analysis data
+"Link Analysis" -> "Main database": Request link analysis data
+"Main database" -> "Link Analysis": Return requested data
+"Link Analysis" -> Ranking: Return requested data
+Ranking -> Ranking: Process all documents and rank them
+Ranking -> "Search queries/retrieval": Return ranked list of documents
+"Search queries/retrieval" -> Index: 
+"Search queries/retrieval" -> "Main database": Request metadata of document to present to user
+"Main database" -> "Search queries/retrieval": Return metadata of document to present to user
+"Search queries/retrieval" -> User: Present user with options
+User -> "Search queries/retrieval": Selects choice
+"Search queries/retrieval" -> User: Gives requested link
+end
+
+@enduml

@@ -1,4 +1,5 @@
 @startuml
+
 participant Web
 participant Crawler
 database "Main database"
@@ -11,7 +12,6 @@ actor User
 
 group Thread one
 Crawler -> Crawler: Decides website must be indexed
-
 loop While websites must be indexed
 Crawler -> Web: Request Website
 Web -> Crawler: Send website html
@@ -25,11 +25,11 @@ Crawler -> Crawler: Add new links to todo list
 Crawler -> "Text transformation": Send html
 "Text transformation" -> "Text transformation": Strip html data from the next itself
 "Text transformation" -> "Text transformation": Transform text as needed
+"Text transformation" -> "Main database": Send metadata to database
 "Text transformation" -> Index: Send relevant text
 Index -> Index: Index words and analyzes text as needed
 Index -> "Main database": Store text analysis results
 end
-
 end
 
 Group Thread 2
@@ -53,5 +53,4 @@ Ranking -> "Search queries/retrieval": Return ranked list of documents
 User -> "Search queries/retrieval": Selects choice
 "Search queries/retrieval" -> User: Gives requested link
 end
-
 @enduml

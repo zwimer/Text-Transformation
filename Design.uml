@@ -1,5 +1,7 @@
 @startuml
 
+scale max 2000 width
+
 participant Web
 participant Crawler
 database "Main database"
@@ -58,3 +60,4 @@ Ranking -> "Search queries/retrieval": Return ranked list of documents
 User -> "Search queries/retrieval": Selects choice
 end
 @enduml
+

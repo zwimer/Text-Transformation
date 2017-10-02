@@ -16,7 +16,7 @@ loop While websites must be indexed
 Crawler -> Web: Request Website
 Web -> Crawler: Send website html
 Crawler -> Crawler: Mark website as visited
-Crawler -> "Link Analysis": Send html
+Crawler -> Crawler: Discard binary (pdf, doc, image, etc) and code files
 "Link Analysis" -> "Link Analysis": Determine what links to links
 "Link Analysis" -> "Link Analysis": Determine importance of links
 "Link Analysis" -> "Main database": Store link analysis results
@@ -24,16 +24,21 @@ Crawler -> "Link Analysis": Send html
 Crawler -> Crawler: Add new links to todo list
 Crawler -> "Text transformation": Send html
 "Text transformation" -> "Text transformation": Strip html data from the next itself
+"Text transformation" -> "Text transformation": Strip scripts from within html
+"Text transformation" -> "Text transformation": Remove stop words, unify conjugations
 "Text transformation" -> "Text transformation": Transform text as needed
-"Text transformation" -> "Main database": Send metadata to database
-"Text transformation" -> Index: Send relevant text
-Index -> Index: Index words and analyzes text as needed
+"Text transformation" -> "Text transformation": Pull metadata (tags, title, date, etc)
+"Text transformation" -> Index: Send relevant text and metadata
+Index -> Index: Index words (& bigrams, trigrams?)
+Index -> Index: Add analysis from metadata and doc statistics
 Index -> "Main database": Store text analysis results
 end
 end
 
 Group Thread 2
 User -> "Search queries/retrieval": User makes query
+"Search queries/retrieval" -> "Search queries/retrieval": Start performance timer
+"Search queries/retrieval" -> "Search queries/retrieval": Remove stop words, unify conjugations
 "Search queries/retrieval" -> Ranking: Requests rank list on search query
 Ranking -> Ranking: Decides what is related to search query
 Ranking -> Index: Request all documents from index containing the query or related
@@ -44,13 +49,12 @@ Ranking -> "Link Analysis": Request link analysis data
 "Link Analysis" -> "Main database": Request link analysis data
 "Main database" -> "Link Analysis": Return requested data
 "Link Analysis" -> Ranking: Return requested data
-Ranking -> Ranking: Process all documents and rank them
+Ranking -> Ranking: Process all documents and rank them (Model? Scoring?)
 Ranking -> "Search queries/retrieval": Return ranked list of documents
-"Search queries/retrieval" -> Index: 
 "Search queries/retrieval" -> "Main database": Request metadata of document to present to user
 "Main database" -> "Search queries/retrieval": Return metadata of document to present to user
+"Search queries/retrieval" -> "Search queries/retrieval": End performance timer
 "Search queries/retrieval" -> User: Present user with options
 User -> "Search queries/retrieval": Selects choice
-"Search queries/retrieval" -> User: Gives requested link
 end
 @enduml

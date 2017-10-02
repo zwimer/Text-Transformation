@@ -12,3 +12,10 @@ Members:
 2. Ranking: Use inlink analysis and index date (with bi/tri-gram analysis) to generate a ranked list of documents for a search query
 
 3. Text transformation: Strip out html tags and clean text to prepare it for indexing. Potentially find and order metadata like title, author, date, tags, etc.
+
+# Progress
+For Thursday: writing pseudocode to summarize what needs to be done for each of the above problems
+
+1. Indexing: Zachary Wimer
+2. Ranking: Charlie Schmitter
+3. Text Transformation: Lee Cattarin

@@ -1,0 +1,46 @@
+pep8 coding standard
+
+UTF 8, 16, Ascii ?
+	Open as plain text, live with consequences
+MD, HTML, plain text?
+Binary files... ?
+
+Strip all non-ascii
+
+Interfaces:
+
+TextTransformation:
+	static void parse ( const char * filename );
+
+Call:
+	Index:
+		void process_text ( const char * plain_text_filename, const char * metadata_filename );
+
+Coding Standard:
+	pep8
+Test plan:
+	Black box
+	White box - if needed
+		Will decide in the future depending on corner cases
+Metrics:
+	Search engine quality:
+		1. Test case pass rate
+			Test metadata output
+		2. Ease of use
+
+	Software development process:
+		1. Test coverage:
+			Maintain high branch coverage
+			Can add white box tests to achieve this
+		2. Code Reviews
+
+		*3: Schedule
+
+	Code base:
+		1. Readbility
+			Comments
+			Coding standard
+		2. Organization
+			Split into proper number of files
+			Good class structure
+			Functions placed near other related functions

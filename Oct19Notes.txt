@@ -1,0 +1,30 @@
+Preferred dates (in order):
+  Thurs, Nov 2
+  Thurs, Oct 26
+  Mon, Oct 30 (One group member cannot attend)
+
+HTML: Assumption that we can only do this for properly formatted HTML
+  ||
+  \/
+Remove comments
+Remove script
+Remove CSS
+Remove metadata ==> Metadata parse
+  ||
+  \/
+Remove HTML ==> Further metadata parse?
+      ==> If markdown, start here
+      ==> remove markdown characters
+Further split on delimiters (punctuation) <== This is where plain text starts
+Remove special characters
+  ||
+Final result: Something that is parseable as a series of "text blocks"
+with only alphanumeric characters, single quotes in the context of words
+  ||
+  \/
+Parse through, accounting for stop words, to find single words,
+bigrams, and trigrams
+Store locations for these terms
+  ||
+  \/
+Output JSON

@@ -37,6 +37,6 @@ Test writeup:
 Descriptions with small examples
 
 Tests on:
-- whole system (main p much) (interfaces)
-- HTML (and other) parser (internal component)
-- N-gram creator (internal component)
+- whole system (main p much) (interfaces) - Zach
+- HTML (and other) parser (internal component) - Charlie
+- N-gram creator (internal component) - Lee

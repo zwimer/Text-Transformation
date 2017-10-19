@@ -1,7 +1,7 @@
 Preferred dates (in order):
   Thurs, Nov 2
   Thurs, Oct 26
-  Mon, Oct 30 (One group member cannot attend)
+  Mon, Oct 30
 
 HTML: Assumption that we can only do this for properly formatted HTML
   ||
@@ -28,3 +28,15 @@ Store locations for these terms
   ||
   \/
 Output JSON
+
+Test writeup:
+- Setup
+- Input
+- Output
+- Side effects
+Descriptions with small examples
+
+Tests on:
+- whole system (main p much) (interfaces)
+- HTML (and other) parser (internal component)
+- N-gram creator (internal component)

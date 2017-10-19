@@ -1,0 +1,46 @@
+Identify non-ascii delimiter to be used as a 'break delimiter'
+
+Assumptions:
+	If html is illformed, no promises
+	Markdown:
+		No html
+		No escape
+	No html in markdown
+	No escape in markdown
+
+Parsers:
+	HTML
+		TODO:
+			Identify 'break tags'
+			Identify 'break characters'
+			Identify 'search terms'
+				- Numbers
+				- Words
+
+		1. Then comments
+		2. No script tags
+		3. Strip out CSS
+		4. Pull meta-data from tags
+			Grab title
+			All meta data tags are pulled
+		5. Remove html tags
+			- Insert non-ascii delimiter at html tags
+		6. Remove special characters
+		7. Remove punctuation
+		7. Simplify whitespace
+		8. .split(delimiter) -> list of strings
+		9. [ .split(' ') for each i ] -> list of list of words
+
+	Plain text:
+		1. Remove punctuation
+		2. Simplify whitespace
+		3. .split(delimiter) -> list of strings
+		4. [ .split(' ') for each i ] -> list of list of words
+
+	MD:
+		1. Remove things between [ and ], as well as between `s and ```s (etc)
+		2. Remove punctuation
+		3. Simplify whitespace
+		4. .split(delimiter) -> list of strings
+		5. [ .split(' ') for each i ] -> list of list of words
+

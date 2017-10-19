@@ -10,3 +10,17 @@ Notes with other Text Transformation team:
     - write to file
     - close file
     - move file to indexing's directory so there is no permissions issue
+
+OTHER TEAM'S NOTES:
+-- For your component, determine what you need for persistent data storage
+    and what information you need from elsewhere within the system
+Storage: JSON file for each parsed web document with search terms (1 gram,
+bigram and trigram), and meta data (page title, author, tags, date)
+Stop words for n-grams: pull from list of stop words created and maintained
+by indexing, top 50 english words, punctuation
+Need: .txt file of raw text from webcrawler of each page to be parsed
+
+-- Also figure out here what information you can provide to other components
+The primary information provided to the other components comes from the outputted,
+ formatted JSON files that are made for each web page that the crawler sends to
+ the text transformation component.

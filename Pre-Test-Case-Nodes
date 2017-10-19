@@ -44,3 +44,17 @@ Parsers:
 		4. .split(delimiter) -> list of strings
 		5. [ .split(' ') for each i ] -> list of list of words
 
+
+
+Structure:
+
+	master ( filename ) :
+		[ words, meta ] = parser ( filename.read() )
+		out = n-gram-creator ( words )
+		out.add(meta)
+
+	parser ( text ):
+		return list list words 	
+
+	n-gram-creator( list list words ):
+		return dict n-grams-to-freq

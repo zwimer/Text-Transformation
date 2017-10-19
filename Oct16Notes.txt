@@ -1,0 +1,12 @@
+Notes with other Text Transformation team:
+  - indexing should handle n-grams
+  - store all output in JSON
+    - metadata
+    - word list
+  - either:
+*   - be called from crawler with specific filename (one instance handles file)
+    - watch a directory for new files
+  - IF indexing is pulling from a directory:
+    - write to file
+    - close file
+    - move file to indexing's directory so there is no permissions issue

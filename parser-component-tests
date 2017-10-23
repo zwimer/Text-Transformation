@@ -1,0 +1,182 @@
+=====HTML======
+html_parser:
+input = raw html
+output = list of lists of words:
+  -each list contains the list of words within a delimiter (delimiter being all tags not including b, em, ul)
+  -delimiter is set of constants, tags such as <p> <br> etc
+
+BASIC CASE:
+simply parses the text between an opening and closing tag
+
+input = "correct" html, i.e:
+
+      ...
+        <h1> HELLO FRIENDS </h2>
+      ...
+
+output = [[hello, friends]]
+
+PUNCTUATION:
+should ignore punctuation
+
+input =
+      ...
+        <h1> hello! friends, and; world!...hi </h1>
+      ...
+
+output = [[hello, friends, and, world, hi]]
+
+WHITESPACE:
+should ignore extraneous whitespace
+
+input =
+      ...
+        <h1> hello      world </h1>
+      ...
+
+output = [[hello, world]]
+
+COMMENTS:
+content within comments should not be sent to index
+
+input =
+      ...
+        <!-- do not add this! -->
+      ...
+
+output = []
+
+SCRIPT TAGS:
+content within script tags should not be sent to index
+
+input =
+      ...
+        <script type="text/javascript">
+          script stuff here
+        </script>
+      ...
+
+output = []
+
+CSS:
+content within style tags should also not be sent to index
+
+input =
+      ...
+        <style>
+          .a-style{
+            width: 10%;
+          }
+        </style>
+      ...
+
+output = []
+
+SPECIAL CHARACTERS:
+special characters should not be parsed i.e. &amp;
+
+input =
+      ...
+        <h2>friends &amp; me</h2>
+      ...
+
+output = [[friends, me]]
+
+
+
+MULTILINE HTML TAGS:
+content on multiple lines should be parsed appropriately
+
+input =
+      ...
+        <h2>
+          hello world
+        </h2>
+      ...
+
+output = [[hello, world]]
+
+NESTED ELEMENTS:
+should separate the nested text into separate list
+
+input =
+      ...
+        <h1> HELLO <p>FRIENDS<\p> </h2>
+      ...
+
+output = [[hello], [friends]]
+
+IGNORED HTML TAG DELIMITERS:
+ignore the <b>, <em>, <u> tags
+
+input =
+      ...
+        <h1> <b>HELLO<\b> <u><\u> <em>FRIENDS<\em> </h2>
+      ...
+
+output = [[hello, friends]]
+
+META TAGS:
+handled by whole component tests...
+
+TO LOWER CASE:
+Upper/mixed case should be converted to lower case for consistency
+
+previous test cases demonstrate this test...
+
+MALFORMED HTML:
+undefined behavior; no tests for these
+
+=====PLAINTEXT======
+plaintext_parser:
+input = raw plaintext
+output = list of list of words:
+  -each list contains the set of words within a delimiter
+  -delimiter is punctuation ending sentences (?)
+   i.e. periods, question marks, exclamation marks
+
+BASIC CASE:
+simple block of text
+i.e. "this is a sentence" -> [[this, is, a, sentence]]
+
+LOWER CASE:
+repeat html to lower case
+i.e. "HeLLo PaLs" -> [[hello, pals]]
+
+WHITESPACE:
+repeat html whitespace test
+i.e. "hello        world" -> [[hello, world]]
+
+PUNCTUATION:
+text within blocks of sentence-ending punctuation should have separate lists
+ignore other punctuation
+i.e. "hello! friends, and; world!...hi" -> [[hello], [friends, and, world], [hi]]
+
+
+=====MARKDOWN======
+md_parser:
+input = raw markdown
+output = list of lists of words:
+  -each list contains the set of words within a delimiter
+  -delimiter is whitespace (can use regex for  1+ whitespace)
+
+LOWER CASE:
+repeat html to lower case
+i.e. "HeLLo PaLs" -> [[hello, pals]]
+
+CODE BLOCKS:
+do not parse text within `` (code blocks)
+i.e. "this is code: `printf("hello\n")` wow" -> [this,is, code, wow]
+
+WHITESPACE:
+repeat html whitespace test
+i.e. "hello        world" -> [[hello, world]]
+
+PUNCTUATION:
+text within blocks of sentence-ending punctuation should have separate lists
+ignore other punctuation
+i.e. "List: *item1 *item2". My favorite list!"" -> [[list, item1, item2], [my, favorite, list]]
+
+LINKS:
+strip out things in brackets, but remove things within parens
+i.e. "Click [here](freestuff.com) for free stuff" -> [[click, here, for, free, stuff]]

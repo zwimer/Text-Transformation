@@ -1,0 +1,108 @@
+Assume we have the two internal components working correctly:
+	text_sanitizer(x) -> sanitized text
+	ngram_finder(x) -> list of ngrams
+	We aren't testing to see if they can do their jobs
+	
+Test cases:
+
+// Basic, test that the comonents work together
+master(x):
+	assert(ngram_finder(text_sanitizer(x)) == <All ngrams in x>)
+
+
+// Basic html
+A = '''
+	<title> Hello World </title>
+	<meta name="author" content="John Doe">
+	.
+	.
+	.
+'''
+
+master(A) should return ngrams of A and a meta-data struct containing:
+{
+	"title":{ "indicies":[0], "string":"Hello World" },
+	"author":{ "indicies":[2], "string":"John Doe" }
+}
+	
+// Basic html
+A = '''
+	<title> Hello World </title>
+	<meta name="author" content="John Doe">
+	.
+	.
+	.
+'''
+
+master(A) should return ngrams of A and a meta-data struct containing:
+{
+	"title":{ "indicies":[0], "string":"Hello World" },
+	"author":{ "indicies":[2], "string":"John Doe" }
+}
+	
+
+// Basic html
+B = '''
+	<head>
+	</head>
+	.
+	.
+	.
+	<body>
+	</body>
+	<title> Hello World </title>
+	<meta name="author" content="John Doe">
+'''
+
+master(B) should return ngrams of B and a meta-data struct containing:
+{
+	"title":{ "indicies":[0], "string":"Hello World" },
+	"author":{ "indicies":[2], "string":"John Doe" }
+}
+
+	
+// Basic html
+C = '''
+	<meta name="author" content="John Doe">
+	.
+	.
+	.
+'''
+
+master(A) should return ngrams of C and a meta-data struct containing:
+{
+	"author":{ "indicies":[2], "string":"John Doe" }
+}
+	
+
+// Basic html
+D = '''
+	<meta name="title" content="Hello World">
+	<meta name="author" content="John Doe">
+	.
+	.
+	.
+'''
+
+master(D) should return ngrams of D and a meta-data struct containing:
+{
+	"title":{ "indicies":[0], "string":"Hello World" },
+	"author":{ "indicies":[2], "string":"John Doe" }
+}
+	
+
+// Basic html, title tag should take preference of meta title tag
+E = '''
+	<title> Hello World </title>
+	<meta name="title" content="Banana">
+	<meta name="author" content="John Doe">
+	.
+	.
+	.
+'''
+
+master(E) should return ngrams of E and a meta-data struct containing:
+{
+	"title":{ "indicies":[0], "string":"Hello World" },
+	"author":{ "indicies":[2], "string":"John Doe" }
+}

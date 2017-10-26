@@ -1,0 +1,77 @@
+N-gram tests
+
+Setup is always the system after HTML parsing
+Or if run as unit tests, no setup other than calling
+parser function
+
+There are no side effects
+
+Trivial cases:
+==============
+- input: [] or [[],[],...]
+- output: empty dict
+
+- input: null/ None
+- output: empty dict
+
+- input: incorrect type OR list of anything other than lists
+- output: empty dict
+
+- input: only whitespace (spaces, newlines, tabs)
+- output: empty dict
+    any given 2nd level list of only whitespace will not add to output
+
+Basic cases:
+============
+\stop is used here to indicate a stop word
+
+a b and c are assumed to be any alphanumerical string with no
+stop words. single quotes within the word are allowed.
+
+The dictionary outputs shown put location in lists, but for
+brevity I will only write lists when necessary
+
+===Delimiters===
+- input: [[a],[b],[c]]
+- output: {a: 0, b: 1, c: 2}
+
+- input: [[a b],[c]]
+- output: {a: 0, b: 1, c: 2, a b: 0}
+
+- input: [[a b c]]
+- output: {a: 0, b: 1, c: 2, a b: 0, b c: 1, a b c: 0}
+
+===Stop words===
+- input: [[a \stop b \stop c]]
+- output: {a: 0, b: 1, c: 2}
+
+- input: [[a b \stop c]]
+- output: {a: 0, b: 1, c: 2, a b: 0}
+
+- input: [[a b c \stop]]
+- output: {a: 0, b: 1, c: 2, a b: 0, b c: 1, a b c: 0}
+
+===N-gram length===
+- input: [[a b c d]]
+- output: {a: 0, ..., a b c: 0, b c d: 1}
+
+===Repeated terms===
+- input [[a],[a b]]
+- output: {a: [0,1], b: 2, a b: 1}
+
+- input: [[a b c a b]]
+- output: {a: [0, 3], b:[1, 4], c: [2], a b: [0, 3], b c: [1],
+    c a: [2], a b c: [0], b c a: [1], c a b: [2]}
+
+===Single quotes===
+- input: [["don't"]]
+- output: {"don't": 0}
+
+- input: [["runnin'"]]
+- output: {"runnin": 0}
+
+- input: [["'stop'"]]
+- output: {"stop": 0}
+
+- input: [["y'all'd've"]]
+- output: {"y'all'd've": 0}

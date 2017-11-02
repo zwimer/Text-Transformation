@@ -1,0 +1,24 @@
+{
+	"title" : {
+		"title" : Null
+		"indicies" : []
+	},
+	"metadata" : {
+		"author": "meg"
+	},
+	"ngrams" : {
+		1 : {
+			"meg" : [ 0 ],
+			"hello" : [ 1 ],
+			"world" : [ 2 ],
+			"book" : [ 3 ]
+		},
+		2 : {
+			"hello world" : [ 1 ],
+			"world book" : [ 2 ]
+		},
+		3 : {
+			"hello world book" : [ 1 ]
+		}
+	}
+}

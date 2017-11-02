@@ -1,0 +1,29 @@
+{
+	"title" : {
+		"title" : "my amazing book",
+		"indicies" : [ 0 ]
+	},
+	"metadata" : {
+		"author": "meg"
+	},
+	"ngrams" : {
+		1 : {
+			"my" : [ 0 ],
+			"amazing" : [ 1 ],
+			"book" : [ 2, 6 ],
+			"meg" : [ 3 ],
+			"hello" : [ 4 ],
+			"world" : [ 5 ]
+		},
+		2 : {
+			"my amazing" : [ 0 ],
+			"amazing book" : [ 1 ],
+			"hello world" : [ 4 ],
+			"world book" : [ 5 ]
+		},
+		3 : {
+			"my amazing book" : [ 0 ],
+			"hello world book" : [ 4 ]
+		}
+	}
+}

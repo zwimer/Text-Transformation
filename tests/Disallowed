@@ -1,0 +1,5 @@
+Only html, css, and javascript in the file
+No comments in inlined or internal css
+No Raw strings
+No escapes newlines trailing single line comments
+No nested tags (in this case, something like <h1 <h2/> />

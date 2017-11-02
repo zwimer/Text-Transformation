@@ -1,0 +1,15 @@
+<script>
+
+	// Comments here are to be ignored
+
+	/* No matter what. Even if they have html in them
+
+		</script> This should not end the script tag!
+
+		<h1> And this whole thing should still be ignored!
+	*/
+
+</script>
+
+<meta name="author"> Meg </meta>
+Hello World book

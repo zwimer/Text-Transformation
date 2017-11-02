@@ -1,0 +1,10 @@
+<!--
+	This comment should be ignored
+	 <!--
+	Here too
+But not after this line
+-->
+
+
+<meta name="author"> Meg </meta>
+Hello World book

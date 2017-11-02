@@ -1,0 +1,36 @@
+{
+	"title" : {
+		"title" : "my amazing book",
+		"indicies" : [ 7 ]
+	},
+	"metadata" : {
+		"author": "meg"
+	},
+	"ngrams" : {
+		1 : {
+			"hello" : [ 0 ],
+			"world" : [ 1 ],
+			"book" : [ 2, 9 ],
+			"banana" : [ 3 ],
+			"apple" : [ 4 ],
+			"bub" : [ 5 ],
+			"bill" : [ 6 ],
+			"my": [ 7 ],
+			"amazing" : [ 8 ],
+			"meg" : [ 10 ]
+		},
+		2 : {
+			"hello world" : [ 0 ],
+			"world book" : [ 1 ],
+			"book banana" : [ 2 ],
+			"apple bub" : [ 4 ],
+			"my amazing ": [ 7 ],
+			"amazing book" : [ 8 ]
+		},
+		3 : {
+			"hello world book" : [ 0 ],
+			"world book banana" : [ 1 ],
+			"my amazing book": [ 7 ]
+		}
+	}
+}

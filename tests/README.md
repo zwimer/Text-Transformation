@@ -1,5 +1,7 @@
 The following test cases each assume the system is up and running, and that every other part is functioning correctly.
 
+These test cases are for when text tranformation is called.
+
 For the following test cases, assume the list of stop words is as follows:
 1. megaphone
 2. couch

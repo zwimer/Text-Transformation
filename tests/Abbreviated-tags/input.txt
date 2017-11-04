@@ -1,4 +1,0 @@
-<h1/>
-<title> My Amazing book </title>
-<meta name="author"> Meg </meta>
-Hello World book

@@ -1,3 +1,0 @@
-<meta name="title"> My Amazing book </meta>
-<meta name="author"> Meg </meta>
-Hello World book

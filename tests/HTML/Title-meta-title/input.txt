@@ -1,0 +1,4 @@
+<meta name="title" content="Hi">
+<title> My Amazing book </title>
+<meta name="author" content="Meg">
+Hello World book

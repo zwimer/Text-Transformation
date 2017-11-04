@@ -1,0 +1,11 @@
+<script>
+
+	// Comments here are to be ignored
+
+	/* No matter
+		what
+	*/
+
+</script>
+<meta name="author" content="Meg">
+Hello World book

@@ -1,6 +1,0 @@
-<?php
-	echo "Hello World!";
-?>
-
-<meta name="author"> Meg </meta>
-Hello World book

@@ -1,3 +1,0 @@
-<!-- This should be ignored -->
-<meta name="author"> Meg </meta>
-Hello World book

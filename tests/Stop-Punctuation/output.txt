@@ -8,14 +8,14 @@
 	"ngrams" : {
 		1 : {
 				"the" : [ 0 ],
-				"word" : [ 1, 6 ],
+				"string" : [ 1, 6 ],
 				"couch" : [ 2 ],
 				"is" : [ 3 ],
 				"a" : [ 4 ],
 				"stop" : [ 5 ],
 		},
 		2 : {
-				"the word" : [ 0 ],
+				"the string" : [ 0 ],
 				"is a" : [ 3 ],
 				"a stop" : [ 4 ],
 				"stop word" : [ 5 ]

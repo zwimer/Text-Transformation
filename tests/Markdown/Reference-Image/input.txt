@@ -1,0 +1,3 @@
+"Click [here][logo] for free stuff"
+
+[logo]: https://www.google.com/my_image

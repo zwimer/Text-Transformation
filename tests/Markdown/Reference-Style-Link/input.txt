@@ -1,0 +1,3 @@
+"Click [here][Arbitrary case-insensitive reference text] for free stuff"
+
+[Arbitrary case-insensitive reference text]: https://www.google.com

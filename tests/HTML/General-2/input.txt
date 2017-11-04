@@ -4,4 +4,4 @@ banana
 apple bub </p> Bill
 
 <title> My Amazing book </title>
-<meta name="author" content="Meg">
+<meta name="author" content="Meg"> Meg

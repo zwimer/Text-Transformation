@@ -1,0 +1,54 @@
+- Talk to Crawling:
+    How are we called?
+    What are we given?
+    What do we need to do to access that information?
+
+Crawling
+- called with specific guid for a specific crawling session
+- call TBD - standard REST call
+- what will be in JSON:
+  - URL <- use this as ID
+  - GUID
+  - time stamp
+  - sitemap
+  - outlinks
+  - HTML
+  - array of JSON objects:
+    - name
+    - type
+    - raw text
+- One call per document
+- maybe unique ID via hashing URL
+- assume ALL pdfs are text
+
+- Talk to Indexing:
+    What is the stop words call?
+    Confirm our output
+    How should we get this output to you?
+
+- call TBD, return JSON with list of 50 words
+
+- Talk to Text Transformation:
+    Confirm that our inputs and outputs match
+
+tsangm@rpi.edu
+seanwaclawik@gmail.com
+
+
+Crawling
+- called with specific guid for a specific crawling session
+- call TBD - standard REST call
+- what will be in JSON:
+  - URL <- use this as ID
+  - GUID
+  - time stamp
+  - sitemap
+  - outlinks
+  - HTML
+  - array of JSON objects:
+    - name
+    - type
+    - raw text
+- One call per document
+- maybe unique ID via hashing URL
+- assume ALL pdfs are text

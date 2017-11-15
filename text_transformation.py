@@ -1,21 +1,24 @@
 import plaintext_parser
 import md_parser
-import content_converter
 
-# For testing
+# For preliminary testing
 def main():
-    # == PLAINTEXT ==
-    plaintext_content = "This is from a plaintext file. For details, refer to the file.\n\nHello World, this is my file."
-    parsed_plaintext_content = plaintext_parser.parse(plaintext_content)
-    converted_plaintext_content = content_converter.convert(parsed_plaintext_content)
-    # Here is where we would send the list of list of words to ngram creation
+    # Raw input comes into text_transformation
 
-    # == MARKDOWN ==
+
+    # If input is html, call html_parser here
+
+    # If input is markdown, call md_parser here
     # TODO: make this actually markdown
     md_content = "This is markdown."
     parsed_md_content = md_parser.parse(md_content)
-    converted_md_content = content_converter.convert(parsed_md_content)
-    # Here is where we would send the list of list of words to ngram creation
+
+    # If input is just plaintext:
+    plaintext_content = "Break here\n\n. Again, #break here;\n\tHello World! BREAK HERE \n\# . Don't avoid\n>contractions."
+    parsed_plaintext_content = plaintext_parser.parse(plaintext_content)
+
+    # Ngram creation will use list of list of words outputted from parsers
+    # Ngram creation will also use metadata here
 
 if __name__ == "__main__":
     main()

@@ -33,6 +33,6 @@ def parse(content):
         section = word.split()
         list_of_lists.append( section )
 
-    print("this is word list:\n", list_of_lists)
+    print("this is list of list of words:\n", list_of_lists)
 
     return list_of_lists

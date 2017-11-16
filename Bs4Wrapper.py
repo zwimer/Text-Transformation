@@ -170,9 +170,12 @@ class Bs4Wrapper:
         # If no title tags were found, return None
         return None
 
+
+
+# For quick testing, not actually part of the code.
 if __name__ == '__main__':
 
-    A = ' <!-- Hi --> B <script> sd </script> <script/> <style> sd2 </style> f';
+    # A = ' <!-- Hi --> B <script> sd </script> <script/> <style> sd2 </style> f';
     with open ('B.html') as f:
         A = f.read()
 

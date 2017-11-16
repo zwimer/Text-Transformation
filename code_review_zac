@@ -1,0 +1,29 @@
+plaintext:
+	sanitize stop words comment: Change from 'check' to 'Alter...'
+
+	Comment: what create does, not just its input
+
+	More commenting in code
+
+plaintext:
+	contraction
+	
+	comment functions
+
+	stop punctuation a separate list
+
+	string.punctuation -> ascii- (string.lower + string.whitespace - string.digits)
+		
+		allow_chars = [];
+		allow_chars.extend(string.lower);
+		allow_chars.extend(string.whitespace);
+		allow_chars.extend(string.digits);
+		allow_chars.extend(string.digits);
+		allow_chars.append('\'')
+
+		ASCII = set([ chr(x) for x in xrange(128) ])
+		remove_chars -= set(allow_chars)
+
+bs4wrapper:
+	unicode -> str
+	title should get indicies !

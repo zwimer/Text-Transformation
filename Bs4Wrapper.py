@@ -23,7 +23,7 @@ def create_delimiter(text):
 
     # While the delimiter exists in text, add random characters to it
     while delimiter in text:
-        delimiter +=random.choice(string.printable)
+        delimiter += random.choice(string.printable)
 
     # Return the resulting delimiter
     return delimiter
@@ -44,17 +44,16 @@ class Bs4Wrapper:
         """
 
         # Create the internal html parser
-        self.soup = BeautifulSoup(html, 'html.parser');       
+        self.soup = BeautifulSoup(html, 'html.parser')
 
         # Determine a unique delimiter not in input_html
-        self.delimiter = create_delimiter(html);
+        self.delimiter = create_delimiter(html)
 
         # A set of functions which must be run before extraction of words
-        self.must_run_before_extract = ( [
+        self.must_run_before_extract = ([
             self.clear_comments,
             self.clear_code
-        ] )    
-
+        ])
 
     def clear_comments(self):
         """
@@ -63,10 +62,10 @@ class Bs4Wrapper:
         """
 
         # Create a function to identify comments
-        is_comment = lambda text:isinstance(text, Comment);
+        def is_comment(text): return isinstance(text, Comment)
 
         # Remove all comments
-        for comment in self.soup.findAll( text = is_comment ):
+        for comment in self.soup.findAll(text=is_comment):
             self.clear_tag(comment)
 
         # This function has already run, so it no longer has to be run
@@ -79,12 +78,12 @@ class Bs4Wrapper:
         """
 
         # Types of tags which store code
-        code_tags = [ 'script', 'style' ];
+        code_tags = ['script', 'style']
 
         # Remove all code tags
         for tag_name in code_tags:
             for tag in self.soup(tag_name):
-                self.clear_tag(tag);
+                self.clear_tag(tag)
 
         # This function has already run, so it no longer has to be run
         self.must_run_before_extract.remove(self.clear_code)
@@ -102,7 +101,7 @@ class Bs4Wrapper:
             function()
 
         # Extract the text, place delimiter where tags used to be
-        extracted_text = self.soup.get_text(self.delimiter, strip=False);
+        extracted_text = self.soup.get_text(self.delimiter, strip=False)
 
         # Return the extracted text as a list
         return extracted_text.split(self.delimiter)
@@ -117,7 +116,7 @@ class Bs4Wrapper:
         # For each tag of tpye tag_name in soup, remove it
         for next_tag in self.soup.find_all(tag_name):
             print "Found", next_tag
-            self.clear_tag(next_tag);
+            self.clear_tag(next_tag)
 
     def clear_tag(self, tag):
         """
@@ -126,10 +125,10 @@ class Bs4Wrapper:
         """
 
         # Determine the tag name
-        tag_name = (tag.name if tag.name is not None else '');
+        tag_name = (tag.name if tag.name is not None else '')
 
         # Clear the tag
-        tag.replace_with(self.soup.new_tag(tag_name));
+        tag.replace_with(self.soup.new_tag(tag_name))
 
     def get_metadata(self):
         """
@@ -137,26 +136,27 @@ class Bs4Wrapper:
         Extracts metadata from the html stored in soup.
         Note: meta title tags and unnamed tags are not considered metadata
         """
-    
+
         # All known metadata
-        metadata = { };
+        metadata = {}
 
         # For each tag of type tag_name in soup that has a name and content
-        for tag in self.soup.find_all('meta', attrs = { 'name':True, 'content':True }):
+        for tag in self.soup.find_all('meta', attrs={'name': True, 'content': True}):
 
             # Skip meta title tags or unnamed tags
             if tag.name == 'title':
                 continue
 
             # Add next meta tag's content field to the dict
-            metadata[tag['name']] = tag['content'];
+            metadata[tag['name']] = tag['content']
 
         # Return metadata
-        return metadata;
-        
+        return metadata
+
     def get_title(self):
         """
-        :returns: Title of the self.soup. If none were found, return None
+        :returns: Title of the self.soup. If none was found, return None
+        Secondarily checks meta title tags if no titles tags were found.
         """
 
         # First search title tags
@@ -164,9 +164,9 @@ class Bs4Wrapper:
             return tag.contents
 
         # If no title tags were found, search for meta title tags that have content
-        for tag in self.soup.find_all('meta', attrs = { 'name':True, 'content':True }):
-            return tag['content'];
-        
+        for tag in self.soup.find_all('meta', attrs={'name': True, 'content': True}):
+            return tag['content']
+
         # If no title tags were found, return None
         return None
 
@@ -176,15 +176,15 @@ class Bs4Wrapper:
 if __name__ == '__main__':
 
     # A = ' <!-- Hi --> B <script> sd </script> <script/> <style> sd2 </style> f';
-    with open ('B.html') as f:
+    with open('B.html') as f:
         A = f.read()
 
-    B = Bs4Wrapper(A);
+    B = Bs4Wrapper(A)
 
-    B.clear_comments();
+    B.clear_comments()
     for i in B.extract_plain_text_lists():
         print i
 
     print B.get_title()
-    print '-'*50
+    print '-' * 50
     print B.get_metadata()

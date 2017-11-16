@@ -1,0 +1,13 @@
+ngram_creator.py:
+  - Comment more
+  - Fix error w/ 2 and 3 grams!
+
+plaintext_parser.py:
+  - Move translator creation out of loop
+  - consider using list comprehension
+
+Bs4Wrapper.py:
+  - Design change wrt metadata component semantics
+  - title should have indices
+  - probably no semicolons
+  - some whitespace

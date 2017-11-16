@@ -16,3 +16,12 @@ Bs4Wrapper.py:
   !!! We are now changing the design of our component: metadata is no longer its own
   component, instead it will be included in each parser; each type of file has different
   ways of extracting metadata
+
+
+MEETING WITH TEAM XX: CRAWLING
+Bs4Wrapper.py
+-line 26
+-typo in docstring
+-remove semicolons
+-return will return None by default; can remove these extraneous Nones...
+-

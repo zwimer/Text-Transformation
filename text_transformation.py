@@ -5,8 +5,10 @@ import ngram_creator
 # For preliminary testing
 def main():
     # Raw input comes into text_transformation
+    
 
     # If input is html, call html_parser here
+
 
     # If input is markdown, call md_parser here
     # TODO: make this actually markdown
@@ -27,6 +29,7 @@ def main():
               2 : ngram_creator.create(text, 2, stopwords, True),\
               3 : ngram_creator.create(text, 3, stopwords, True)}
 
+
     # Packages up content from ngrams and metadata for output
     metadata_out = ({ "title" : "My Amazing Book", indices : [ 0 ] },\
                     { "author" : "Meg" })
@@ -44,4 +47,4 @@ def main():
 if __name__ == "__main__":
     main()
 
-#       
+#

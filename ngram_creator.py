@@ -1,37 +1,64 @@
+# NGram Creation
+# Author: Lee Cattarin
+# Date created: 15 Nov 2017
+# Date last edited: 16 Nov 2017
 
-
-# Check that stopwords are lowercase and stripped. Likely will not
-# be necessary
 def sanitize_stopwords(stopwords):
+    """
+    :param stopwords: list of stopwords
+    :returns None
+    Edits the stopword list in place to ensure words are stripped of
+        spaces and lowercase
+    """
     for i, word in enumerate(stopwords):
         stopwords[i] = word.strip().lower()
 
-# Expected input format:
-# text: list of lists of sanitized strings
-# number_of_terms: 1, 2, or 3 depending on the desired term length
-# stopwords: list of string stop words obtained from indexing
 def create(text, number_of_terms, stopwords, use_stopwords):
+    """
+    :param text: list of lists of sanitized strings
+    :param number_of_terms: desired ngram length
+    :param stopwords: list of stopwords
+    :use_stopwords: True if stopwords are taken into account,
+        False if they are treated as normal words
+    :returns dictionary of key, value = term, [indices]
+    Creates a dictionary of terms of the given length and their indices
+        in the text body
+    """
     terms = {}
-    index = 0
+    index = 0 # index in full text
 
-    current = ("", 0) # current term and the number of words in it
+    # Current term details
+    # (term, term length)
+    current = ("", 0)
+
+    # Terminology:
+    # Text: full list of lists
+    # Section: one list in text (considered delimited at beginning and end)
+    # Word: single string in section
 
     for section in text:
+
+        # Skip sections that do not have enough words to create a term
         if len(section) < number_of_terms:
             index += len(section)
             continue
 
-        current = ("", 0) # current term and the number of words in it
+        # Reset the current term details
+        current = ("", 0)
 
         for word in section:
             index += 1
 
+            # Reset the term details when a stopword is encountered
+            # (if stopwords are being used)
             if word in stopwords and use_stopwords:
                 current = ("", 0)
                 continue
 
+            # Otherwise, add to the term
             current = (current[0] + " " + word, current[1] + 1)
 
+            # If the term is long enough, add it
             if current[1] == number_of_terms:
 
                 if not current[0] in terms:
@@ -42,7 +69,15 @@ def create(text, number_of_terms, stopwords, use_stopwords):
 
     return terms
 
+# All below this only for test use
+
 def test(text, stopwords):
+    """
+    :param text: text as a list of lists of words
+    :param stopwords: the list of stopwords
+    :returns None
+    Runs a single test with the given text and stopwords
+    """
     print("="*72)
     print("Test:\nstarting text: {}\nstopwords: {}\n".format(text, stopwords))
 

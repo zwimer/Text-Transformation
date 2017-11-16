@@ -1,0 +1,18 @@
+plaintext_parser.py:
+  Refer to other code review notes
+  Turn into class
+  include metadata function stub
+  rename into PlaintextParser.py -> make a class
+
+md_parser.py:
+  Turn into class
+  include metadata function stub
+  rename into MarkdownParser.py -> make a class
+
+Bs4Wrapper.py:
+  typo in class definition: simply interface -> simple interface
+  not python3 compliant, i.e. print statements need to be using print()
+
+  !!! We are now changing the design of our component: metadata is no longer its own
+  component, instead it will be included in each parser; each type of file has different
+  ways of extracting metadata

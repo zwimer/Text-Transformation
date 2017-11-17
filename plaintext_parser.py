@@ -1,38 +1,57 @@
 import string
 import re
 
-# Input: String
-# Output: list of list of strings (lower cased individual words)
-# TODO: Need to fix contractions i.e. don't, won't, etc.
-def parse(content):
+class PlaintextParser:
+    """
+    This class provides a function for parsing plaintext into a specific format.
+    It will also parse the metadata out of a provided
+    """
 
-    print("this is original:\n", content)
+    def __init__(self):
+        """
+            The constructor. No initialization is needed for this parser.
+        """
 
-    # Lower case all words
-    content = content.lower()
+    def parse(self, content):
+        """
+            Takes in a string.
+            Returns a list of list of strings (lower case individual words)
+            Note: If the caller has blocks of strings already
+            broken by stopwords (whether it be HTML tags, stop punctuation, or
+            otherwise), then the caller must pass each string separately.
+        """
 
-    # Remove all symbols except # and > (for use with stop punctuation later)
-    punct = re.sub("[#>]", "", string.punctuation)
-    translator = str.maketrans("", "", punct)
-    parsed = content.translate(translator)
+        # Lower case all words
+        content = content.lower()
 
-    # First, need to split on escape characters
-    # (except html tags; this is done by HTML parser)
-    word_list = re.split("\n\t|\n\n|\n\#|\n>", parsed)
+        # Remove all symbols except # > (stop punctuation)
+        # Remove all symbols except ' - (words w/ contractions)
+        removable_punct = re.sub("[#>\'-]", "", string.punctuation)
+        translator = str.maketrans("", "", removable_punct)
+        parsed = content.translate(translator)
 
-    # Second, need to remove extraneous # and >
-    # that were not part of stop punctuation
-    new_word_list = []
-    for word in word_list:
+        # First, need to split into "blocks" on stop punctuation
+        # (except html tags; this is done by HTML parser)
+        stop_punct = "\n\t|\n\n|\n\#|\n>"
+        block_list = re.split(stop_punct, parsed)
+
+        # Second, need to "clean" out extraneous # and >
+        # that were not part of stop punctuation from each block
+        clean_block_list = []
         translator = str.maketrans("", "", "#>")
-        new_word_list.append( word.translate(translator) )
+        clean_block_list = [block.translate(translator) for block in block_list]
 
-    # Finally, split on whitespace to get individual words
-    list_of_lists = []
-    for word in new_word_list:
-        section = word.split()
-        list_of_lists.append( section )
+        # Remove invalid apostrophes/hyphens that are not apart of a word
+        invalid_contractions = "\'\s+|\s+\'|-\s+|\s+-"
+        new_block_list = [re.sub(invalid_contractions, " ", block) for block in clean_block_list]
 
-    print("this is list of list of words:\n", list_of_lists)
+        # Finally, split on whitespace to get individual words
+        list_of_lists = [block.split() for block in new_block_list]
 
-    return list_of_lists
+        return list_of_lists
+
+    def parse_metadata(content):
+        """
+            This is a method stub; metadata is not needed from plaintext files.
+        """
+        return

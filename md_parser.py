@@ -13,4 +13,5 @@ def parse(content):
 
     # May need to go line by line to feed into plaintext_parser here...
 
-    return plaintext_parser.parse(content)
+    PTParser = plaintext_parser.PlaintextParser()
+    return PTParser.parse(content)

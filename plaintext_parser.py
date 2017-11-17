@@ -48,6 +48,9 @@ class PlaintextParser:
         # Finally, split on whitespace to get individual words
         list_of_lists = [block.split() for block in new_block_list]
 
+        # Clean out empty lists
+        list_of_lists = [word_list for word_list in list_of_lists if len(word_list) > 0]
+
         return list_of_lists
 
     def parse_metadata(content):

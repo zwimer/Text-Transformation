@@ -12,12 +12,17 @@ def main():
 
     # If input is markdown, call md_parser here
     md_content = "# This is a \n\n general Markdown test\n\n```c++\nAnd boy is it ever\n#magic!\n```"
-    parsed_md_content = md_parser.parse(md_content)
+    MDParser = md_parser.MarkdownParser()
+    parsed_md_content = MDParser.parse(md_content)
+    print("ORIGINAL MD CONTENT:\n", md_content, "\n")
+    print("PARSED MD CONTENT:\n", parsed_md_content, "\n")
 
     # If input is just plaintext:
     plaintext_content = "Break here\n\n. Again, #break-here;\n\tHello World!\nBREAK- HERE \n\# . Don't avoid\n>contractions. James' lol"
     PTParser = plaintext_parser.PlaintextParser()
     parsed_plaintext_content = PTParser.parse(plaintext_content)
+    print("ORIGINAL PLAINTEXT CONTENT:\n", plaintext_content, "\n")
+    print("PARSED PLAINTEXT CONTENT:\n", parsed_plaintext_content, "\n")
 
     # Ngram creation will use list of list of words outputted from parsers
     # Ngram creation will also use metadata here in assembly of ngrams - no it won't?

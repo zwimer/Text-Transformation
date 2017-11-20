@@ -29,7 +29,8 @@ def create(text, number_of_terms, stopwords, use_stopwords):
 
     # Current term details
     # (term, term length)
-    current = ("", 0)
+    current_term = []
+    current_length = 0
 
     # Terminology:
     # Text: full list of lists
@@ -44,7 +45,8 @@ def create(text, number_of_terms, stopwords, use_stopwords):
             continue
 
         # Reset the current term details
-        current = ("", 0)
+        current_term = []
+        current_length = 0
 
         for word in section:
             index += 1
@@ -52,20 +54,24 @@ def create(text, number_of_terms, stopwords, use_stopwords):
             # Reset the term details when a stopword is encountered
             # (if stopwords are being used)
             if word in stopwords and use_stopwords:
-                current = ("", 0)
+                current_term = []
+                current_length = 0
                 continue
 
             # Otherwise, add to the term
-            current = (current[0] + " " + word, current[1] + 1)
+            current_term.append(word)
+            current_length += 1
 
             # If the term is long enough, add it
-            if current[1] == number_of_terms:
+            if current_length == number_of_terms:
+                new_term = " ".join(current_term)
 
-                if not current[0] in terms:
-                    terms[current[0]] = []
-                terms[current[0]].append(index - number_of_terms)
+                if not new_term in terms:
+                    terms[new_term] = []
+                terms[new_term].append(index - number_of_terms)
 
-                current = ("", 0)
+                current_term = current_term[1:]
+                current_length -= 1
 
     return terms
 

@@ -1,6 +1,7 @@
 ngram_creator.py:
   - Comment more
   - Fix error w/ 2 and 3 grams!
+Done, done 
 
 plaintext_parser.py:
   - Move translator creation out of loop

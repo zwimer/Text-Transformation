@@ -1,10 +1,19 @@
+"""
+This file contains the function parse(content).
+This function removes extraneous symbols/stop punctuation from content and
+returns a list of lists of words, where each list of words is a
+contiguous set of words not interrupted by certain stop punctuation.
+"""
+
 import string
 import re
 
 class PlaintextParser:
     """
-    This class provides a function for parsing plaintext into a specific format.
-    It will also parse the metadata out of a provided
+    This class allows the client to strip extraneous syntax from an input
+    string such as symbols and punctuation.
+    It has the ability to extract metadata from an input string, although this
+    feature is not fully defined.
     """
 
     def __init__(self):
@@ -14,11 +23,10 @@ class PlaintextParser:
 
     def parse(self, content):
         """
-            Takes in a string.
-            Returns a list of list of strings (lower case individual words)
-            Note: If the caller has blocks of strings already
-            broken by stopwords (whether it be HTML tags, stop punctuation, or
-            otherwise), then the caller must pass each string separately.
+            :param content: One string of plaintext content
+            :returns: List of list of strings (lower cased individual words)
+            This is the bread and butter function that will strip
+            symbols and punctuation from the input string.
         """
 
         # Lower case all words
@@ -55,6 +63,8 @@ class PlaintextParser:
 
     def parse_metadata(content):
         """
+            :param content: One string of plaintext content
+            :returns: None
             This is a method stub; metadata is not needed from plaintext files.
         """
         return

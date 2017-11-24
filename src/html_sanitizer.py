@@ -1,9 +1,11 @@
 """
-This file contains the function sanitize_html(input_html).
-This function removes html from the input_html and returns 
-a list of lists of words, where each list or words is a 
-contiguous set of words not interrupted by tags.
+This file contains the class HtmlSanitizer.
+This file is meant to sanitize html to extract the plain
+text it represents. This class also exposes methods which
+allow the extraction of metadata and the title of the html.
 """
+
+from text_sanitizer import TextSanitizer
 
 from bs4 import BeautifulSoup, Comment
 import random
@@ -28,12 +30,20 @@ def create_delimiter(text):
     # Return the resulting delimiter
     return delimiter
 
-
-class HtmlSanitizer:
+def uniform_sanitize(in_data):
     """
-    This class wraps a bs4.BeautifulSoup html parser.
-    It provides a simply interface for removing code and comments
-    It can extract all data of a certain tag as well
+    :param in_data: The data to be sanitized as a string
+    :returns: in_text sanitized by TextSanitizer
+    A uniform method that HtmlSanitizer can use to sanitize 
+    plain text and get a string as a result
+    """
+    return ' '.join(TextSanitizer.sanitize_plain_text(str(in_data)))
+
+
+class HtmlSanitizer(TextSanitizer):
+    """
+    This class is a TextSanitizer which also sanitizes html
+    It exposes interfaces allowing both title extraction and metadata extraction
     Note: This class assumes meta title tags and unnamed tags are not metadata
     """
 
@@ -57,7 +67,7 @@ class HtmlSanitizer:
 
     def get_metadata(self):
         """
-        :returns: A dict of metadata tags whose names are mapped to their content
+        :returns: A dict of metadata tags whose names are mapped to their sanitized content
         Extracts metadata from the html stored in soup.
         Note: meta title tags and unnamed tags are not considered metadata
         """
@@ -73,26 +83,27 @@ class HtmlSanitizer:
             if tag_name == 'title':
                 continue
 
-            # Add next meta tag's content field to the dict
+            # Add next meta tag's sanitized content field to the dict
             if tag_name not in metadata:
-                metadata[tag_name] = str(tag['content'])
+                content = str(tag['content'])
+                metadata[tag_name] = uniform_sanitize(content)
 
         # Return metadata
         return metadata
 
     def get_title(self):
         """
-        :returns: Title of the self.soup. If none was found, return None
+        :returns: Sanitized title of the self.soup. If none was found, return None
         Secondarily checks meta title tags if no titles tags were found.
         """
 
         # First search title tags
         for tag in self.soup.find_all('title'):
-            return str(tag.contents[0])
+            return uniform_sanitize(' '.join(tag.contents))
 
         # If no title tags were found, search for meta title tags that have content
         for tag in self.soup.find_all('meta', attrs={'name': 'title', 'content': True}):
-            return str(tag['content'])
+            return uniform_sanitize(tag['content'])
 
         # If no title tags were found, return None
         return None
@@ -100,9 +111,8 @@ class HtmlSanitizer:
     def extract_plain_text_lists(self):
         """
         :returns: The plain text stored in the html of self.soup as a list of strings
-        Each list of string is contiguous in the origional html.
-        All the strings together comprise the plain text of the origional html.
-        The plain text of the html is split where html tags used to be.
+        Each string represents a contiguous section of the plain text of the html
+        The strings are split where tags were.
         Note: Special characters are replaced with what they represent
         """
 

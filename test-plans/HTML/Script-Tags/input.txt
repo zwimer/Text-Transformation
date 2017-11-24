@@ -2,7 +2,7 @@
 	Everything here should be ignored
 </script>
 
-</script src = "This too"> </script>
+<script src = "This too"> </script>
 
 <script/> 
 

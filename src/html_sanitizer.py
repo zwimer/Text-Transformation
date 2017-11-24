@@ -29,7 +29,7 @@ def create_delimiter(text):
     return delimiter
 
 
-class Bs4Wrapper:
+class HtmlSanitizer:
     """
     This class wraps a bs4.BeautifulSoup html parser.
     It provides a simply interface for removing code and comments
@@ -50,10 +50,71 @@ class Bs4Wrapper:
         self.delimiter = create_delimiter(html)
 
         # A set of functions which must be run before extraction of words
-        self.must_run_before_extract = ([
+        self.must_run_before_extract = [
             self.clear_comments,
             self.clear_code
-        ])
+        ]
+
+    def get_metadata(self):
+        """
+        :returns: A dict of metadata tags whose names are mapped to their content
+        Extracts metadata from the html stored in soup.
+        Note: meta title tags and unnamed tags are not considered metadata
+        """
+
+        # All known metadata
+        metadata = {}
+
+        # For each tag of type tag_name in soup that has a name and content
+        for tag in self.soup.find_all('meta', attrs={'name': True, 'content': True}):
+            tag_name = str(tag['name'])
+
+            # Skip meta title tags or unnamed tags
+            if tag_name == 'title':
+                continue
+
+            # Add next meta tag's content field to the dict
+            if tag_name not in metadata:
+                metadata[tag_name] = str(tag['content'])
+
+        # Return metadata
+        return metadata
+
+    def get_title(self):
+        """
+        :returns: Title of the self.soup. If none was found, return None
+        Secondarily checks meta title tags if no titles tags were found.
+        """
+
+        # First search title tags
+        for tag in self.soup.find_all('title'):
+            return str(tag.contents[0])
+
+        # If no title tags were found, search for meta title tags that have content
+        for tag in self.soup.find_all('meta', attrs={'name': 'title', 'content': True}):
+            return str(tag['content'])
+
+        # If no title tags were found, return None
+        return None
+
+    def extract_plain_text_lists(self):
+        """
+        :returns: The plain text stored in the html of self.soup as a list of strings
+        Each list of string is contiguous in the origional html.
+        All the strings together comprise the plain text of the origional html.
+        The plain text of the html is split where html tags used to be.
+        Note: Special characters are replaced with what they represent
+        """
+
+        # For all functions which must run first, run them
+        while len(self.must_run_before_extract) > 0:
+            self.must_run_before_extract[0]()
+
+        # Extract the text, place delimiter where tags used to be
+        extracted_text = str(self.soup.get_text(self.delimiter, strip=False))
+
+        # Return the extracted text as a list
+        return extracted_text.split(self.delimiter)
 
     def clear_comments(self):
         """
@@ -88,24 +149,6 @@ class Bs4Wrapper:
         # This function has already run, so it no longer has to be run
         self.must_run_before_extract.remove(self.clear_code)
 
-    def extract_plain_text_lists(self):
-        """
-        :returns: The plain text stored in the html of self.soup as a list of strings
-        Each list of string is contiguous in the origional html.
-        All the strings together comprise the plain text of the origional html.
-        The plain text of the html is split where html tags used to be.
-        """
-
-        # For all functions which must run first, run them
-        for function in self.must_run_before_extract:
-            function()
-
-        # Extract the text, place delimiter where tags used to be
-        extracted_text = self.soup.get_text(self.delimiter, strip=False)
-
-        # Return the extracted text as a list
-        return extracted_text.split(self.delimiter)
-
     def clear_all_tags_of_name(self, tag_name):
         """
         :param tag: The tag to be removed
@@ -115,7 +158,6 @@ class Bs4Wrapper:
 
         # For each tag of tpye tag_name in soup, remove it
         for next_tag in self.soup.find_all(tag_name):
-            print "Found", next_tag
             self.clear_tag(next_tag)
 
     def clear_tag(self, tag):
@@ -129,62 +171,3 @@ class Bs4Wrapper:
 
         # Clear the tag
         tag.replace_with(self.soup.new_tag(tag_name))
-
-    def get_metadata(self):
-        """
-        :returns: A dict of metadata tags whose names are mapped to their content
-        Extracts metadata from the html stored in soup.
-        Note: meta title tags and unnamed tags are not considered metadata
-        """
-
-        # All known metadata
-        metadata = {}
-
-        # For each tag of type tag_name in soup that has a name and content
-        for tag in self.soup.find_all('meta', attrs={'name': True, 'content': True}):
-
-            # Skip meta title tags or unnamed tags
-            if tag.name == 'title':
-                continue
-
-            # Add next meta tag's content field to the dict
-            metadata[tag['name']] = tag['content']
-
-        # Return metadata
-        return metadata
-
-    def get_title(self):
-        """
-        :returns: Title of the self.soup. If none was found, return None
-        Secondarily checks meta title tags if no titles tags were found.
-        """
-
-        # First search title tags
-        for tag in self.soup.find_all('title'):
-            return tag.contents
-
-        # If no title tags were found, search for meta title tags that have content
-        for tag in self.soup.find_all('meta', attrs={'name': True, 'content': True}):
-            return tag['content']
-
-        # If no title tags were found, return None
-        return None
-
-
-
-# For quick testing, not actually part of the code.
-if __name__ == '__main__':
-
-    # A = ' <!-- Hi --> B <script> sd </script> <script/> <style> sd2 </style> f';
-    with open('B.html') as f:
-        A = f.read()
-
-    B = Bs4Wrapper(A)
-
-    B.clear_comments()
-    for i in B.extract_plain_text_lists():
-        print i
-
-    print B.get_title()
-    print '-' * 50
-    print B.get_metadata()

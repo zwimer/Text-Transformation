@@ -4,10 +4,12 @@ This file is meant to sanitize markdown to extract the plain
 text it represents.
 """
 
+from text_sanitizer import TextSanitizer
+
 import string
 import re
 
-class MarkdownParser(TextSanitizer):
+class MarkdownSanitizer(TextSanitizer):
     """
     This class is a TextSanitizer which also sanitizes markdown
     """

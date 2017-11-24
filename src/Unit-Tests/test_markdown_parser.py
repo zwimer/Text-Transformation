@@ -1,6 +1,6 @@
 """
-This file contains the TestHtmlSanitizer class which contains 
-multiple different test used to test the html parser
+This file contains the TestMarkdownSanitizer class which contains 
+multiple different test used to test the markdown parser
 """
 
 import sys
@@ -9,12 +9,12 @@ import difflib
 import unittest
 
 sys.path.append('..')
-from html_sanitizer import HtmlSanitizer
+from markdown_sanitizer import MarkdownSanitizer
 
 
-class TestHtmlSanitizer(unittest.TestCase):
+class TestMarkdownSanitizer(unittest.TestCase):
     """
-    This class is used to test the html parser class
+    This class is used to test the markdown parser class
     """
 
     # TODO

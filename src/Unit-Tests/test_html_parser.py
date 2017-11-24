@@ -37,23 +37,22 @@ class TestHtmlSanitizer(unittest.TestCase):
         """
 
         # Assert that the types match
-        self.assertEquals(type(expected), type(actual))
+        self.assertEqual(type(expected), type(actual))
 
         # If the types are jsons, make them strings
         if type(actual) is [ list, dict ]:
             expected = json_to_str(expected)
-            actual = json_to_str(actual)
 
         # Test to ensure equality
         try:
-            self.assertEquals(actual, expected)
+            self.assertEqual(actual, expected)
 
         # If the assertion fails
         except AssertionError:
-            print '*** Assertion failed! ***'
-            print 'Actual:' + str(actual)
-            print 'Expected:' + str(expected)
-            print '*** Re-emitting error ***'
+            print('*** Assertion failed! ***')
+            print('Actual:' + str(actual))
+            print('Expected:' + str(expected))
+            print('*** Re-emitting error ***')
             raise
 
     def run_test_check_output(self, input_data, expected_output):
@@ -147,7 +146,7 @@ class TestHtmlSanitizer(unittest.TestCase):
         html = ( '<title> My Amazing book </title>\n'
                  '<meta name="author" content="Meg">\n'
                  'Hello World book' )
-        title = ' my amazing book '
+        title = 'my amazing book'
 
         # Test the parser
         self.run_test_check_title(html, title)
@@ -182,7 +181,7 @@ class TestHtmlSanitizer(unittest.TestCase):
             'meg'
         ]
         metadata = {'author' : 'meg'}
-        title = ' my amazing book '
+        title = 'my amazing book'
 
         # Test the parser
         self.run_test_check_output(html, output)
@@ -205,7 +204,7 @@ class TestHtmlSanitizer(unittest.TestCase):
         output = [' Bob\n', ' My Amazing book ',
                   '\n', ' Meg\nHello World book']
         metadata = {'author' : 'bob'}
-        title = ' my amazing book '
+        title = 'my amazing book'
 
         # Test the parser
         self.run_test_check_output(html, output)
@@ -227,7 +226,7 @@ class TestHtmlSanitizer(unittest.TestCase):
         output = [' Hi ', '\n', ' My Amazing book ',
                   '\n', ' Meg\nHello World book']
         metadata = {'author' : 'meg'}
-        title = ' hi '
+        title = 'hi'
 
         # Test the parser
         self.run_test_check_output(html, output)
@@ -268,7 +267,7 @@ class TestHtmlSanitizer(unittest.TestCase):
                 'Hello World book')
         output = [' Hi\n', ' My Amazing book ', '\n', ' Meg\nHello World book']
         metadata = {'author' : 'meg'}
-        title = ' my amazing book '
+        title = 'my amazing book'
 
         # Test the parser
         self.run_test_check_output(html, output)
@@ -287,7 +286,7 @@ class TestHtmlSanitizer(unittest.TestCase):
                 'Hello World book')
         output = [' My Amazing book ', '\nHello World book']
         metadata = {}
-        title = ' my amazing book '
+        title = 'my amazing book'
 
         # Test the parser
         self.run_test_check_output(html, output)

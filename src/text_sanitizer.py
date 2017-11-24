@@ -6,6 +6,9 @@ exposes methods which allow the extraction of metadata and
 the title of the input.
 """
 
+import re
+import string
+
 class TextSanitizer:
     """
     This class is meant to sanitize plain text.

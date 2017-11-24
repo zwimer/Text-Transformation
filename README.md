@@ -6,6 +6,12 @@ Members:
 * Charles Schmitter
 * Zachary Wimer
 
+# Unit Tests
+To unit test this project, go to `cd src/Unit-Tests` then run 
+```bash
+	python3 -m unittest discover
+```
+
 # Design preferences:
 1. Indexing: Map out where in each document any given word can be found. Notate extant fields like title and author.
 2. Ranking: Use inlink analysis and index date (with bi/tri-gram analysis) to generate a ranked list of documents for a search query

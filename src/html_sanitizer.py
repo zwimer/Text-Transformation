@@ -17,11 +17,11 @@ def create_delimiter(text):
     """
     :param text: The text to create a delimiter for
     :returns: A delimiter not in text
-    Create a delimiter that does not exist in text
+    Create a non-whitespace only delimiter that does not exist in text
     """
 
     # Construct an initial delimiter
-    delimiter = random.choice(string.printable)
+    delimiter = random.choice(string.ascii_letters)
 
     # While the delimiter exists in text, add random characters to it
     while delimiter in text:

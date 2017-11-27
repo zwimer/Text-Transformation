@@ -30,13 +30,18 @@ class MarkdownSanitizer(TextSanitizer):
 
         # Remove all code blocks
         code_blocks = r'`(.*?(\s)*?)*?`'
-        code_free_content = re.sub(code_blocks, " ", content)
+        code_free_content = re.sub(code_blocks, " ", self.content)
 
         # Remove links (this will include image blocks)
         # the ! symbol is sanitized by the parent class later on
         link_blocks = r'\[(.*?)\][\[\(].*?[\]\)]'
-        regex = re.compile(link_blocks)
-        plain_text = str(regex.sub("\\1", code_free_content))
+        link_regex = re.compile(link_blocks)
+        plain_text = str(link_regex.sub("\\1", code_free_content))
+
+        # Remove references
+        references = r'\[.+\]:.+'
+        ref_regex = re.compile(references)
+        result = str(ref_regex.sub("", plain_text))
 
         # Return the plain text in a list
         return [ result ]

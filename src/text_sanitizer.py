@@ -1,8 +1,8 @@
 """
 This file contains the class TextSanitizer.
 This file is meant to hold a text sanitization class
-to extract the plain text from its input. This class also 
-exposes methods which allow the extraction of metadata and 
+to extract the plain text from its input. This class also
+exposes methods which allow the extraction of metadata and
 the title of the input.
 """
 
@@ -44,14 +44,14 @@ class TextSanitizer:
         # Convert the text to plain text then sanitize the text
         text_lists = self.extract_plain_text_lists()
         ret = []
-        _ = [ ret.extend(self.sanitize_plain_text(i)) for i in text_lists ]
+        _ = [ ret.append(self.sanitize_plain_text(i)) for i in text_lists ]
         return ret
-        
-    def extract_plain_text(self):
+
+    def extract_plain_text_lists(self):
         """
         :returns: The lists of plain text found
         """
-        return [ self.input ] 
+        return [ self.input ]
 
     @staticmethod
     def sanitize_plain_text(dirty):
@@ -91,9 +91,13 @@ class TextSanitizer:
         new_block_list = [ i.strip() for i in new_block_list ]
         new_block_list = [ i for i in new_block_list if i ]
 
-        # Finally, in each block, replace all 
+        # Finally, in each block, replace all
         # contiguous chunks of whitespace with a single ' '
         sanitized_blocks = [ ' '.join(i.split()) for i in new_block_list]
 
         # Return the list as a list of strings
         return [ str(i) for i in sanitized_blocks ]
+
+if __name__ == '__main__':
+    obj = TextSanitizer("This is a sentence! Woo!")
+    print( obj.sanitize() )

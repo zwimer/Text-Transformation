@@ -56,6 +56,7 @@ class TestMarkdownSanitizer(unittest.TestCase):
         """
         parser = MarkdownSanitizer(input_data)
         output = parser.extract_plain_text_lists()
+
         self.assert_equality(expected_output, output)
 
     def test_inline_image(self):
@@ -67,7 +68,7 @@ class TestMarkdownSanitizer(unittest.TestCase):
 
         # Test input and all expected outputs
         md = ('\"Click ![here](www.freestuff.com/image_link) for free stuff\"\n')
-        output = ['\"Click !here for free stuff\"\n']
+        output = ['\n\"Click !here for free stuff\"\n\n']
         metadata = None
         title = None
 
@@ -83,7 +84,7 @@ class TestMarkdownSanitizer(unittest.TestCase):
 
         # Test input and all expected outputs
         md = ('\"Click ![here](www.freestuff.com/image_link \"Title goes here\") for free stuff\"')
-        output = ['\"Click !here for free stuff\"']
+        output = ['\n\"Click !here for free stuff\"\n']
         metadata = None
         title = None
 
@@ -99,7 +100,7 @@ class TestMarkdownSanitizer(unittest.TestCase):
 
         # Test input and all expected outputs
         md = ('Click [here](www.freestuff.com) for free stuff')
-        output = ['Click here for free stuff']
+        output = ['\nClick here for free stuff\n']
         metadata = None
         title = None
 
@@ -115,7 +116,7 @@ class TestMarkdownSanitizer(unittest.TestCase):
 
         # Test input and all expected outputs
         md = ('Click [here](www.freestuff.com FreeStuffTitle) for free stuff')
-        output = ['Click here for free stuff']
+        output = ['\nClick here for free stuff\n']
         metadata = None
         title = None
 
@@ -131,7 +132,7 @@ class TestMarkdownSanitizer(unittest.TestCase):
 
         # Test input and all expected outputs
         md = ('we ignore this ```printf("this is code\n")``` great')
-        output = ['we ignore this     great']
+        output = ['\nwe ignore this     great\n']
         metadata = None
         title = None
 
@@ -163,7 +164,55 @@ class TestMarkdownSanitizer(unittest.TestCase):
 
         # Test input and all expected outputs
         md = ('\"Click [here][logo] for free stuff\"\n\n[logo]: https://www.google.com/my_image')
-        output = ['']
+        output = ['\n\"Click here for free stuff\"\n\n']
+        metadata = None
+        title = None
+
+        # Test the parser
+        self.run_test_check_output(md, output)
+
+    def test_numbered_reference_style_link_extra(self):
+        """
+        :throws AssertionError: If test case fail
+        :returns: nothing
+        Test that the parser removes html single line comments
+        """
+
+        # Test input and all expected outputs
+        md = ('\"Click [here][logo] for free stuff\"\n\n[logo]: https://www.google.com/my_image "Title"\n Banana \n[2]: dfsdfds\n[3]: t')
+        output = ['\n\"Click here for free stuff\"\n\n Banana \n']
+        metadata = None
+        title = None
+
+        # Test the parser
+        self.run_test_check_output(md, output)
+
+    def test_relative_repository(self):
+        """
+        :throws AssertionError: If test case fail
+        :returns: nothing
+        Test that the parser removes html single line comments
+        """
+
+        # Test input and all expected outputs
+        md = ('Click [here](../Free/Stuff) for free stuff')
+        output = ['\nClick here for free stuff\n']
+        metadata = None
+        title = None
+
+        # Test the parser
+        self.run_test_check_output(md, output)
+
+    def test_single_tick_code_blocks(self):
+        """
+        :throws AssertionError: If test case fail
+        :returns: nothing
+        Test that the parser removes html single line comments
+        """
+
+        # Test input and all expected outputs
+        md = ('we ignore this `printf("this is code\n")` great')
+        output = ['\nwe ignore this   great\n']
         metadata = None
         title = None
 

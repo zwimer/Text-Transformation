@@ -98,7 +98,3 @@ class TextSanitizer:
 
         # Return the list as a list of strings
         return [ str(i) for i in sanitized_blocks ]
-
-if __name__ == '__main__':
-    obj = TextSanitizer("This is a sentence!\n\nhere Woo!")
-    print( obj.sanitize() )

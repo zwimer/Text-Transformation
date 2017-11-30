@@ -44,7 +44,8 @@ class TextSanitizer:
         # Convert the text to plain text then sanitize the text
         text_lists = self.extract_plain_text_lists()
         ret = []
-        _ = [ ret.append(self.sanitize_plain_text(i)) for i in text_lists ]
+        _ = [ ret.extend([ i.split() for i in self.sanitize_plain_text(i)]) \
+            for i in text_lists ]
         return ret
 
     def extract_plain_text_lists(self):
@@ -99,5 +100,5 @@ class TextSanitizer:
         return [ str(i) for i in sanitized_blocks ]
 
 if __name__ == '__main__':
-    obj = TextSanitizer("This is a sentence! Woo!")
+    obj = TextSanitizer("This is a sentence!\n\nhere Woo!")
     print( obj.sanitize() )

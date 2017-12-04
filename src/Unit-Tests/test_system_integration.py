@@ -3,7 +3,7 @@ This file contains the TestSystemIntegration class which contains test
 cases for the full integrated text transformation system.
 
 Currently, tests that fail due to the same error as another test (most of the
-html tests) have been prepended with donotrun_ and only the original test with
+html tests) have been prepended with  and only the original test with
 that error has been left runnable
 """
 
@@ -141,7 +141,7 @@ class TestSystemIntegration(unittest.TestCase):
 # HTML
 # ============================================================================
 
-    def donotrun_test_html_abbreviated_tags(self):
+    def test_html_abbreviated_tags(self):
         """
         throws AssertionError: If test case fails
         System test for abbreviated tags HTML test plan
@@ -155,7 +155,7 @@ class TestSystemIntegration(unittest.TestCase):
         self.run_test_check_output(input_fname, input_type,
             expected_output_fname, actual_output_fname)
 
-    def donotrun_test_html_duplicate_metadata(self):
+    def test_html_duplicate_metadata(self):
         """
         throws AssertionError: If test case fails
         System test for duplicate metadata HTML test plan
@@ -169,7 +169,7 @@ class TestSystemIntegration(unittest.TestCase):
         self.run_test_check_output(input_fname, input_type,
             expected_output_fname, actual_output_fname)
 
-    def donotrun_test_html_duplicate_title(self):
+    def test_html_duplicate_title(self):
         """
         throws AssertionError: If test case fails
         System test for duplicate title HTML test plan
@@ -225,7 +225,7 @@ class TestSystemIntegration(unittest.TestCase):
         self.run_test_check_output(input_fname, input_type,
             expected_output_fname, actual_output_fname)
 
-    def donotrun_test_html_inline_css(self):
+    def test_html_inline_css(self):
         """
         throws AssertionError: If test case fails
         System test for inline css HTML test plan
@@ -239,7 +239,7 @@ class TestSystemIntegration(unittest.TestCase):
         self.run_test_check_output(input_fname, input_type,
             expected_output_fname, actual_output_fname)
 
-    def donotrun_test_html_inline_php(self):
+    def test_html_inline_php(self):
         """
         throws AssertionError: If test case fails
         System test for inline php HTML test plan
@@ -253,7 +253,7 @@ class TestSystemIntegration(unittest.TestCase):
         self.run_test_check_output(input_fname, input_type,
             expected_output_fname, actual_output_fname)
 
-    def donotrun_test_html_Internal_css(self):
+    def test_html_Internal_css(self):
         """
         throws AssertionError: If test case fails
         System test for internal css HTML test plan
@@ -267,7 +267,7 @@ class TestSystemIntegration(unittest.TestCase):
         self.run_test_check_output(input_fname, input_type,
             expected_output_fname, actual_output_fname)
 
-    def donotrun_test_html_javascript_comments(self):
+    def test_html_javascript_comments(self):
         """
         throws AssertionError: If test case fails
         System test for javascript comments HTML test plan
@@ -281,7 +281,7 @@ class TestSystemIntegration(unittest.TestCase):
         self.run_test_check_output(input_fname, input_type,
             expected_output_fname, actual_output_fname)
 
-    def donotrun_test_html_meta_title(self):
+    def test_html_meta_title(self):
         """
         throws AssertionError: If test case fails
         System test for meta title HTML test plan
@@ -295,7 +295,7 @@ class TestSystemIntegration(unittest.TestCase):
         self.run_test_check_output(input_fname, input_type,
             expected_output_fname, actual_output_fname)
 
-    def donotrun_test_html_multiline_comments(self):
+    def test_html_multiline_comments(self):
         """
         throws AssertionError: If test case fails
         System test for multiline comments HTML test plan
@@ -309,7 +309,7 @@ class TestSystemIntegration(unittest.TestCase):
         self.run_test_check_output(input_fname, input_type,
             expected_output_fname, actual_output_fname)
 
-    def donotrun_test_html_nested_html_comments(self):
+    def test_html_nested_html_comments(self):
         """
         throws AssertionError: If test case fails
         System test for nested html comments HTML test plan
@@ -337,7 +337,7 @@ class TestSystemIntegration(unittest.TestCase):
         self.run_test_check_output(input_fname, input_type,
             expected_output_fname, actual_output_fname)
 
-    def donotrun_test_html_no_title(self):
+    def test_html_no_title(self):
         """
         throws AssertionError: If test case fails
         System test for no title HTML test plan
@@ -365,7 +365,7 @@ class TestSystemIntegration(unittest.TestCase):
         self.run_test_check_output(input_fname, input_type,
             expected_output_fname, actual_output_fname)
 
-    def donotrun_test_html_script_tags(self):
+    def test_html_script_tags(self):
         """
         throws AssertionError: If test case fails
         System test for script tags HTML test plan

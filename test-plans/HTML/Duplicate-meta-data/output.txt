@@ -19,11 +19,13 @@
 		"2" : {
 			"my amazing" : [ 1 ],
 			"amazing book" : [ 2 ],
+      "meg hello" : [ 4 ],
 			"hello world" : [ 5 ],
 			"world book" : [ 6 ]
 		},
 		"3" : {
 			"my amazing book" : [ 1 ],
+      "meg hello world" : [ 4 ],
 			"hello world book" : [ 5 ]
 		}
 	}

@@ -1,25 +1,25 @@
 {
 	"title" : {
 		"title" : "my amazing book",
-		"indicies" : [ 0 ]
+		"indices" : [ 0 ]
 	},
 	"metadata" : {
 	},
 	"ngrams" : {
-		1 : {
+		"1" : {
 			"my" : [ 0 ],
 			"amazing" : [ 1 ],
 			"book" : [ 2, 5 ],
 			"hello" : [ 3 ],
 			"world" : [ 4 ]
 		},
-		2 : {
+		"2" : {
 			"my amazing" : [ 0 ],
 			"amazing book" : [ 1 ],
 			"hello world" : [ 3 ],
 			"world book" : [ 4 ]
 		},
-		3 : {
+		"3" : {
 			"my amazing book" : [ 0 ],
 			"hello world book" : [ 3 ]
 		}

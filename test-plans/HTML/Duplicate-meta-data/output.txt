@@ -1,13 +1,13 @@
 {
 	"title" : {
 		"title" : "my amazing book",
-		"indicies" : [ 0 ]
+		"indices" : [ 1 ]
 	},
 	"metadata" : {
 		"author": "bob"
 	},
 	"ngrams" : {
-		1 : {
+		"1" : {
 			"bob" : [ 0 ],
 			"my" : [ 1 ],
 			"amazing" : [ 2 ],
@@ -16,13 +16,13 @@
 			"hello" : [ 5 ],
 			"world" : [ 6 ]
 		},
-		2 : {
+		"2" : {
 			"my amazing" : [ 1 ],
 			"amazing book" : [ 2 ],
 			"hello world" : [ 5 ],
 			"world book" : [ 6 ]
 		},
-		3 : {
+		"3" : {
 			"my amazing book" : [ 1 ],
 			"hello world book" : [ 5 ]
 		}

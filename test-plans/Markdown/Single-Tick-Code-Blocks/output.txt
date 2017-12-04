@@ -1,23 +1,23 @@
 {
 	"title" : {
-		"title" : Null
-		"indicies" : []
+		"title" : null,
+		"indices" : []
 	},
 	"metadata" : {
 	},
 	"ngrams" : {
-		1 : {
+		"1" : {
 			"we" : [ 0 ],
 			"ignore" : [ 1 ],
 			"this" : [ 2 ],
 			"great" : [ 3 ]
 		},
-		2 : {
+		"2" : {
 			"we ignore" : [ 0 ],
 			"ignore this" : [ 1 ],
 			"this great" : [ 2 ]
 		},
-		3 : {
+		"3" : {
 			"we ignore this" : [ 0 ],
 			"ignore this great" : [ 1 ]
 		}

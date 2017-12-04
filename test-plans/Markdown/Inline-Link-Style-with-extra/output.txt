@@ -1,25 +1,25 @@
 {
 	"title" : {
-		"title" : Null
-		"indicies" : []
+		"title" : null,
+		"indices" : []
 	},
 	"metadata" : {
 	},
 	"ngrams" : {
-		1 : {
+		"1" : {
 			"click" : [ 0 ],
 			"here" : [ 1 ],
 			"for" : [ 2 ],
 			"free" : [ 3 ],
       "stuff" : [ 4 ]
 		},
-		2 : {
+		"2" : {
 			"click here" : [ 0 ],
 			"here for" : [ 1 ],
 			"for free" : [ 2 ],
       "free stuff" : [ 3 ]
 		},
-		3 : {
+		"3" : {
 			"click here for" : [ 0 ],
 			"here for free" : [ 1 ],
       "for free stuff" : [ 2 ]

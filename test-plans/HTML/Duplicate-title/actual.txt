@@ -1,0 +1,65 @@
+{
+    "metadata":{
+        "author":"meg"
+    },
+    "ngrams":{
+        "1":{
+            "amazing":[
+                2
+            ],
+            "book":[
+                3,
+                7
+            ],
+            "hello":[
+                5
+            ],
+            "hi":[
+                0
+            ],
+            "meg":[
+                4
+            ],
+            "my":[
+                1
+            ],
+            "world":[
+                6
+            ]
+        },
+        "2":{
+            "amazing book":[
+                2
+            ],
+            "hello world":[
+                5
+            ],
+            "meg hello":[
+                4
+            ],
+            "my amazing":[
+                1
+            ],
+            "world book":[
+                6
+            ]
+        },
+        "3":{
+            "hello world book":[
+                5
+            ],
+            "meg hello world":[
+                4
+            ],
+            "my amazing book":[
+                1
+            ]
+        }
+    },
+    "title":{
+        "indices":[
+            0
+        ],
+        "title":"hi"
+    }
+}

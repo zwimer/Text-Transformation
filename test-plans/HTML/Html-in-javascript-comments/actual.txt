@@ -1,0 +1,157 @@
+{
+    "metadata":{
+        "author":"meg"
+    },
+    "ngrams":{
+        "1":{
+            "and":[
+                7
+            ],
+            "be":[
+                13
+            ],
+            "book":[
+                18
+            ],
+            "end":[
+                3
+            ],
+            "hello":[
+                16
+            ],
+            "ignored":[
+                14
+            ],
+            "meg":[
+                15
+            ],
+            "not":[
+                2
+            ],
+            "script":[
+                5
+            ],
+            "should":[
+                1,
+                11
+            ],
+            "still":[
+                12
+            ],
+            "tag":[
+                6
+            ],
+            "the":[
+                4
+            ],
+            "thing":[
+                10
+            ],
+            "this":[
+                0,
+                8
+            ],
+            "whole":[
+                9
+            ],
+            "world":[
+                17
+            ]
+        },
+        "2":{
+            "and this":[
+                7
+            ],
+            "be ignored":[
+                13
+            ],
+            "end the":[
+                3
+            ],
+            "hello world":[
+                16
+            ],
+            "meg hello":[
+                15
+            ],
+            "not end":[
+                2
+            ],
+            "script tag":[
+                5
+            ],
+            "should not":[
+                1
+            ],
+            "should still":[
+                11
+            ],
+            "still be":[
+                12
+            ],
+            "the script":[
+                4
+            ],
+            "thing should":[
+                10
+            ],
+            "this should":[
+                0
+            ],
+            "this whole":[
+                8
+            ],
+            "whole thing":[
+                9
+            ],
+            "world book":[
+                17
+            ]
+        },
+        "3":{
+            "and this whole":[
+                7
+            ],
+            "end the script":[
+                3
+            ],
+            "hello world book":[
+                16
+            ],
+            "meg hello world":[
+                15
+            ],
+            "not end the":[
+                2
+            ],
+            "should not end":[
+                1
+            ],
+            "should still be":[
+                11
+            ],
+            "still be ignored":[
+                12
+            ],
+            "the script tag":[
+                4
+            ],
+            "thing should still":[
+                10
+            ],
+            "this should not":[
+                0
+            ],
+            "this whole thing":[
+                8
+            ],
+            "whole thing should":[
+                9
+            ]
+        }
+    },
+    "title":{
+        "indices":[],
+        "title":null
+    }
+}

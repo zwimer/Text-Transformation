@@ -1,13 +1,13 @@
 {
 	"title" : {
-		"title" : Null,
-		"indicies" : []
+		"title" : null,,
+		"indices" : []
 	},
 	"metadata" : {
 	},
 	"ngrams" : {
-		1 : { },
-		2 : { },
-		3 : { }
+		"1" : { },
+		"2" : { },
+		"3" : { }
 	}
 }

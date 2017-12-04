@@ -159,6 +159,48 @@ class TestSystemIntegration(unittest.TestCase):
         self.run_test_check_output(input_fname, input_type,
             expected_output_fname, actual_output_fname)
 
+    def test_html_Internal_css(self):
+        """
+        throws AssertionError: If test case fails
+        System test for internal css HTML test plan
+        """
+        input_fname = "../../test-plans/HTML/Internal-CSS/input.txt"
+        input_type = "html"
+        expected_output_fname = "../../test-plans/HTML/Internal-CSS/output.txt"
+        actual_output_fname = "../../test-plans/HTML/Internal-CSS/actual.txt"
+
+        # Run the test!
+        self.run_test_check_output(input_fname, input_type,
+            expected_output_fname, actual_output_fname)
+
+    def test_html_plain_text(self):
+        """
+        throws AssertionError: If test case fails
+        System test for plain-text HTML test plan
+        """
+        input_fname = "../../test-plans/HTML/Plain-text/input.txt"
+        input_type = "html"
+        expected_output_fname = "../../test-plans/HTML/Plain-text/output.txt"
+        actual_output_fname = "../../test-plans/HTML/Plain-text/actual.txt"
+
+        # Run the test!
+        self.run_test_check_output(input_fname, input_type,
+            expected_output_fname, actual_output_fname)
+
+    def test_html_script_tags(self):
+        """
+        throws AssertionError: If test case fails
+        System test for script tags HTML test plan
+        """
+        input_fname = "../../test-plans/HTML/Script-Tags/input.txt"
+        input_type = "html"
+        expected_output_fname = "../../test-plans/HTML/Script-Tags/output.txt"
+        actual_output_fname = "../../test-plans/HTML/Script-Tags/actual.txt"
+
+        # Run the test!
+        self.run_test_check_output(input_fname, input_type,
+            expected_output_fname, actual_output_fname)
+
     # Markdown tests
     # Just general tests at first
     def test_md_general_1(self):
@@ -174,6 +216,35 @@ class TestSystemIntegration(unittest.TestCase):
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
             expected_output_fname, actual_output_fname)
+
+    def test_md_inline_image(self):
+        """
+        throws AssertionError: If test case fails
+        System test for inline image md test plan
+        """
+        input_fname = "../../test-plans/Markdown/Inline-Image/input.txt"
+        input_type = "md"
+        expected_output_fname = "../../test-plans/Markdown/Inline-Image/output.txt"
+        actual_output_fname = "../../test-plans/Markdown/Inline-Image/actual.txt"
+
+        # Run the test!
+        self.run_test_check_output(input_fname, input_type,
+            expected_output_fname, actual_output_fname)
+
+    def test_md_inline_link_style(self):
+        """
+        throws AssertionError: If test case fails
+        System test for inline link style md test plan
+        """
+        input_fname = "../../test-plans/Markdown/Inline-Link-Style/input.txt"
+        input_type = "md"
+        expected_output_fname = "../../test-plans/Markdown/Inline-Link-Style/output.txt"
+        actual_output_fname = "../../test-plans/Markdown/Inline-Link-Style/actual.txt"
+
+        # Run the test!
+        self.run_test_check_output(input_fname, input_type,
+            expected_output_fname, actual_output_fname)
+
 
 if __name__ == "__main__":
     unittest.main()

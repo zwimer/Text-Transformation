@@ -1,0 +1,51 @@
+{
+    "metadata":{},
+    "ngrams":{
+        "1":{
+            "click":[
+                0
+            ],
+            "for":[
+                2
+            ],
+            "free":[
+                3
+            ],
+            "here":[
+                1
+            ],
+            "stuff":[
+                4
+            ]
+        },
+        "2":{
+            "click here":[
+                0
+            ],
+            "for free":[
+                2
+            ],
+            "free stuff":[
+                3
+            ],
+            "here for":[
+                1
+            ]
+        },
+        "3":{
+            "click here for":[
+                0
+            ],
+            "for free stuff":[
+                2
+            ],
+            "here for free":[
+                1
+            ]
+        }
+    },
+    "title":{
+        "indices":[],
+        "title":null
+    }
+}

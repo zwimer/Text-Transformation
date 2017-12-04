@@ -379,6 +379,62 @@ class TestSystemIntegration(unittest.TestCase):
         self.run_test_check_output(input_fname, input_type,
             expected_output_fname, actual_output_fname)
 
+    def test_html_single_line_comments(self):
+        """
+        throws AssertionError: If test case fails
+        System test for single line comments HTML test plan
+        """
+        input_fname = "../../test-plans/HTML/Single-Line-Comments/input.txt"
+        input_type = "html"
+        expected_output_fname = "../../test-plans/HTML/Single-Line-Comments/output.txt"
+        actual_output_fname = "../../test-plans/HTML/Single-Line-Comments/actual.txt"
+
+        # Run the test!
+        self.run_test_check_output(input_fname, input_type,
+            expected_output_fname, actual_output_fname)
+
+    def test_html_special_characters(self):
+        """
+        throws AssertionError: If test case fails
+        System test for special characters HTML test plan
+        """
+        input_fname = "../../test-plans/HTML/Special-Characters/input.txt"
+        input_type = "html"
+        expected_output_fname = "../../test-plans/HTML/Special-Characters/output.txt"
+        actual_output_fname = "../../test-plans/HTML/Special-Characters/actual.txt"
+
+        # Run the test!
+        self.run_test_check_output(input_fname, input_type,
+            expected_output_fname, actual_output_fname)
+
+    def test_html_tags(self):
+        """
+        throws AssertionError: If test case fails
+        System test for tags HTML test plan
+        """
+        input_fname = "../../test-plans/HTML/Tags/input.txt"
+        input_type = "html"
+        expected_output_fname = "../../test-plans/HTML/Tags/output.txt"
+        actual_output_fname = "../../test-plans/HTML/Tags/actual.txt"
+
+        # Run the test!
+        self.run_test_check_output(input_fname, input_type,
+            expected_output_fname, actual_output_fname)
+
+    def test_html_title_meta_title(self):
+        """
+        throws AssertionError: If test case fails
+        System test for title / meta title HTML test plan
+        """
+        input_fname = "../../test-plans/HTML/Title-meta-title/input.txt"
+        input_type = "html"
+        expected_output_fname = "../../test-plans/HTML/Title-meta-title/output.txt"
+        actual_output_fname = "../../test-plans/HTML/Title-meta-title/actual.txt"
+
+        # Run the test!
+        self.run_test_check_output(input_fname, input_type,
+            expected_output_fname, actual_output_fname)
+
 # ============================================================================
 # MARKDOWN
 # ============================================================================

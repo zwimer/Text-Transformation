@@ -11,21 +11,19 @@ tests, including previously failed ones
 
 | Test | Outcome | Notes |
 |------------------------|
-1. Casing: **PASS**
-2. Punctuation: **PASS**
-3. Stop Punctuation: **PASS**
-  - Originally failed due to incorrect output file: indices for "is"
-    onward on two- and three- grams were shifted one greater
-4. Stop Words: **PASS**
-5. Whitespace: **PASS**
+| Casing | **PASS** |  |
+| Punctuation | **PASS** |  |
+| Stop Punctuation | **PASS** | Originally failed due to incorrect output file - indices for "is" onward on two- and three- grams were shifted one greater |
+| Stop Words | **PASS** |  |
+| Whitespace | **PASS** |  ||
 
 ## HTML Tests
 
 | Test | Outcome | Notes |
 |------------------------|
 | Abbreviated Tags | PASS |  |
-| Duplicate Metadata | PASS | Originally additionally failed due to an index error in the expected output file |
-| Duplicate Title | PASS | Originally additionally failed due to capitalization error in expected output |
+| Duplicate Metadata | PASS | Originally failed due to an index error in the expected output file |
+| Duplicate Title | PASS | Originally failed due to capitalization error in expected output |
 | General-1 | **FAIL** | Lines 2 and 3 are not registered as having anything that counts as a stopword between them. I believe the output file is in error here, but want to check before changing it. |
 | General-2 | PASS | Originally failed due to error in output file (extraneous space in a term) |
 | HTML in Javascript Comments | **FAIL** | HTML is Javascript Comments is not ignored; General-1 error |
@@ -40,10 +38,10 @@ tests, including previously failed ones
 | No Title | PASS |  |
 | Plaintext | PASS | |
 | Script tags | PASS |  |
-| Single Line Comments | **NOT RUN** |  |
-| Special Characters | **NOT RUN** |  |
-| Tags | **NOT RUN** |  |
-| Title / Meta Title | **NOT RUN** |  ||
+| Single Line Comments | PASS |  |
+| Special Characters | PASS |  |
+| Tags | PASS |  |
+| Title / Meta Title | PASS |  ||
 
 ## Markdown Tests
 

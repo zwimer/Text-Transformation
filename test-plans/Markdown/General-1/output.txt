@@ -17,12 +17,10 @@
 		"2" : {
 			"this is" : [ 0 ],
       "is a" : [ 1 ],
-      "general markdown" : [ 3 ],
       "markdown test" : [ 4 ]
 		},
 		"3" : {
-			"this is a" : [ 0 ],
-      "general markdown test" : [ 3 ]
+			"this is a" : [ 0 ]
 		}
 	}
 }

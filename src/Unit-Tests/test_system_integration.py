@@ -267,6 +267,90 @@ class TestSystemIntegration(unittest.TestCase):
         self.run_test_check_output(input_fname, input_type,
             expected_output_fname, actual_output_fname)
 
+    def donotrun_test_html_javascript_comments(self):
+        """
+        throws AssertionError: If test case fails
+        System test for javascript comments HTML test plan
+        """
+        input_fname = "../../test-plans/HTML/Javascript-comments/input.txt"
+        input_type = "html"
+        expected_output_fname = "../../test-plans/HTML/Javascript-comments/output.txt"
+        actual_output_fname = "../../test-plans/HTML/Javascript-comments/actual.txt"
+
+        # Run the test!
+        self.run_test_check_output(input_fname, input_type,
+            expected_output_fname, actual_output_fname)
+
+    def donotrun_test_html_meta_title(self):
+        """
+        throws AssertionError: If test case fails
+        System test for meta title HTML test plan
+        """
+        input_fname = "../../test-plans/HTML/Meta-title/input.txt"
+        input_type = "html"
+        expected_output_fname = "../../test-plans/HTML/Meta-title/output.txt"
+        actual_output_fname = "../../test-plans/HTML/Meta-title/actual.txt"
+
+        # Run the test!
+        self.run_test_check_output(input_fname, input_type,
+            expected_output_fname, actual_output_fname)
+
+    def donotrun_test_html_multiline_comments(self):
+        """
+        throws AssertionError: If test case fails
+        System test for multiline comments HTML test plan
+        """
+        input_fname = "../../test-plans/HTML/Multi-Line-Comments/input.txt"
+        input_type = "html"
+        expected_output_fname = "../../test-plans/HTML/Multi-Line-Comments/output.txt"
+        actual_output_fname = "../../test-plans/HTML/Multi-Line-Comments/actual.txt"
+
+        # Run the test!
+        self.run_test_check_output(input_fname, input_type,
+            expected_output_fname, actual_output_fname)
+
+    def donotrun_test_html_nested_html_comments(self):
+        """
+        throws AssertionError: If test case fails
+        System test for nested html comments HTML test plan
+        """
+        input_fname = "../../test-plans/HTML/Nested-html-comments/input.txt"
+        input_type = "html"
+        expected_output_fname = "../../test-plans/HTML/Nested-html-comments/output.txt"
+        actual_output_fname = "../../test-plans/HTML/Nested-html-comments/actual.txt"
+
+        # Run the test!
+        self.run_test_check_output(input_fname, input_type,
+            expected_output_fname, actual_output_fname)
+
+    def test_html_no_meta_tags(self):
+        """
+        throws AssertionError: If test case fails
+        System test for no meta tags HTML test plan
+        """
+        input_fname = "../../test-plans/HTML/No-meta-tags/input.txt"
+        input_type = "html"
+        expected_output_fname = "../../test-plans/HTML/No-meta-tags/output.txt"
+        actual_output_fname = "../../test-plans/HTML/No-meta-tags/actual.txt"
+
+        # Run the test!
+        self.run_test_check_output(input_fname, input_type,
+            expected_output_fname, actual_output_fname)
+
+    def donotrun_test_html_no_title(self):
+        """
+        throws AssertionError: If test case fails
+        System test for no title HTML test plan
+        """
+        input_fname = "../../test-plans/HTML/No-title/input.txt"
+        input_type = "html"
+        expected_output_fname = "../../test-plans/HTML/No-title/output.txt"
+        actual_output_fname = "../../test-plans/HTML/No-title/actual.txt"
+
+        # Run the test!
+        self.run_test_check_output(input_fname, input_type,
+            expected_output_fname, actual_output_fname)
+
     def test_html_plain_text(self):
         """
         throws AssertionError: If test case fails
@@ -295,8 +379,10 @@ class TestSystemIntegration(unittest.TestCase):
         self.run_test_check_output(input_fname, input_type,
             expected_output_fname, actual_output_fname)
 
-    # Markdown tests
-    # Just general tests at first
+# ============================================================================
+# MARKDOWN
+# ============================================================================
+
     def test_md_general_1(self):
         """
         throws AssertionError: If test case fails

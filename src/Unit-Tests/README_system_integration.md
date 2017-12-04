@@ -19,47 +19,29 @@ tests, including previously failed ones
 
 ## HTML Tests
 
-1. Abbreviated Tags: **FAIL**
-  - Same reason as General-1
-2. Duplicate Metadata: **FAIL**
-  - Same reason as General-1
-  - Originally additionally failed due to an index error in the expected output
-    file
-3. Duplicate Title: **FAIL**
-  - Same reason as General-1
-  - Originally additionally failed due to capitalization error in expected
-    output
-4. General-1: **FAIL**
-  - Lines 2 and 3 are not registered as having anything that counts as a
-    stopword between them. I believe the output file is in error here, but
-    want to check before changing it.
-5. General-2: **PASS**
-  - Originally failed due to error in output file (extraneous space in a
-    term)
-6. HTML in Javascript Comments: **FAIL**
-  - HTML is Javascript Comments is not ignored
-  - Error from General-1 is also present
-7. Inline CSS: **FAIL**
-  - Same reason as General-1
-  - Originally additionally failed to an index error in expected output - a word
-    repeated in the input was only indexed once
-8. Inline PHP: **FAIL**
-  - Same reason as General-1
-9. Internal CSS: **FAIL**
-  - Same reason as General-1
-10. Javascript Comments: **NOT RUN**
-11. Meta Title: **NOT RUN**
-12. Multi-line Comments: **NOT RUN**
-13. Nested HTML Comments: **NOT RUN**
-14. No Meta Tags: **NOT RUN**
-15. No Title: **NOT RUN**
-16. Plaintext: **PASS**
-17. Script tags: **FAIL**
-  - Same reason as General-1
-18. Single Line Comments: **NOT RUN**
-19. Special Characters: **NOT RUN**
-20. Tags: **NOT RUN**
-21. Title / Meta Title: **NOT RUN**
+| Test | Outcome | Notes |
+|------------------------|
+| Abbreviated Tags | **FAIL** | General-1 error |
+| Duplicate Metadata | **FAIL** | General-1 error; Originally additionally failed due to an index error in the expected output file |
+| Duplicate Title | **FAIL** | General-1 error; Originally additionally failed due to capitalization error in expected output |
+| General-1 | **FAIL** | Lines 2 and 3 are not registered as having anything that counts as a stopword between them. I believe the output file is in error here, but want to check before changing it. |
+| General-2 | **PASS** | Originally failed due to error in output file (extraneous space in a term) |
+| HTML in Javascript Comments | **FAIL** | HTML is Javascript Comments is not ignored; General-1 error |
+| Inline CSS | **FAIL** | General-1 error; Originally additionally failed to an index error in expected output - a word repeated in the input was only indexed once |
+| Inline PHP | **FAIL** | General-1 error |
+| Internal CSS | **FAIL** | General-1 error |
+| Javascript Comments | **FAIL** | General-1 error |
+| Meta Title | **FAIL** | General-1 error |
+| Multi-line Comments | **FAIL** | General-1 error |
+| Nested HTML Comments | **FAIL** | General-1 error |
+| No Meta Tags | **PASS** |  |
+| No Title | **FAIL** | General-1 error |
+| Plaintext | **PASS** | |
+| Script tags | **FAIL** | General-1 error |
+| Single Line Comments | **NOT RUN** |  |
+| Special Characters | **NOT RUN** |  |
+| Tags | **NOT RUN** |  |
+| Title / Meta Title | **NOT RUN** |  ||
 
 ## Markdown Tests
 

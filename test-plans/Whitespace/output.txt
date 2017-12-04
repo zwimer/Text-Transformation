@@ -1,12 +1,12 @@
 {
 	"title" : {
-		"title" : Null,
-		"indicies" : []
+		"title" : null,
+		"indices" : []
 	},
 	"metadata" : {
 	},
 	"ngrams" : {
-		1 : {
+		"1" : {
 				"this" : [ 0 ],
 				"is" : [ 1 ],
 				"line" : [ 2, 7],
@@ -16,7 +16,7 @@
 				"have" : [ 6 ],
 				"two" : [8]
 		},
-		2 : {
+		"2" : {
 				"this is" : [ 0 ],
 				"is line" : [ 1 ],
 				"line one" : [ 2 ],
@@ -25,7 +25,7 @@
 				"have line" : [ 6 ],
 				"line two" : [ 7 ]
 		},
-		3 : {
+		"3" : {
 				"this is line" : [ 0 ],
 				"is line one" : [ 1 ],
 				"here we have" : [ 4 ],

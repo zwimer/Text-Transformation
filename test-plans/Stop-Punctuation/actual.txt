@@ -1,0 +1,51 @@
+{
+    "metadata":{},
+    "ngrams":{
+        "1":{
+            "a":[
+                3
+            ],
+            "is":[
+                2
+            ],
+            "stop":[
+                4
+            ],
+            "string":[
+                1
+            ],
+            "the":[
+                0
+            ],
+            "word":[
+                5
+            ]
+        },
+        "2":{
+            "a stop":[
+                3
+            ],
+            "is a":[
+                2
+            ],
+            "stop word":[
+                4
+            ],
+            "the string":[
+                0
+            ]
+        },
+        "3":{
+            "a stop word":[
+                3
+            ],
+            "is a stop":[
+                2
+            ]
+        }
+    },
+    "title":{
+        "indices":[],
+        "title":null
+    }
+}

@@ -1,12 +1,12 @@
 {
 	"title" : {
-		"title" : Null,
-		"indicies" : []
+		"title" : null,
+		"indices" : []
 	},
 	"metadata" : {
 	},
 	"ngrams" : {
-		1 : {
+		"1" : {
 				"the" : [ 0 ],
 				"string" : [ 1 ],
 				"is" : [ 2 ],
@@ -14,15 +14,15 @@
 				"stop" : [ 4 ],
         "word" : [ 5 ]
 		},
-		2 : {
+		"2" : {
 				"the string" : [ 0 ],
-				"is a" : [ 3 ],
-				"a stop" : [ 4 ],
-				"stop word" : [ 5 ]
+				"is a" : [ 2 ],
+				"a stop" : [ 3 ],
+				"stop word" : [ 4 ]
 		},
-		3 : {
-				"is a stop" : [ 3 ],
-				"a stop word" : [ 4 ]
+		"3" : {
+				"is a stop" : [ 2 ],
+				"a stop word" : [ 3 ]
 		}
 	}
 }

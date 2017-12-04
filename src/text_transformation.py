@@ -1,3 +1,7 @@
+"""
+This file contains the main system code for running text transformation.
+"""
+
 import sys
 import json
 
@@ -19,9 +23,6 @@ def arg():
     filename = sys.argv[1]
     file_type = sys.argv[2]
 
-    print("DEBUG:\tFilename:\t{}\n\tFile type:\t{}" \
-        .format(filename, file_type) )
-
     return filename, file_type
 
 def parse(text, file_type):
@@ -29,8 +30,6 @@ def parse(text, file_type):
     param text: full text to be parsed
     returns a tupe with (title string, metadata dictionary, parsed text lists)
     """
-
-    print("DEBUG: Parsing as {}".format(file_type))
 
     # Create parser based on file type
     if file_type == "html":
@@ -42,43 +41,40 @@ def parse(text, file_type):
 
     return (parser.get_title(), parser.get_metadata(), parser.sanitize())
 
-def get_title_indices(title, text_lists):
+def get_title_indices(title, onegrams):
     """
     param title: the title string (can be None)
-    param text_lists: list of list of strings of sanitized text
-    returns: a list of indices where the title is found in the text
+    param onegrams: The dictionary of onegrams and their indices created
+        by ngram_creator
+    returns: a list of the title's indices
     """
 
     # no title -> return an empty list
     if title == None:
         return []
 
-    # Count the term index
-    index = 0
+    title_terms = title.split()
+    current = 0
+    queue = set()
+    queue.add( () )
     indices = []
 
-    title_terms = title.split()
-    title_len = len(title)
+    # Constructs a set of all viable index "paths" that the title is found at
+    while (current != len(title_terms)):
+        newqueue = set()
 
-    for section in text_lists:
+        for index in onegrams[title_terms[current]]:
+            # Add this to the queue if it is a continuation of a title "path"
+            for path in queue:
+                if len(path) == 0 or path[-1] == index - 1:
+                    newqueue.add( path + (index,) )
 
-        # if the start of the title isn't in this section, skip it
-        if not title_terms[0] in section:
-            index += len(section)
-            continue
+        # move on to the next term
+        queue = newqueue
+        current += 1
 
-        for term, i in enumerate(section):
-            if term == title_terms[0]:
-
-                # when the first term is found, check the title_terms list
-                # against a sublist from section of the same length as the title
-                if title_terms == section[i:i+title_len]:
-                    indices.append(index)
-
-            index += 1
-
-    print("DEBUG:\tFound title {} at indices: ".format(title))
-    print("\t",indices)
+    for path in queue:
+        indices.append(path[0])
 
     return indices
 
@@ -90,12 +86,11 @@ def get_ngrams(text):
     """
     # Get stopwords from indexing
     # TODO add call to indexing
-    # TODO change for tests
-    stopwords_fname = "temp/english_stopwords.json"
-    stopwords = json.load( open(stopwords_fname, "r") )
 
-    print("DEBUG:\tLoaded list of {} stopwords".format(len(stopwords)))
+    # stopwords_fname = "temp/english_stopwords.json"
+    # stopwords = json.load( open(stopwords_fname, "r") )
 
+    stopwords = [ "couch" ]
 
     # Compile ngram_creator's results
     return {1 : ngram_creator.create(text, 1, stopwords, False), \
@@ -106,7 +101,7 @@ def get_ngrams(text):
 # MAIN
 # =============================================================================
 
-def main( arguments ):
+def main( arguments, output_fname=None ):
     """
     param arguments: a tuple containing the name of the file to be used and
         its type. Allowable types are 'txt', 'html', or 'md'.
@@ -141,31 +136,34 @@ def main( arguments ):
     output = {}
 
     # parse text
-    (text_list, metadata, title) = parse(text, file_type)
+    (title, metadata, text_list) = parse(text, file_type)
     # TODO remove dummy values
-    text_list = [["my", "amazing", "book"], ["hello", "world", "book"]]
-    title = "my amazing book"
+    # text_list = [["my", "amazing", "book"], ["hello", "world", "book"]]
+    # title = "my amazing book"
+
+    # Get ngrams and add to output
+    output["ngrams"] = get_ngrams(text_list)
 
     # metadata will either be populated or an empty dictionary
     output["metadata"] = metadata
 
     # title is either a string or none
     output["title"] = { "title" : title }
-    output["title"]["indices"] = get_title_indices(title, text_list)
-
-    # Get ngrams and add to output
-    output["ngrams"] = get_ngrams(text_list)
+    output["title"]["indices"] = get_title_indices(title, output["ngrams"][1])
 
     # Write to file as JSON
+    if output_fname == None:
+        output_fname = "dummy.json"
     # TODO output file name should be programmatically generated
     try:
-        fout = open("dummy.json", "w")
+        fout = open(output_fname, "w")
     except:
         print("ERROR: Output file creation failed")
         sys.exit()
 
     json.dump(output, fout, sort_keys=True, indent=4, \
         separators=(',', ':'))
+    fout.close()
 
 
 if __name__ == "__main__":

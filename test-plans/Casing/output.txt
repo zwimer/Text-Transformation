@@ -1,12 +1,12 @@
 {
 	"title" : {
-		"title" : Null
-		"indicies" : []
+		"title" : null,
+		"indices" : []
 	},
 	"metadata" : {
 	},
 	"ngrams" : {
-		1 : {
+		"1" : {
 			"hello" : [ 0 ],
 			"world" : [ 1 ],
 			"i" : [ 2 ],
@@ -15,7 +15,7 @@
 		    "casing" : [ 5 ],
       		"problem" : [ 6 ]
 		},
-		2 : {
+		"2" : {
 			"hello world" : [ 0 ],
 			"world i" : [ 1 ],
 			"i have" : [ 2 ],
@@ -23,7 +23,7 @@
 		    "a casing" : [ 4 ],
 		    "casing problem" : [ 5 ]
 		},
-		3 : {
+		"3" : {
 			"hello world i" : [ 0 ],
 			"world i have" : [ 1 ],
       		"i have a" : [ 2 ],

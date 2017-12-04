@@ -1,0 +1,69 @@
+{
+    "metadata":{},
+    "ngrams":{
+        "1":{
+            "a":[
+                4
+            ],
+            "casing":[
+                5
+            ],
+            "have":[
+                3
+            ],
+            "hello":[
+                0
+            ],
+            "i":[
+                2
+            ],
+            "problem":[
+                6
+            ],
+            "world":[
+                1
+            ]
+        },
+        "2":{
+            "a casing":[
+                4
+            ],
+            "casing problem":[
+                5
+            ],
+            "have a":[
+                3
+            ],
+            "hello world":[
+                0
+            ],
+            "i have":[
+                2
+            ],
+            "world i":[
+                1
+            ]
+        },
+        "3":{
+            "a casing problem":[
+                4
+            ],
+            "have a casing":[
+                3
+            ],
+            "hello world i":[
+                0
+            ],
+            "i have a":[
+                2
+            ],
+            "world i have":[
+                1
+            ]
+        }
+    },
+    "title":{
+        "indices":[],
+        "title":null
+    }
+}

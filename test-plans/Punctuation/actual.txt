@@ -1,0 +1,51 @@
+{
+    "metadata":{},
+    "ngrams":{
+        "1":{
+            "has":[
+                2
+            ],
+            "punctuation":[
+                3
+            ],
+            "sentence":[
+                1
+            ],
+            "this":[
+                0
+            ],
+            "wow":[
+                4
+            ]
+        },
+        "2":{
+            "has punctuation":[
+                2
+            ],
+            "punctuation wow":[
+                3
+            ],
+            "sentence has":[
+                1
+            ],
+            "this sentence":[
+                0
+            ]
+        },
+        "3":{
+            "has punctuation wow":[
+                2
+            ],
+            "sentence has punctuation":[
+                1
+            ],
+            "this sentence has":[
+                0
+            ]
+        }
+    },
+    "title":{
+        "indices":[],
+        "title":null
+    }
+}

@@ -1,25 +1,25 @@
 {
 	"title" : {
-		"title" : Null
-		"indicies" : []
+		"title" : null,
+		"indices" : []
 	},
 	"metadata" : {
 	},
 	"ngrams" : {
-		1 : {
+		"1" : {
 			"this" : [ 0 ],
 			"sentence" : [ 1 ],
 			"has" : [ 2 ],
 			"punctuation" : [ 3 ],
       "wow" : [ 4 ]
 		},
-		2 : {
+		"2" : {
 			"this sentence" : [ 0 ],
 			"sentence has" : [ 1 ],
 			"has punctuation" : [ 2 ],
       "punctuation wow" : [ 3 ]
 		},
-		3 : {
+		"3" : {
 			"this sentence has" : [ 0 ],
 			"sentence has punctuation" : [ 1 ],
       "has punctuation wow" : [ 2 ]

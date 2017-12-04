@@ -377,6 +377,33 @@ class TestHtmlSanitizer(unittest.TestCase):
         self.run_test_check_metadata(html, metadata)
         self.run_test_check_title(html, title)
 
+    def test_remove_javascript_comments(self):
+        """
+        :throws AssertionError: If test case fail
+        :returns: nothing
+        Test that the parser removes javascript
+        """
+
+        # Test input and all expected outputs
+        html = ('<script>\n'
+                'Everything here should be ignored\n'
+                '// Here too'
+                '/* And here'
+                ' And here */'
+                '</script>\n'
+                '<script src = "This too"> Should be removed </script>\n'
+                '<script/>\n'
+                '<meta name="author" content="Meg"> Meg\n'
+                'Hello World book\n')
+        output = ['\n', '\n', '\n', ' Meg\nHello World book\n']
+        metadata = {'author' : 'meg'}
+        title = None
+
+        # Test the parser
+        self.run_test_check_output(html, output)
+        self.run_test_check_metadata(html, metadata)
+        self.run_test_check_title(html, title)
+
     def test_remove_inline_css(self):
         """
         :throws AssertionError: If test case fail

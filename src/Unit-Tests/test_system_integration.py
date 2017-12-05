@@ -8,6 +8,7 @@ that error has been left runnable
 """
 
 import sys
+import os
 import json
 import difflib
 import unittest
@@ -48,6 +49,14 @@ class TestSystemIntegration(unittest.TestCase):
         except AssertionError:
             raise
 
+    def assert_file_does_not_exist(self, filepath):
+        """
+        param filepath: relative path to file to check
+        throws AssertionError: if file exists
+        Checks that the file specified does not exist
+        """
+        self.assertFalse(os.path.isfile(filepath))
+
     def run_test_check_output(self, input_fname, input_type,
       expected_output_fname, actual_output_fname):
         """
@@ -61,7 +70,78 @@ class TestSystemIntegration(unittest.TestCase):
         text_transformation.main( (input_fname, input_type), actual_output_fname)
         self.assert_equality(expected_output_fname, actual_output_fname)
 
-# TESTS
+    def run_test_no_output(self, input_fname, input_type, output_fname):
+        """
+        param input_fname: filename of the json input file
+        param input_type: file type of input
+        param output_fname: name for the output file
+        throws AssertionError: if test fails)
+        Test that the given input produces an error/ system exit and
+        therefore no output
+        """
+
+        with self.assertRaises(SystemExit):
+            text_transformation.main( (input_fname, input_type), output_fname)
+
+        self.assert_file_does_not_exist(output_fname)
+
+# ============================================================================
+# SYSTEM
+# ============================================================================
+
+    def test_improper_number_of_arguments(self):
+        """
+        throws AssertionError: If system does not exit and creates output
+        System test for binary files (should be ignored)
+        """
+        output_fname = "../../test-plans/System/Empty/output.txt"
+
+        # Specific test because specified arguemnts
+        # Check for failure with one or three arguments
+        with self.assertRaises(SystemExit):
+            text_transformation.main( (None,), output_fname )
+            text_transformation.main( (None, None, None), output_fname )
+
+        self.assert_file_does_not_exist(output_fname)
+
+    def test_file_type_not_allowed(self):
+        """
+        throws AssertionError: If system does not exit and creates output
+        System test for file types that are not txt, html, md
+        """
+        input_fname = "../../test-plans/System/File-Type-Not-Allowed/input.php"
+        input_type = "php"
+        output_fname = "../../test-plans/System/File-Type-Not-Allowed/output.txt"
+
+        self.run_test_no_output(input_fname, input_type, output_fname)
+
+    def test_binary(self):
+        """
+        throws AssertionError: If system does not exit and creates output
+        System test for binary files (should be ignored)
+        """
+        input_fname = "../../test-plans/System/Binary-File/input.jpg"
+        input_type = "txt" # So that file opening failure is tested instead of type checking
+        output_fname = "../../test-plans/System/Binary-File/output.txt"
+
+        # Specific test because of binary reading error
+        with self.assertRaises(UnicodeDecodeError):
+            text_transformation.main( (input_fname, input_type), output_fname)
+
+        self.assert_file_does_not_exist(output_fname)
+
+    def test_empty_text_file(self):
+        """
+        throws AssertionError: If system does not exit and creates output
+        System test for file types that are not txt, html, md
+        """
+        input_fname = "../../test-plans/System/Empty-Text-File/input.txt"
+        input_type = "txt"
+        expected_output_fname = "../../test-plans/System/Empty-Text-File/output.txt"
+        actual_output_fname = "../../test-plans/System/Empty-Text-File/actual.txt"
+
+        self.run_test_check_output(input_fname, input_type,
+            expected_output_fname, actual_output_fname)
 
 # ============================================================================
 # PLAINTEXT
@@ -72,10 +152,10 @@ class TestSystemIntegration(unittest.TestCase):
         throws AssertionError: If test case fails
         System test for casing
         """
-        input_fname = "../../test-plans/Casing/input.txt"
+        input_fname = "../../test-plans/Plaintext/Casing/input.txt"
         input_type = "txt"
-        expected_output_fname = "../../test-plans/Casing/output.txt"
-        actual_output_fname = "../../test-plans/Casing/actual.txt"
+        expected_output_fname = "../../test-plans/Plaintext/Casing/output.txt"
+        actual_output_fname = "../../test-plans/Plaintext/Casing/actual.txt"
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
@@ -86,10 +166,10 @@ class TestSystemIntegration(unittest.TestCase):
         throws AssertionError: If test case fails
         System test for punctuation
         """
-        input_fname = "../../test-plans/Punctuation/input.txt"
+        input_fname = "../../test-plans/Plaintext/Punctuation/input.txt"
         input_type = "txt"
-        expected_output_fname = "../../test-plans/Punctuation/output.txt"
-        actual_output_fname = "../../test-plans/Punctuation/actual.txt"
+        expected_output_fname = "../../test-plans/Plaintext/Punctuation/output.txt"
+        actual_output_fname = "../../test-plans/Plaintext/Punctuation/actual.txt"
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
@@ -100,10 +180,10 @@ class TestSystemIntegration(unittest.TestCase):
         throws AssertionError: If test case fails
         System test for stop punctuation
         """
-        input_fname = "../../test-plans/Stop-Punctuation/input.txt"
+        input_fname = "../../test-plans/Plaintext/Stop-Punctuation/input.txt"
         input_type = "txt"
-        expected_output_fname = "../../test-plans/Stop-Punctuation/output.txt"
-        actual_output_fname = "../../test-plans/Stop-Punctuation/actual.txt"
+        expected_output_fname = "../../test-plans/Plaintext/Stop-Punctuation/output.txt"
+        actual_output_fname = "../../test-plans/Plaintext/Stop-Punctuation/actual.txt"
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
@@ -114,10 +194,10 @@ class TestSystemIntegration(unittest.TestCase):
         throws AssertionError: If test case fails
         System test for stopwords
         """
-        input_fname = "../../test-plans/Stop-Words/input.txt"
+        input_fname = "../../test-plans/Plaintext/Stop-Words/input.txt"
         input_type = "txt"
-        expected_output_fname = "../../test-plans/Stop-Words/output.txt"
-        actual_output_fname = "../../test-plans/Stop-Words/actual.txt"
+        expected_output_fname = "../../test-plans/Plaintext/Stop-Words/output.txt"
+        actual_output_fname = "../../test-plans/Plaintext/Stop-Words/actual.txt"
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
@@ -128,10 +208,10 @@ class TestSystemIntegration(unittest.TestCase):
         throws AssertionError: If test case fails
         System test for stopwords
         """
-        input_fname = "../../test-plans/Whitespace/input.txt"
+        input_fname = "../../test-plans/Plaintext/Whitespace/input.txt"
         input_type = "txt"
-        expected_output_fname = "../../test-plans/Whitespace/output.txt"
-        actual_output_fname = "../../test-plans/Whitespace/actual.txt"
+        expected_output_fname = "../../test-plans/Plaintext/Whitespace/output.txt"
+        actual_output_fname = "../../test-plans/Plaintext/Whitespace/actual.txt"
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
@@ -206,20 +286,6 @@ class TestSystemIntegration(unittest.TestCase):
         input_type = "html"
         expected_output_fname = "../../test-plans/HTML/General-2/output.txt"
         actual_output_fname = "../../test-plans/HTML/General-2/actual.txt"
-
-        # Run the test!
-        self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
-
-    def test_html_html_in_javascript_comments(self):
-        """
-        throws AssertionError: If test case fails
-        System test for html in javascript comments HTML test plan
-        """
-        input_fname = "../../test-plans/HTML/Html-in-javascript-comments/input.txt"
-        input_type = "html"
-        expected_output_fname = "../../test-plans/HTML/Html-in-javascript-comments/output.txt"
-        actual_output_fname = "../../test-plans/HTML/Html-in-javascript-comments/actual.txt"
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
@@ -467,6 +533,20 @@ class TestSystemIntegration(unittest.TestCase):
         self.run_test_check_output(input_fname, input_type,
             expected_output_fname, actual_output_fname)
 
+    def test_md_inline_image_with_extra(self):
+        """
+        throws AssertionError: If test case fails
+        System test for inline image with extra md test plan
+        """
+        input_fname = "../../test-plans/Markdown/Inline-Image-with-extra/input.txt"
+        input_type = "md"
+        expected_output_fname = "../../test-plans/Markdown/Inline-Image-with-extra/output.txt"
+        actual_output_fname = "../../test-plans/Markdown/Inline-Image-with-extra/actual.txt"
+
+        # Run the test!
+        self.run_test_check_output(input_fname, input_type,
+            expected_output_fname, actual_output_fname)
+
     def test_md_inline_link_style(self):
         """
         throws AssertionError: If test case fails
@@ -481,6 +561,131 @@ class TestSystemIntegration(unittest.TestCase):
         self.run_test_check_output(input_fname, input_type,
             expected_output_fname, actual_output_fname)
 
+    def test_md_inline_line_style_with_extra(self):
+        """
+        throws AssertionError: If test case fails
+        System test for inline image with extra md test plan
+        """
+        input_fname = "../../test-plans/Markdown/Inline-Link-Style-with-extra/input.txt"
+        input_type = "md"
+        expected_output_fname = "../../test-plans/Markdown/Inline-Link-Style-with-extra/output.txt"
+        actual_output_fname = "../../test-plans/Markdown/Inline-Link-Style-with-extra/actual.txt"
+
+        # Run the test!
+        self.run_test_check_output(input_fname, input_type,
+            expected_output_fname, actual_output_fname)
+
+    def test_md_multi_tick_code_blocks(self):
+        """
+        throws AssertionError: If test case fails
+        System test for multi tick code blocks md test plan
+        """
+        input_fname = "../../test-plans/Markdown/Multi-Tick-Code-Blocks/input.txt"
+        input_type = "md"
+        expected_output_fname = "../../test-plans/Markdown/Multi-Tick-Code-Blocks/output.txt"
+        actual_output_fname = "../../test-plans/Markdown/Multi-Tick-Code-Blocks/actual.txt"
+
+        # Run the test!
+        self.run_test_check_output(input_fname, input_type,
+            expected_output_fname, actual_output_fname)
+
+    def test_md_numbered_reference_style_link(self):
+        """
+        throws AssertionError: If test case fails
+        System test for numbered reference style link md test plan
+        """
+        input_fname = "../../test-plans/Markdown/Numbered-Reference-Style-Link/input.txt"
+        input_type = "md"
+        expected_output_fname = "../../test-plans/Markdown/Numbered-Reference-Style-Link/output.txt"
+        actual_output_fname = "../../test-plans/Markdown/Numbered-Reference-Style-Link/actual.txt"
+
+        # Run the test!
+        self.run_test_check_output(input_fname, input_type,
+            expected_output_fname, actual_output_fname)
+
+    def test_md_reference_image(self):
+        """
+        throws AssertionError: If test case fails
+        System test for reference image md test plan
+        """
+        input_fname = "../../test-plans/Markdown/Reference-Image/input.txt"
+        input_type = "md"
+        expected_output_fname = "../../test-plans/Markdown/Reference-Image/output.txt"
+        actual_output_fname = "../../test-plans/Markdown/Reference-Image/actual.txt"
+
+        # Run the test!
+        self.run_test_check_output(input_fname, input_type,
+            expected_output_fname, actual_output_fname)
+
+    def test_md_reference_image_with_extra(self):
+        """
+        throws AssertionError: If test case fails
+        System test for reference image with extra md test plan
+        """
+        input_fname = "../../test-plans/Markdown/Reference-Image-with-extra/input.txt"
+        input_type = "md"
+        expected_output_fname = "../../test-plans/Markdown/Reference-Image-with-extra/output.txt"
+        actual_output_fname = "../../test-plans/Markdown/Reference-Image-with-extra/actual.txt"
+
+        # Run the test!
+        self.run_test_check_output(input_fname, input_type,
+            expected_output_fname, actual_output_fname)
+
+    def test_md_reference_style_link(self):
+        """
+        throws AssertionError: If test case fails
+        System test for reference style link md test plan
+        """
+        input_fname = "../../test-plans/Markdown/Reference-Style-Link/input.txt"
+        input_type = "md"
+        expected_output_fname = "../../test-plans/Markdown/Reference-Style-Link/output.txt"
+        actual_output_fname = "../../test-plans/Markdown/Reference-Style-Link/actual.txt"
+
+        # Run the test!
+        self.run_test_check_output(input_fname, input_type,
+            expected_output_fname, actual_output_fname)
+
+    def test_md_relative_repository_reference_link(self):
+        """
+        throws AssertionError: If test case fails
+        System test for relative repository reference link md test plan
+        """
+        input_fname = "../../test-plans/Markdown/Relative-Repository-Reference-Link/input.txt"
+        input_type = "md"
+        expected_output_fname = "../../test-plans/Markdown/Relative-Repository-Reference-Link/output.txt"
+        actual_output_fname = "../../test-plans/Markdown/Relative-Repository-Reference-Link/actual.txt"
+
+        # Run the test!
+        self.run_test_check_output(input_fname, input_type,
+            expected_output_fname, actual_output_fname)
+
+    def test_md_self_reference_style_link(self):
+        """
+        throws AssertionError: If test case fails
+        System test for self reference style link md test plan
+        """
+        input_fname = "../../test-plans/Markdown/Self-Reference-Style-Link/input.txt"
+        input_type = "md"
+        expected_output_fname = "../../test-plans/Markdown/Self-Reference-Style-Link/output.txt"
+        actual_output_fname = "../../test-plans/Markdown/Self-Reference-Style-Link/actual.txt"
+
+        # Run the test!
+        self.run_test_check_output(input_fname, input_type,
+            expected_output_fname, actual_output_fname)
+
+    def test_md_single_tick_code_blocks(self):
+        """
+        throws AssertionError: If test case fails
+        System test for single tick code blocks md test plan
+        """
+        input_fname = "../../test-plans/Markdown/Single-Tick-Code-Blocks/input.txt"
+        input_type = "md"
+        expected_output_fname = "../../test-plans/Markdown/Single-Tick-Code-Blocks/output.txt"
+        actual_output_fname = "../../test-plans/Markdown/Single-Tick-Code-Blocks/actual.txt"
+
+        # Run the test!
+        self.run_test_check_output(input_fname, input_type,
+            expected_output_fname, actual_output_fname)
 
 if __name__ == "__main__":
     unittest.main()

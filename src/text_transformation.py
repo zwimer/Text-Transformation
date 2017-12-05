@@ -127,6 +127,7 @@ def main( arguments, output_fname=None ):
         f = open(filename, "r", encoding="utf-8")
     except:
         print("ERROR: File failed to open")
+        f.close()
         sys.exit()
 
     text = f.read()

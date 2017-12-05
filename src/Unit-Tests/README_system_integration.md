@@ -3,9 +3,12 @@
 - All original output files were edited for correct JSON formatting.
 - Additional resource if need be: http://www.jsondiff.com/
 
-Tests that have failed and been documented have donotrun_ appended to the
-function name so new tests are easier to see - remove that phrase to run all
-tests, including previously failed ones
+## System Tests
+(All are expected to error, exit, and create no output)
+
+| Test | Outcome | Notes |
+|------------------------|
+| Binary File |
 
 ## Plaintext Tests
 
@@ -47,20 +50,16 @@ tests, including previously failed ones
 
 | Test | Outcome | Notes |
 |------------------------|
-| General-1 | **FAIL** |Originally failed due to the output file being the output for a separate test; Likely failing due to incorrect output file, not system failure |
+| General-1 | PASS | Originally failed due to the output file being the output for a separate test; Originally failed due to incorrect output file - '\n\t' not used as stopword |
 | Inline Image | PASS |  |
-| Inline Image with Extra | **NOT RUN** |  |
-| Inline Link Style | **PASS** |  |
-| Inline Link Style with Extra | **NOT RUN** |  |
-| Multi-tick Code Blocks | **NOT RUN** |  |
-| Numbered Reference Style Link | **NOT RUN** |  |
-| Reference Image | **NOT RUN** |  |
-| Reference Image with Extra | **NOT RUN** |  |
-| Reference Style Link | **NOT RUN** |  |
-| Relative Repository Reference Link | **NOT RUN** |  |
-| Self Reference Style Link | **NOT RUN** |  |
-| Single Tick Code Blocks | **NOT RUN** |  ||
-
-## Other Tests
-
-- Binary File: That output does not seem to align with our specs. Binary files should not produce any output at all - currently, the system will error on any file that is not within the expected types.
+| Inline Image with Extra | PASS |  |
+| Inline Link Style | PASS |  |
+| Inline Link Style with Extra | PASS |  |
+| Multi-tick Code Blocks | PASS |  |
+| Numbered Reference Style Link | PASS |  |
+| Reference Image | PASS |  |
+| Reference Image with Extra | PASS |  |
+| Reference Style Link | PASS |  |
+| Relative Repository Reference Link | PASS |  |
+| Self Reference Style Link | PASS |  |
+| Single Tick Code Blocks | PASS |  ||

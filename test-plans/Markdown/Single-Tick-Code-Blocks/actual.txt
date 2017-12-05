@@ -1,0 +1,42 @@
+{
+    "metadata":{},
+    "ngrams":{
+        "1":{
+            "great":[
+                3
+            ],
+            "ignore":[
+                1
+            ],
+            "this":[
+                2
+            ],
+            "we":[
+                0
+            ]
+        },
+        "2":{
+            "ignore this":[
+                1
+            ],
+            "this great":[
+                2
+            ],
+            "we ignore":[
+                0
+            ]
+        },
+        "3":{
+            "ignore this great":[
+                1
+            ],
+            "we ignore this":[
+                0
+            ]
+        }
+    },
+    "title":{
+        "indices":[],
+        "title":null
+    }
+}

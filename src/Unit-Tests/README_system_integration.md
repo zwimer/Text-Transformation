@@ -8,7 +8,10 @@
 
 | Test | Outcome | Notes |
 |------------------------|
-| Binary File |
+| One or three arguments | PASS |  |
+| Binary File | PASS |  |
+| File type not allowed | PASS |  |
+| Empty text file | PASS |  ||
 
 ## Plaintext Tests
 

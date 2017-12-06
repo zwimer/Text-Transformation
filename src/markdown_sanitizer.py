@@ -9,6 +9,7 @@ from text_sanitizer import TextSanitizer
 import string
 import re
 
+
 class MarkdownSanitizer(TextSanitizer):
     """
     This class is a TextSanitizer which also sanitizes markdown
@@ -24,8 +25,9 @@ class MarkdownSanitizer(TextSanitizer):
     def extract_plain_text_lists(self):
         """
         :returns: The plain text stored in self.content as a list of strings
-        Each string represents a contiguous section of the plain text of the markdown
-        As markdown contains no 'stop tags', it returns a list with one string.
+        Each string represents a contiguous section of the plain text of the
+        markdown. As markdown contains no 'stop tags', it returns a list with
+        one string.
         """
 
         # Remove all code blocks
@@ -45,4 +47,4 @@ class MarkdownSanitizer(TextSanitizer):
         result = str(ref_regex.sub("", '\n'+plain_text+'\n'))
 
         # Return the plain text in a list
-        return [ result ]
+        return [result]

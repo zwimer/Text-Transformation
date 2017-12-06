@@ -67,6 +67,7 @@ def get_title_indices(title, onegrams):
         newqueue = set()
 
         for index in onegrams[title_terms[current]]:
+
             # Add this to the queue if it is a continuation of a title "path"
             for path in queue:
                 if len(path) == 0 or path[-1] == index - 1:

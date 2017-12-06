@@ -30,11 +30,12 @@ def create_delimiter(text):
     # Return the resulting delimiter
     return delimiter
 
+
 def uniform_sanitize(in_data):
     """
     :param in_data: The data to be sanitized as a string
     :returns: in_text sanitized by TextSanitizer
-    A uniform method that HtmlSanitizer can use to sanitize 
+    A uniform method that HtmlSanitizer can use to sanitize
     plain text and get a string as a result
     """
     return ' '.join(TextSanitizer.sanitize_plain_text(str(in_data)))
@@ -43,8 +44,10 @@ def uniform_sanitize(in_data):
 class HtmlSanitizer(TextSanitizer):
     """
     This class is a TextSanitizer which also sanitizes html
-    It exposes interfaces allowing both title extraction and metadata extraction
-    Note: This class assumes meta title tags and unnamed tags are not metadata
+    It exposes interfaces allowing both title extraction
+    and metadata extraction
+    Note: This class assumes meta title tags and unnamed tags
+    are not metadata
     """
 
     def __init__(self, html):
@@ -67,7 +70,8 @@ class HtmlSanitizer(TextSanitizer):
 
     def get_metadata(self):
         """
-        :returns: A dict of metadata tags whose names are mapped to their sanitized content
+        :returns: A dict of metadata tags whose names
+        are mapped to their sanitized content
         Extracts metadata from the html stored in soup.
         Note: meta title tags and unnamed tags are not considered metadata
         """
@@ -76,7 +80,8 @@ class HtmlSanitizer(TextSanitizer):
         metadata = {}
 
         # For each tag of type tag_name in soup that has a name and content
-        for tag in self.soup.find_all('meta', attrs={'name': True, 'content': True}):
+        desired_attrs = {'name': True, 'content': True}
+        for tag in self.soup.find_all('meta', attrs=desired_attrs):
             tag_name = str(tag['name'])
 
             # Skip meta title tags or unnamed tags
@@ -93,7 +98,8 @@ class HtmlSanitizer(TextSanitizer):
 
     def get_title(self):
         """
-        :returns: Sanitized title of the self.soup. If none was found, return None
+        :returns: Sanitized title of the self.soup.
+        If none was found, return None
         Secondarily checks meta title tags if no titles tags were found.
         """
 
@@ -101,8 +107,10 @@ class HtmlSanitizer(TextSanitizer):
         for tag in self.soup.find_all('title'):
             return uniform_sanitize(' '.join(tag.contents))
 
-        # If no title tags were found, search for meta title tags that have content
-        for tag in self.soup.find_all('meta', attrs={'name': 'title', 'content': True}):
+        # If no title tags were found, search for
+        # meta title tags that have content
+        desired_attrs = {'name': 'title', 'content': True}
+        for tag in self.soup.find_all('meta', attrs=desired_attrs):
             return uniform_sanitize(tag['content'])
 
         # If no title tags were found, return None
@@ -110,8 +118,10 @@ class HtmlSanitizer(TextSanitizer):
 
     def extract_plain_text_lists(self):
         """
-        :returns: The plain text stored in the html of self.soup as a list of strings
-        Each string represents a contiguous section of the plain text of the html
+        :returns: The plain text stored in the html of
+        self.soup as a list of strings
+        Each string represents a contiguous section
+        of the plain text of the html
         The strings are split where tags were.
         Note: Special characters are replaced with what they represent
         """

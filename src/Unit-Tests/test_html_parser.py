@@ -1,5 +1,5 @@
 """
-This file contains the TestHtmlSanitizer class which contains 
+This file contains the TestHtmlSanitizer class which contains
 multiple different test used to test the html parser
 """
 
@@ -40,7 +40,7 @@ class TestHtmlSanitizer(unittest.TestCase):
         self.assertEqual(type(expected), type(actual))
 
         # If the types are jsons, make them strings
-        if type(actual) is [ list, dict ]:
+        if type(actual) is [list, dict]:
             expected = json_to_str(expected)
 
         # Test to ensure equality
@@ -127,10 +127,10 @@ class TestHtmlSanitizer(unittest.TestCase):
         """
 
         # Test input and expected metadata
-        html = ( '<title> My Amazing book </title>\n'
-                 '<meta name="author" content="Meg">\n'
-                 'Hello World book' )
-        metadata = {'author' : 'meg'}
+        html = ('<title> My Amazing book </title>\n'
+                '<meta name="author" content="Meg">\n'
+                'Hello World book')
+        metadata = {'author': 'meg'}
 
         # Test the parser
         self.run_test_check_metadata(html, metadata)
@@ -143,9 +143,9 @@ class TestHtmlSanitizer(unittest.TestCase):
         """
 
         # Test input and expected title
-        html = ( '<title> My Amazing book </title>\n'
-                 '<meta name="author" content="Meg">\n'
-                 'Hello World book' )
+        html = ('<title> My Amazing book </title>\n'
+                '<meta name="author" content="Meg">\n'
+                'Hello World book')
         title = 'my amazing book'
 
         # Test the parser
@@ -180,7 +180,7 @@ class TestHtmlSanitizer(unittest.TestCase):
             '',
             'meg'
         ]
-        metadata = {'author' : 'meg'}
+        metadata = {'author': 'meg'}
         title = 'my amazing book'
 
         # Test the parser
@@ -203,7 +203,7 @@ class TestHtmlSanitizer(unittest.TestCase):
                 'Hello World book')
         output = [' Bob\n', ' My Amazing book ',
                   '\n', ' Meg\nHello World book']
-        metadata = {'author' : 'bob'}
+        metadata = {'author': 'bob'}
         title = 'my amazing book'
 
         # Test the parser
@@ -225,7 +225,7 @@ class TestHtmlSanitizer(unittest.TestCase):
                 'Hello World book')
         output = [' Hi ', '\n', ' My Amazing book ',
                   '\n', ' Meg\nHello World book']
-        metadata = {'author' : 'meg'}
+        metadata = {'author': 'meg'}
         title = 'hi'
 
         # Test the parser
@@ -241,11 +241,12 @@ class TestHtmlSanitizer(unittest.TestCase):
         """
 
         # Test input and all expected outputs
-        html = ('<meta name="title" content="My Amazing book"> My Amazing book\n'
+        html = ('<meta name="title" content="My Amazing book"> '
+                'My Amazing book\n'
                 '<meta name="author" content="Meg"> Meg\n'
                 'Hello World book')
         output = [' My Amazing book\n', ' Meg\nHello World book']
-        metadata = {'author' : 'meg'}
+        metadata = {'author': 'meg'}
         title = 'my amazing book'
 
         # Test the parser
@@ -266,7 +267,7 @@ class TestHtmlSanitizer(unittest.TestCase):
                 '<meta name="author" content="Meg"> Meg\n'
                 'Hello World book')
         output = [' Hi\n', ' My Amazing book ', '\n', ' Meg\nHello World book']
-        metadata = {'author' : 'meg'}
+        metadata = {'author': 'meg'}
         title = 'my amazing book'
 
         # Test the parser
@@ -304,7 +305,7 @@ class TestHtmlSanitizer(unittest.TestCase):
         html = ('<meta name="author" content="Meg"> Meg\n'
                 'Hello World book')
         output = [' Meg\nHello World book']
-        metadata = {'author' : 'meg'}
+        metadata = {'author': 'meg'}
         title = None
 
         # Test the parser
@@ -324,7 +325,7 @@ class TestHtmlSanitizer(unittest.TestCase):
                 '<meta name="author" content="Meg"> Meg\n'
                 'Hello World book')
         output = ['\n', ' Meg\nHello World book']
-        metadata = {'author' : 'meg'}
+        metadata = {'author': 'meg'}
         title = None
 
         # Test the parser
@@ -345,7 +346,7 @@ class TestHtmlSanitizer(unittest.TestCase):
                 '<meta name="author" content="Meg"> Meg\n'
                 'Hello World book\n')
         output = ['\n', ' Meg\nHello World book\n']
-        metadata = {'author' : 'meg'}
+        metadata = {'author': 'meg'}
         title = None
 
         # Test the parser
@@ -369,7 +370,7 @@ class TestHtmlSanitizer(unittest.TestCase):
                 '<meta name="author" content="Meg"> Meg\n'
                 'Hello World book\n')
         output = ['\n', '\n', '\n', ' Meg\nHello World book\n']
-        metadata = {'author' : 'meg'}
+        metadata = {'author': 'meg'}
         title = None
 
         # Test the parser
@@ -396,7 +397,7 @@ class TestHtmlSanitizer(unittest.TestCase):
                 '<meta name="author" content="Meg"> Meg\n'
                 'Hello World book\n')
         output = ['\n', '\n', '\n', ' Meg\nHello World book\n']
-        metadata = {'author' : 'meg'}
+        metadata = {'author': 'meg'}
         title = None
 
         # Test the parser
@@ -416,7 +417,7 @@ class TestHtmlSanitizer(unittest.TestCase):
                 '<meta name="author" content="Meg"> Meg\n'
                 'Hello World book')
         output = [' Meg\n', ' Meg\nHello World book']
-        metadata = {'author' : 'meg'}
+        metadata = {'author': 'meg'}
         title = None
 
         # Test the parser
@@ -445,7 +446,7 @@ class TestHtmlSanitizer(unittest.TestCase):
                 '<meta name="author" content="Meg"> Meg\n'
                 'Hello World book')
         output = ['\n', ' Meg\nHello World book']
-        metadata = {'author' : 'meg'}
+        metadata = {'author': 'meg'}
         title = None
 
         # Test the parser
@@ -457,7 +458,8 @@ class TestHtmlSanitizer(unittest.TestCase):
         """
         :throws AssertionError: If test case fail
         :returns: nothing
-        Test that the parser replaces special characters with what they represent
+        Test that the parser replaces special characters
+        with what they represent
         For example: '&lt;' should be replaced with '<'
         """
 
@@ -465,13 +467,14 @@ class TestHtmlSanitizer(unittest.TestCase):
         html = ('<meta name="author" content="Meg"> Meg\n'
                 'Hello World &lt; book')
         output = [' Meg\nHello World < book']
-        metadata = {'author' : 'meg'}
+        metadata = {'author': 'meg'}
         title = None
 
         # Test the parser
         self.run_test_check_output(html, output)
         self.run_test_check_metadata(html, metadata)
         self.run_test_check_title(html, title)
+
 
 # Do not run on imports
 if __name__ == '__main__':

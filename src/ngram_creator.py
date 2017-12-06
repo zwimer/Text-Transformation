@@ -3,6 +3,7 @@
 # Date created: 15 Nov 2017
 # Date last edited: 16 Nov 2017
 
+
 def sanitize_stopwords(stopwords):
     """
     :param stopwords: list of stopwords
@@ -12,6 +13,7 @@ def sanitize_stopwords(stopwords):
     """
     for i, word in enumerate(stopwords):
         stopwords[i] = word.strip().lower()
+
 
 def create(text, number_of_terms, stopwords, use_stopwords):
     """
@@ -25,7 +27,7 @@ def create(text, number_of_terms, stopwords, use_stopwords):
         in the text body
     """
     terms = {}
-    index = 0 # index in full text
+    index = 0  # index in full text
 
     # Current term details
     # (term, term length)
@@ -66,7 +68,7 @@ def create(text, number_of_terms, stopwords, use_stopwords):
             if current_length == number_of_terms:
                 new_term = " ".join(current_term)
 
-                if not new_term in terms:
+                if new_term not in terms:
                     terms[new_term] = []
                 terms[new_term].append(index - number_of_terms)
 
@@ -77,6 +79,7 @@ def create(text, number_of_terms, stopwords, use_stopwords):
 
 # All below this only for test use
 
+
 def test(text, stopwords):
     """
     :param text: text as a list of lists of words
@@ -84,34 +87,37 @@ def test(text, stopwords):
     :returns None
     Runs a single test with the given text and stopwords
     """
-    print("="*72)
+    print("=" * 72)
     print("Test:\nstarting text: {}\nstopwords: {}\n".format(text, stopwords))
 
-    ngrams = {1 : create(text, 1, stopwords, False),\
-              2 : create(text, 2, stopwords, True),\
-              3 : create(text, 3, stopwords, True)}
+    ngrams = {1: create(text, 1, stopwords, False),
+              2: create(text, 2, stopwords, True),
+              3: create(text, 3, stopwords, True)}
 
     for key, value in ngrams.items():
         print("Ngram length: {}".format(key))
         for term, indices in value.items():
             print("\t{}: {}".format(term, indices))
 
-    print("="*72, "\n")
+    print("=" * 72, "\n")
+
 
 def main():
     text = [["my", "amazing", "book"], ["hello", "world", "book"]]
     stopwords = ["my"]
-    #sanitize_stopwords(stopwords)
+    # sanitize_stopwords(stopwords)
     test(text, stopwords)
 
-    text = [["this", "is", "a", "sentence", "with", "lots", "of",\
-            "stopwords"], ["short"], ["long", "sentence", "here",\
-            "and", "repetition", "of", "sentence", "stopwords"]]
+    text = [["this", "is", "a", "sentence", "with", "lots", "of",
+             "stopwords"], ["short"], ["long", "sentence", "here",
+                                       "and", "repetition", "of",
+                                       "sentence", "stopwords"]]
     stopwords = ["this", "is", "a", "with", "of", "and"]
     sanitize_stopwords(stopwords)
     test(text, stopwords)
 
     # more tests here
+
 
 if __name__ == "__main__":
     main()

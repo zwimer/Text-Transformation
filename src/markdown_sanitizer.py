@@ -39,9 +39,10 @@ class MarkdownSanitizer(TextSanitizer):
         plain_text = str(link_regex.sub("\\1", code_free_content))
 
         # Remove references
-        references = r'\[.+\]:.+'
+        references = r'\n\[.+\]:.*'
+        # references = r'(?:\n|^)\[[\w\s\d]*:[^\n]*(?:\n|$)'
         ref_regex = re.compile(references)
-        result = str(ref_regex.sub("", plain_text))
+        result = str(ref_regex.sub("", '\n'+plain_text+'\n'))
 
         # Return the plain text in a list
         return [ result ]

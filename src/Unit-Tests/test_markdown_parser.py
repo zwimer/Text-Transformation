@@ -11,7 +11,6 @@ import unittest
 sys.path.append('..')
 from markdown_sanitizer import MarkdownSanitizer
 
-# TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
 class TestMarkdownSanitizer(unittest.TestCase):
     """
     This class is used to test the markdown parser class

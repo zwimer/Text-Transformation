@@ -1,0 +1,48 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module text_transformation</title>
+<meta charset="utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>text_transformation</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/zwimer/School/LSP/Project/src/text_transformation.py">/Users/zwimer/School/LSP/Project/src/text_transformation.py</a></font></td></tr></table>
+    <p><tt>This&nbsp;file&nbsp;contains&nbsp;the&nbsp;main&nbsp;system&nbsp;code&nbsp;for&nbsp;running&nbsp;text&nbsp;transformation.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="html_sanitizer.html">html_sanitizer</a><br>
+<a href="json.html">json</a><br>
+</td><td width="25%" valign=top><a href="markdown_sanitizer.html">markdown_sanitizer</a><br>
+<a href="ngram_creator.html">ngram_creator</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+<a href="text_sanitizer.html">text_sanitizer</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-arg"><strong>arg</strong></a>()</dt><dd><tt>returns:&nbsp;filename&nbsp;(string)&nbsp;and&nbsp;file_type&nbsp;(string,&nbsp;assumed&nbsp;to&nbsp;be&nbsp;'txt',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'html',&nbsp;or&nbsp;'md')</tt></dd></dl>
+ <dl><dt><a name="-get_ngrams"><strong>get_ngrams</strong></a>(text)</dt><dd><tt>param&nbsp;text:&nbsp;list&nbsp;of&nbsp;lists&nbsp;of&nbsp;strings&nbsp;used&nbsp;for&nbsp;ngram&nbsp;creation<br>
+returns:&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;ngrams&nbsp;and&nbsp;their&nbsp;indices,&nbsp;divided&nbsp;by&nbsp;number<br>
+&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;terms</tt></dd></dl>
+ <dl><dt><a name="-get_title_indices"><strong>get_title_indices</strong></a>(title, onegrams)</dt><dd><tt>param&nbsp;title:&nbsp;the&nbsp;title&nbsp;string&nbsp;(can&nbsp;be&nbsp;None)<br>
+param&nbsp;onegrams:&nbsp;The&nbsp;dictionary&nbsp;of&nbsp;onegrams&nbsp;and&nbsp;their&nbsp;indices&nbsp;created<br>
+&nbsp;&nbsp;&nbsp;&nbsp;by&nbsp;ngram_creator<br>
+returns:&nbsp;a&nbsp;list&nbsp;of&nbsp;the&nbsp;title's&nbsp;indices</tt></dd></dl>
+ <dl><dt><a name="-main"><strong>main</strong></a>(arguments, output_fname<font color="#909090">=None</font>)</dt><dd><tt>param&nbsp;arguments:&nbsp;a&nbsp;tuple&nbsp;containing&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;file&nbsp;to&nbsp;be&nbsp;used&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;its&nbsp;type.&nbsp;Allowable&nbsp;types&nbsp;are&nbsp;'txt',&nbsp;'html',&nbsp;or&nbsp;'md'.</tt></dd></dl>
+ <dl><dt><a name="-parse"><strong>parse</strong></a>(text, file_type)</dt><dd><tt>param&nbsp;text:&nbsp;full&nbsp;text&nbsp;to&nbsp;be&nbsp;parsed<br>
+returns&nbsp;a&nbsp;tupe&nbsp;with&nbsp;(title&nbsp;string,&nbsp;metadata&nbsp;dictionary,&nbsp;parsed&nbsp;text&nbsp;lists)</tt></dd></dl>
+</td></tr></table>
+</body></html>

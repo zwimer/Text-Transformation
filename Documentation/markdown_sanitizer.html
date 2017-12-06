@@ -1,0 +1,76 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module markdown_sanitizer</title>
+<meta charset="utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>markdown_sanitizer</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/zwimer/School/LSP/Project/src/markdown_sanitizer.py">/Users/zwimer/School/LSP/Project/src/markdown_sanitizer.py</a></font></td></tr></table>
+    <p><tt>This&nbsp;file&nbsp;contains&nbsp;the&nbsp;class&nbsp;MarkdownParser.<br>
+This&nbsp;file&nbsp;is&nbsp;meant&nbsp;to&nbsp;sanitize&nbsp;markdown&nbsp;to&nbsp;extract&nbsp;the&nbsp;plain<br>
+text&nbsp;it&nbsp;represents.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="re.html">re</a><br>
+</td><td width="25%" valign=top><a href="string.html">string</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="text_sanitizer.html#TextSanitizer">text_sanitizer.TextSanitizer</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="markdown_sanitizer.html#MarkdownSanitizer">MarkdownSanitizer</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="MarkdownSanitizer">class <strong>MarkdownSanitizer</strong></a>(<a href="text_sanitizer.html#TextSanitizer">text_sanitizer.TextSanitizer</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;class&nbsp;is&nbsp;a&nbsp;<a href="text_sanitizer.html#TextSanitizer">TextSanitizer</a>&nbsp;which&nbsp;also&nbsp;sanitizes&nbsp;markdown<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="MarkdownSanitizer-__init__"><strong>__init__</strong></a>(self, content)</dt><dd><tt>:param&nbsp;content:&nbsp;The&nbsp;markdown&nbsp;to&nbsp;sanitize<br>
+The&nbsp;constructor</tt></dd></dl>
+
+<dl><dt><a name="MarkdownSanitizer-extract_plain_text_lists"><strong>extract_plain_text_lists</strong></a>(self)</dt><dd><tt>:returns:&nbsp;The&nbsp;plain&nbsp;text&nbsp;stored&nbsp;in&nbsp;self.<strong>content</strong>&nbsp;as&nbsp;a&nbsp;list&nbsp;of&nbsp;strings<br>
+Each&nbsp;string&nbsp;represents&nbsp;a&nbsp;contiguous&nbsp;section&nbsp;of&nbsp;the&nbsp;plain&nbsp;text&nbsp;of&nbsp;the<br>
+markdown.&nbsp;As&nbsp;markdown&nbsp;contains&nbsp;no&nbsp;'stop&nbsp;tags',&nbsp;it&nbsp;returns&nbsp;a&nbsp;list&nbsp;with<br>
+one&nbsp;string.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="text_sanitizer.html#TextSanitizer">text_sanitizer.TextSanitizer</a>:<br>
+<dl><dt><a name="MarkdownSanitizer-get_metadata"><strong>get_metadata</strong></a>(self)</dt><dd><tt>:returns:&nbsp;The&nbsp;metadata&nbsp;extracted&nbsp;from&nbsp;self.<strong>input</strong></tt></dd></dl>
+
+<dl><dt><a name="MarkdownSanitizer-get_title"><strong>get_title</strong></a>(self)</dt><dd><tt>:returns:&nbsp;The&nbsp;title&nbsp;extracted&nbsp;from&nbsp;self.<strong>input</strong></tt></dd></dl>
+
+<dl><dt><a name="MarkdownSanitizer-sanitize"><strong>sanitize</strong></a>(self)</dt><dd><tt>:returns:&nbsp;Sanitized&nbsp;text&nbsp;extracted&nbsp;from&nbsp;input&nbsp;as&nbsp;a&nbsp;list&nbsp;of&nbsp;strings<br>
+Each&nbsp;string&nbsp;represents&nbsp;a&nbsp;contiguous&nbsp;set&nbsp;of&nbsp;words&nbsp;not&nbsp;interrupted&nbsp;by<br>
+stop-tags</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="text_sanitizer.html#TextSanitizer">text_sanitizer.TextSanitizer</a>:<br>
+<dl><dt><a name="MarkdownSanitizer-sanitize_plain_text"><strong>sanitize_plain_text</strong></a>(dirty)</dt><dd><tt>:param&nbsp;dirty:&nbsp;The&nbsp;unclean&nbsp;text&nbsp;that&nbsp;must&nbsp;be&nbsp;sanitized<br>
+:returns:&nbsp;Sanitized&nbsp;plain&nbsp;text&nbsp;of&nbsp;dirty<br>
+This&nbsp;is&nbsp;the&nbsp;bread&nbsp;and&nbsp;butter&nbsp;function&nbsp;that&nbsp;will&nbsp;strip<br>
+symbols&nbsp;and&nbsp;punctuation&nbsp;from&nbsp;the&nbsp;input&nbsp;string.</tt></dd></dl>
+
+</td></tr></table></td></tr></table>
+</body></html>

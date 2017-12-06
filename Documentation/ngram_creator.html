@@ -1,0 +1,42 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module ngram_creator</title>
+<meta charset="utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>ngram_creator</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/zwimer/School/LSP/Project/src/ngram_creator.py">/Users/zwimer/School/LSP/Project/src/ngram_creator.py</a></font></td></tr></table>
+    <p><tt>#&nbsp;NGram&nbsp;Creation<br>
+#&nbsp;Author:&nbsp;Lee&nbsp;Cattarin<br>
+#&nbsp;Date&nbsp;created:&nbsp;15&nbsp;Nov&nbsp;2017<br>
+#&nbsp;Date&nbsp;last&nbsp;edited:&nbsp;16&nbsp;Nov&nbsp;2017</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-create"><strong>create</strong></a>(text, number_of_terms, stopwords, use_stopwords)</dt><dd><tt>:param&nbsp;text:&nbsp;list&nbsp;of&nbsp;lists&nbsp;of&nbsp;sanitized&nbsp;strings<br>
+:param&nbsp;number_of_terms:&nbsp;desired&nbsp;ngram&nbsp;length<br>
+:param&nbsp;stopwords:&nbsp;list&nbsp;of&nbsp;stopwords<br>
+:use_stopwords:&nbsp;True&nbsp;if&nbsp;stopwords&nbsp;are&nbsp;taken&nbsp;into&nbsp;account,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;False&nbsp;if&nbsp;they&nbsp;are&nbsp;treated&nbsp;as&nbsp;normal&nbsp;words<br>
+:returns&nbsp;dictionary&nbsp;of&nbsp;key,&nbsp;value&nbsp;=&nbsp;term,&nbsp;[indices]<br>
+Creates&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;terms&nbsp;of&nbsp;the&nbsp;given&nbsp;length&nbsp;and&nbsp;their&nbsp;indices<br>
+&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;text&nbsp;body</tt></dd></dl>
+ <dl><dt><a name="-main"><strong>main</strong></a>()</dt></dl>
+ <dl><dt><a name="-sanitize_stopwords"><strong>sanitize_stopwords</strong></a>(stopwords)</dt><dd><tt>:param&nbsp;stopwords:&nbsp;list&nbsp;of&nbsp;stopwords<br>
+:returns&nbsp;None<br>
+Edits&nbsp;the&nbsp;stopword&nbsp;list&nbsp;in&nbsp;place&nbsp;to&nbsp;ensure&nbsp;words&nbsp;are&nbsp;stripped&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;spaces&nbsp;and&nbsp;lowercase</tt></dd></dl>
+ <dl><dt><a name="-test"><strong>test</strong></a>(text, stopwords)</dt><dd><tt>:param&nbsp;text:&nbsp;text&nbsp;as&nbsp;a&nbsp;list&nbsp;of&nbsp;lists&nbsp;of&nbsp;words<br>
+:param&nbsp;stopwords:&nbsp;the&nbsp;list&nbsp;of&nbsp;stopwords<br>
+:returns&nbsp;None<br>
+Runs&nbsp;a&nbsp;single&nbsp;test&nbsp;with&nbsp;the&nbsp;given&nbsp;text&nbsp;and&nbsp;stopwords</tt></dd></dl>
+</td></tr></table>
+</body></html>

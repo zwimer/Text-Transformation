@@ -1,0 +1,116 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module html_sanitizer</title>
+<meta charset="utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>html_sanitizer</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/zwimer/School/LSP/Project/src/html_sanitizer.py">/Users/zwimer/School/LSP/Project/src/html_sanitizer.py</a></font></td></tr></table>
+    <p><tt>This&nbsp;file&nbsp;contains&nbsp;the&nbsp;class&nbsp;<a href="#HtmlSanitizer">HtmlSanitizer</a>.<br>
+This&nbsp;file&nbsp;is&nbsp;meant&nbsp;to&nbsp;sanitize&nbsp;html&nbsp;to&nbsp;extract&nbsp;the&nbsp;plain<br>
+text&nbsp;it&nbsp;represents.&nbsp;This&nbsp;class&nbsp;also&nbsp;exposes&nbsp;methods&nbsp;which<br>
+allow&nbsp;the&nbsp;extraction&nbsp;of&nbsp;metadata&nbsp;and&nbsp;the&nbsp;title&nbsp;of&nbsp;the&nbsp;html.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="random.html">random</a><br>
+</td><td width="25%" valign=top><a href="re.html">re</a><br>
+</td><td width="25%" valign=top><a href="string.html">string</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="text_sanitizer.html#TextSanitizer">text_sanitizer.TextSanitizer</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="html_sanitizer.html#HtmlSanitizer">HtmlSanitizer</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="HtmlSanitizer">class <strong>HtmlSanitizer</strong></a>(<a href="text_sanitizer.html#TextSanitizer">text_sanitizer.TextSanitizer</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;class&nbsp;is&nbsp;a&nbsp;<a href="text_sanitizer.html#TextSanitizer">TextSanitizer</a>&nbsp;which&nbsp;also&nbsp;sanitizes&nbsp;html<br>
+It&nbsp;exposes&nbsp;interfaces&nbsp;allowing&nbsp;both&nbsp;title&nbsp;extraction<br>
+and&nbsp;metadata&nbsp;extraction<br>
+Note:&nbsp;This&nbsp;class&nbsp;assumes&nbsp;meta&nbsp;title&nbsp;tags&nbsp;and&nbsp;unnamed&nbsp;tags<br>
+are&nbsp;not&nbsp;metadata<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="HtmlSanitizer-__init__"><strong>__init__</strong></a>(self, html)</dt><dd><tt>:param&nbsp;html:&nbsp;The&nbsp;html&nbsp;to&nbsp;be&nbsp;parsed<br>
+The&nbsp;constructor</tt></dd></dl>
+
+<dl><dt><a name="HtmlSanitizer-clear_all_tags_of_name"><strong>clear_all_tags_of_name</strong></a>(self, tag_name)</dt><dd><tt>:param&nbsp;tag:&nbsp;The&nbsp;tag&nbsp;to&nbsp;be&nbsp;removed<br>
+:returns:&nbsp;nothing<br>
+Clear&nbsp;all&nbsp;tags&nbsp;of&nbsp;type&nbsp;tag&nbsp;in&nbsp;the&nbsp;html&nbsp;stored&nbsp;in&nbsp;self.<strong>soup</strong></tt></dd></dl>
+
+<dl><dt><a name="HtmlSanitizer-clear_code"><strong>clear_code</strong></a>(self)</dt><dd><tt>:returns:&nbsp;nothing<br>
+Clear&nbsp;all&nbsp;code&nbsp;tags&nbsp;in&nbsp;the&nbsp;html&nbsp;stored&nbsp;in&nbsp;self.<strong>soup</strong></tt></dd></dl>
+
+<dl><dt><a name="HtmlSanitizer-clear_comments"><strong>clear_comments</strong></a>(self)</dt><dd><tt>:returns:&nbsp;nothing<br>
+Clear&nbsp;comments&nbsp;in&nbsp;the&nbsp;html&nbsp;stored&nbsp;in&nbsp;self.<strong>soup</strong></tt></dd></dl>
+
+<dl><dt><a name="HtmlSanitizer-clear_tag"><strong>clear_tag</strong></a>(self, tag)</dt><dd><tt>:param&nbsp;tag:&nbsp;The&nbsp;tag&nbsp;to&nbsp;be&nbsp;cleared<br>
+:returns:&nbsp;nothing</tt></dd></dl>
+
+<dl><dt><a name="HtmlSanitizer-extract_plain_text_lists"><strong>extract_plain_text_lists</strong></a>(self)</dt><dd><tt>:returns:&nbsp;The&nbsp;plain&nbsp;text&nbsp;stored&nbsp;in&nbsp;the&nbsp;html&nbsp;of<br>
+self.<strong>soup</strong>&nbsp;as&nbsp;a&nbsp;list&nbsp;of&nbsp;strings<br>
+Each&nbsp;string&nbsp;represents&nbsp;a&nbsp;contiguous&nbsp;section<br>
+of&nbsp;the&nbsp;plain&nbsp;text&nbsp;of&nbsp;the&nbsp;html<br>
+The&nbsp;strings&nbsp;are&nbsp;split&nbsp;where&nbsp;tags&nbsp;were.<br>
+Note:&nbsp;Special&nbsp;characters&nbsp;are&nbsp;replaced&nbsp;with&nbsp;what&nbsp;they&nbsp;represent</tt></dd></dl>
+
+<dl><dt><a name="HtmlSanitizer-get_metadata"><strong>get_metadata</strong></a>(self)</dt><dd><tt>:returns:&nbsp;A&nbsp;dict&nbsp;of&nbsp;metadata&nbsp;tags&nbsp;whose&nbsp;names<br>
+are&nbsp;mapped&nbsp;to&nbsp;their&nbsp;sanitized&nbsp;content<br>
+Extracts&nbsp;metadata&nbsp;from&nbsp;the&nbsp;html&nbsp;stored&nbsp;in&nbsp;soup.<br>
+Note:&nbsp;meta&nbsp;title&nbsp;tags&nbsp;and&nbsp;unnamed&nbsp;tags&nbsp;are&nbsp;not&nbsp;considered&nbsp;metadata</tt></dd></dl>
+
+<dl><dt><a name="HtmlSanitizer-get_title"><strong>get_title</strong></a>(self)</dt><dd><tt>:returns:&nbsp;Sanitized&nbsp;title&nbsp;of&nbsp;the&nbsp;self.<strong>soup</strong>.<br>
+If&nbsp;none&nbsp;was&nbsp;found,&nbsp;return&nbsp;None<br>
+Secondarily&nbsp;checks&nbsp;meta&nbsp;title&nbsp;tags&nbsp;if&nbsp;no&nbsp;titles&nbsp;tags&nbsp;were&nbsp;found.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="text_sanitizer.html#TextSanitizer">text_sanitizer.TextSanitizer</a>:<br>
+<dl><dt><a name="HtmlSanitizer-sanitize"><strong>sanitize</strong></a>(self)</dt><dd><tt>:returns:&nbsp;Sanitized&nbsp;text&nbsp;extracted&nbsp;from&nbsp;input&nbsp;as&nbsp;a&nbsp;list&nbsp;of&nbsp;strings<br>
+Each&nbsp;string&nbsp;represents&nbsp;a&nbsp;contiguous&nbsp;set&nbsp;of&nbsp;words&nbsp;not&nbsp;interrupted&nbsp;by<br>
+stop-tags</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="text_sanitizer.html#TextSanitizer">text_sanitizer.TextSanitizer</a>:<br>
+<dl><dt><a name="HtmlSanitizer-sanitize_plain_text"><strong>sanitize_plain_text</strong></a>(dirty)</dt><dd><tt>:param&nbsp;dirty:&nbsp;The&nbsp;unclean&nbsp;text&nbsp;that&nbsp;must&nbsp;be&nbsp;sanitized<br>
+:returns:&nbsp;Sanitized&nbsp;plain&nbsp;text&nbsp;of&nbsp;dirty<br>
+This&nbsp;is&nbsp;the&nbsp;bread&nbsp;and&nbsp;butter&nbsp;function&nbsp;that&nbsp;will&nbsp;strip<br>
+symbols&nbsp;and&nbsp;punctuation&nbsp;from&nbsp;the&nbsp;input&nbsp;string.</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-create_delimiter"><strong>create_delimiter</strong></a>(text)</dt><dd><tt>:param&nbsp;text:&nbsp;The&nbsp;text&nbsp;to&nbsp;create&nbsp;a&nbsp;delimiter&nbsp;for<br>
+:returns:&nbsp;A&nbsp;delimiter&nbsp;not&nbsp;in&nbsp;text<br>
+Create&nbsp;a&nbsp;non-whitespace&nbsp;only&nbsp;delimiter&nbsp;that&nbsp;does&nbsp;not&nbsp;exist&nbsp;in&nbsp;text</tt></dd></dl>
+ <dl><dt><a name="-uniform_sanitize"><strong>uniform_sanitize</strong></a>(in_data)</dt><dd><tt>:param&nbsp;in_data:&nbsp;The&nbsp;data&nbsp;to&nbsp;be&nbsp;sanitized&nbsp;as&nbsp;a&nbsp;string<br>
+:returns:&nbsp;in_text&nbsp;sanitized&nbsp;by&nbsp;<a href="text_sanitizer.html#TextSanitizer">TextSanitizer</a><br>
+A&nbsp;uniform&nbsp;method&nbsp;that&nbsp;<a href="#HtmlSanitizer">HtmlSanitizer</a>&nbsp;can&nbsp;use&nbsp;to&nbsp;sanitize<br>
+plain&nbsp;text&nbsp;and&nbsp;get&nbsp;a&nbsp;string&nbsp;as&nbsp;a&nbsp;result</tt></dd></dl>
+</td></tr></table>
+</body></html>

@@ -18,7 +18,9 @@ def arg():
     """
     # Get filename and type from CLI
     if len(sys.argv) != 3:
-        print("USAGE: python3 script filename file_type")
+        print("ERROR: Invalid usage:\nUSAGE: python3 " + sys.argv[0]
+            + " <file name> <file type> [optional output file]\n"
+            "Valid file extensions are: 'txt', 'md', 'html'" )
         sys.exit()
 
     filename = sys.argv[1]
@@ -115,7 +117,10 @@ def main(arguments, output_fname=None):
 
     # Check for validity
     if len(arguments) != 2:
-        print("ERROR: arguments must be filename, file_type")
+        print("ERROR: Invalid usage\nCommand line usage: "
+            "python3 text_transformation.py"
+            "<file name> <file type> [optional output file]\n"
+            "Valid file extensions are: 'txt', 'md', 'html'" )
         sys.exit()
 
     # TODO this will come from a different source eventually
@@ -160,7 +165,7 @@ def main(arguments, output_fname=None):
 
     # Write to file as JSON
     if output_fname is None:
-        output_fname = "dummy.json"
+        output_fname = ".".join(filename.split(".")[:-1]) + "_ouput.json"
     # TODO output file name should be programmatically generated
     try:
         fout = open(output_fname, "w")

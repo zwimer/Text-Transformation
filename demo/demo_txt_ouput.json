@@ -1,0 +1,121 @@
+{
+    "metadata":{},
+    "ngrams":{
+        "1":{
+            "all":[
+                9
+            ],
+            "are":[
+                8
+            ],
+            "casing":[
+                2
+            ],
+            "lots":[
+                12
+            ],
+            "mixed":[
+                1
+            ],
+            "now":[
+                3
+            ],
+            "of":[
+                13
+            ],
+            "punctuation":[
+                5
+            ],
+            "some":[
+                0,
+                4
+            ],
+            "split":[
+                10
+            ],
+            "stuff":[
+                6
+            ],
+            "these":[
+                7
+            ],
+            "up":[
+                11
+            ],
+            "whitespace":[
+                14
+            ]
+        },
+        "2":{
+            "all split":[
+                9
+            ],
+            "are all":[
+                8
+            ],
+            "lots of":[
+                12
+            ],
+            "mixed casing":[
+                1
+            ],
+            "now some":[
+                3
+            ],
+            "of whitespace":[
+                13
+            ],
+            "punctuation stuff":[
+                5
+            ],
+            "some mixed":[
+                0
+            ],
+            "some punctuation":[
+                4
+            ],
+            "split up":[
+                10
+            ],
+            "stuff these":[
+                6
+            ],
+            "these are":[
+                7
+            ]
+        },
+        "3":{
+            "all split up":[
+                9
+            ],
+            "are all split":[
+                8
+            ],
+            "lots of whitespace":[
+                12
+            ],
+            "now some punctuation":[
+                3
+            ],
+            "punctuation stuff these":[
+                5
+            ],
+            "some mixed casing":[
+                0
+            ],
+            "some punctuation stuff":[
+                4
+            ],
+            "stuff these are":[
+                6
+            ],
+            "these are all":[
+                7
+            ]
+        }
+    },
+    "title":{
+        "indices":[],
+        "title":null
+    }
+}

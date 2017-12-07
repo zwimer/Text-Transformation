@@ -1,0 +1,90 @@
+{
+    "metadata":{},
+    "ngrams":{
+        "1":{
+            "a":[
+                5
+            ],
+            "alternative":[
+                8
+            ],
+            "heading":[
+                0
+            ],
+            "here":[
+                10
+            ],
+            "leads":[
+                2
+            ],
+            "nice":[
+                6
+            ],
+            "picture":[
+                7
+            ],
+            "text":[
+                9
+            ],
+            "this":[
+                1
+            ],
+            "to":[
+                3
+            ],
+            "website":[
+                4
+            ]
+        },
+        "2":{
+            "a nice":[
+                5
+            ],
+            "alternative text":[
+                8
+            ],
+            "leads to":[
+                2
+            ],
+            "nice picture":[
+                6
+            ],
+            "picture alternative":[
+                7
+            ],
+            "text here":[
+                9
+            ],
+            "this leads":[
+                1
+            ],
+            "to website":[
+                3
+            ]
+        },
+        "3":{
+            "a nice picture":[
+                5
+            ],
+            "alternative text here":[
+                8
+            ],
+            "leads to website":[
+                2
+            ],
+            "nice picture alternative":[
+                6
+            ],
+            "picture alternative text":[
+                7
+            ],
+            "this leads to":[
+                1
+            ]
+        }
+    },
+    "title":{
+        "indices":[],
+        "title":null
+    }
+}

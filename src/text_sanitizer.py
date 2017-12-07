@@ -68,11 +68,10 @@ class TextSanitizer:
         # Lower case all words
         dirty = str(dirty).lower()
 
-        # Remove all symbols except # > (stop punctuation)
-        # Remove all symbols except ' - (words w/ contractions)
+        # Replace all symbols except # > with ' ' (stop punctuation)
+        # Replace all symbols except ' - with ' ' (words w/ contractions)
         removable_punct = re.sub("[#>\'-]", "", string.punctuation)
-        translator = str.maketrans("", "", removable_punct)
-        parsed = dirty.translate(translator)
+        parsed = re.sub("[" + re.escape(removable_punct) + "]", " ", dirty)
 
         # First, need to split into "blocks" on stop punctuation
         # (except html tags; this is done by HTML parser)
@@ -81,10 +80,8 @@ class TextSanitizer:
 
         # Second, need to "clean" out extraneous # and >
         # that were not part of stop punctuation from each block
-        clean_block_list = []
-        translator = str.maketrans("", "", "#>")
-        clean_block_list = [block.translate(translator)
-                            for block in block_list]
+        # Replace each occurence of them with a ' '
+        clean_block_list = [ re.sub("[#>]", " ", i) for i in block_list ]
 
         # Remove invalid apostrophes/hyphens that are not apart of a word
         invalid_contractions = "\'\s+|\s+\'|-\s+|\s+-"

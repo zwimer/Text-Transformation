@@ -1,4 +1,4 @@
-# lspt_project1: Z
+# LSPT Project: Team Z
 Large Scale Programming &amp; Testing Project 1 (Search Engine Architecture)
 
 Members:

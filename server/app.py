@@ -3,6 +3,8 @@ from flask import request
 from flask import jsonify
 
 import json
+import sys
+
 from subprocess import Popen
 
 app = Flask(__name__)
@@ -22,7 +24,7 @@ def welcome():
 @app.route("/stopWords", methods=["GET"])
 def return_stopwords():
     data = json.load( open("stopwords.json", "r") )
-    eprint("LOG: Sending stopwords to text_transformation")
+    eprint("LOG:\t(server)\tSending stopwords to text_transformation")
     return jsonify(data)
 
 # Test version of Indexing's /setToken
@@ -31,19 +33,27 @@ def receive_token():
     # While this works for my setup, it looks like indexing might have something
     # weird re: json vs plain text. TODO check with them
     if request.is_json:
-        eprint("LOG: Received json from text_transformation")
         request_json = request.get_json()
-        print( json.dumps(request_json, sort_keys=True, indent=4) )
-        eprint("LOG: JSON ^^^^^^^^^")
+
+        # Print to file (to check correctness)
+        outfile = open("check.json", "w")
+        json.dump(request_json, outfile, sort_keys=True, indent=4,
+                  separators=(',', ':'))
+
+        # Everything ok!
+        eprint("LOG:\t(server)\tReceived json data from text_transformation")
         return "POST OK"
     else:
-        eprint("LOG: Received other from text_transformation")
+        eprint("LOG:\t(server)\tReceived other from text_transformation")
         return "WRONG FORMAT"
 
 # Used in /document calls to create a filename out of a URL
 def url_to_fname(url):
-    for char in [".", "/", ":", "#", "__"]:
+    for char in [".", "/", ":", "#",]:
         url = url.replace(char, "_")
+    while "__" in url:
+        url = url.replace("__", "_")
+    url = url.strip("_")
     return url
 
 # Our call to receive a document POST
@@ -57,28 +67,34 @@ def get_document():
         data = request.get_json()
         # For understanding of JSON format, check crawling.json
 
-        # Start text_transformation for body
+        # Get file information for body
         fname = url_to_fname(data["url"])
         fname = "../data/" + fname + ".txt"
         ftype = "html"
 
-        eprint("LOG: Starting text_transformation for", fname)
+        eprint("LOG:\t(server)\tStarting text_transformation for", fname)
 
         outfile = open(fname, "w")
         json.dump(data["html"], outfile)
-        Popen(["python3", "../src/text_transformation.py", \
-        #    fname, "html"])
 
-        for attach in data["docs"]:
-            fname = "../data/" + url_to_fname(attach[0]) + ".txt"
-            ftype = attach[1]
+        # Start text_transformation subprocess
+        Popen(["python3", "../src/text_transformation.py", fname, "html"], \
+            shell=False, stdin=None, stdout=None, stderr=2)
 
-            eprint("LOG: Starting text_transformation for", fname)
+        # For each attached document
+        for attachment in data["docs"]:
+            # Get file info
+            fname = "../data/" + url_to_fname(attachment[0]) + ".txt"
+            ftype = attachment[1]
+
+            eprint("LOG:\t(server)\tStarting text_transformation for", fname)
 
             outfile = open(fname, "w")
-            json.dump(attach[2], outfile)
-            #subprocess.run(["python3", "../src/text_transformation.py", \
-            #    fname, "html"])
+            json.dump(attachment[2], outfile)
+
+            # Start subprocess
+            Popen(["python3", "../src/text_transformation.py", fname, ftype], \
+                shell=False, stdin=None, stdout=None, stderr=2)
 
         return "POST OK"
 

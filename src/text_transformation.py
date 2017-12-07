@@ -99,11 +99,11 @@ def get_ngrams(text):
     """
     # Get stopwords from indexing
     # TODO this is temporary, use real address
-    eprint("LOG:\tRequesting stop words from server")
-    r = requests.get("http://localhost:5000/stopWords")
+    eprint("LOG:\t(text_t)\tRequesting stop words from server")
+    r = requests.get("http://localhost:8080/stopWords")
     try:
         stopwords = r.json()
-        eprint("LOG:\tReceived stop words from server")
+        eprint("LOG:\t(text_t)\tReceived stop words from server")
     except Exception as e:
         eprint("ERROR: Failed to get stopwords from server")
         sys.exit()
@@ -141,7 +141,7 @@ def main(arguments, output_fname=None):
     filename = arguments[0]
     file_type = arguments[1]
 
-    eprint("\nLOG:\tfilename:", filename, "\n\tfile type:", file_type)
+    eprint("LOG:\t(text_t)\tfilename:", filename, "\n\t\t\tfile type:", file_type)
 
     types_allowed = ("txt", "pdf", "md", "html")
 
@@ -164,7 +164,7 @@ def main(arguments, output_fname=None):
     output = {}
 
     # parse text
-    eprint("LOG:\tParsing data")
+    eprint("LOG:\t(text_t)\tParsing data")
     (title, metadata, text_list) = parse(text, file_type)
 
     # Get ngrams and add to output
@@ -179,7 +179,7 @@ def main(arguments, output_fname=None):
 
     # TODO this is temporary, change when receiving real URLs
     output["url"] = filename
-    eprint("LOG:\tCreated json output object")
+    eprint("LOG:\t(text_t)\tCreated json output object")
 
     # If writing to file:
     """
@@ -203,12 +203,12 @@ def main(arguments, output_fname=None):
         "Content-Type":"application/json"}
     data = json.dumps(output)
 
-    eprint("LOG:\tSending json to server")
+    eprint("LOG:\t(text_t)\tSending json to server")
 
     # TODO: real server request pls
-    r = requests.post("http://localhost:5000/setToken", \
+    r = requests.post("http://localhost:8080/setToken", \
         data=data, headers=headers)
-    eprint("LOG:\tServer response:", r.text)
+    eprint("LOG:\t(text_t)\tServer response:", r.text)
 
 
 if __name__ == "__main__":

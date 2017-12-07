@@ -8,6 +8,6 @@ data = json.dumps(output)
 
 print("LOG: Sending crawling json to server")
 
-r = requests.post("http://localhost:5000/document", \
+r = requests.post("http://localhost:8080/document", \
     data=data, headers=headers)
 print(r.text)

@@ -3,6 +3,7 @@ This file contains the main system code for running text transformation.
 """
 
 import sys
+import os
 import json
 import requests
 
@@ -157,8 +158,10 @@ def main(arguments, output_fname=None):
         f.close()
         sys.exit()
 
+    # Get text, then remove file
     text = f.read()
     f.close()
+    os.remove(filename)
 
     # eventual full output dictionary
     output = {}

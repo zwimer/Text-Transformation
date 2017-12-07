@@ -4,6 +4,7 @@ This file contains the main system code for running text transformation.
 
 import sys
 import json
+import requests
 
 import html_sanitizer
 import markdown_sanitizer
@@ -40,7 +41,7 @@ def parse(text, file_type):
         parser = html_sanitizer.HtmlSanitizer(text)
     elif file_type == "md":
         parser = markdown_sanitizer.MarkdownSanitizer(text)
-    elif file_type == "txt":
+    elif file_type == "txt" or file_type == "pdf":
         parser = text_sanitizer.TextSanitizer(text)
 
     return (parser.get_title(), parser.get_metadata(), parser.sanitize())
@@ -92,12 +93,20 @@ def get_ngrams(text):
         of terms
     """
     # Get stopwords from indexing
-    # TODO add call to indexing
+    # TODO this is temporary, use real address
+    print("LOG:\tRequesting stop words from server")
+    r = requests.get("http://localhost:5000/stopWords")
+    try:
+        stopwords = r.json()
+        print("LOG:\tReceived stop words from server")
+    except Exception as e:
+        print("ERROR: Failed to get stopwords from server")
+        sys.exit()
+        
+    # To load from file
+    #stopwords = json.load( open("stopwords.json", "r") )
 
-    # stopwords_fname = "temp/english_stopwords.json"
-    # stopwords = json.load( open(stopwords_fname, "r") )
-
-    stopwords = ["couch"]
+    stopwords = stopwords["stopwords"]
 
     # Compile ngram_creator's results
     return {1: ngram_creator.create(text, 1, stopwords, False),
@@ -127,7 +136,9 @@ def main(arguments, output_fname=None):
     filename = arguments[0]
     file_type = arguments[1]
 
-    types_allowed = ("txt", "md", "html")
+    print("\nLOG:\tfilename:", filename, "\n\tfile type:", file_type)
+
+    types_allowed = ("txt", "pdf", "md", "html")
 
     if file_type not in types_allowed:
         print("ERROR: Unusable file type")
@@ -148,10 +159,8 @@ def main(arguments, output_fname=None):
     output = {}
 
     # parse text
+    print("LOG:\tParsing data")
     (title, metadata, text_list) = parse(text, file_type)
-    # TODO remove dummy values
-    # text_list = [["my", "amazing", "book"], ["hello", "world", "book"]]
-    # title = "my amazing book"
 
     # Get ngrams and add to output
     output["ngrams"] = get_ngrams(text_list)
@@ -163,6 +172,12 @@ def main(arguments, output_fname=None):
     output["title"] = {"title": title}
     output["title"]["indices"] = get_title_indices(title, output["ngrams"][1])
 
+    # TODO this is temporary, change when receiving real URLs
+    output["url"] = filename
+    print("LOG:\tCreated json output object")
+
+    # If writing to file:
+    """
     # Write to file as JSON
     if output_fname is None:
         output_fname = ".".join(filename.split(".")[:-1]) + "_ouput.json"
@@ -176,6 +191,19 @@ def main(arguments, output_fname=None):
     json.dump(output, fout, sort_keys=True, indent=4,
               separators=(',', ':'))
     fout.close()
+    """
+
+    # If sending to server:
+    headers = {"Accept":"application/json", \
+        "Content-Type":"application/json"}
+    data = json.dumps(output)
+
+    print("LOG:\tSending json to server")
+
+    # TODO: real server request pls
+    r = requests.post("http://localhost:5000/setToken", \
+        data=data, headers=headers)
+    print("LOG:\tServer response:", r.text)
 
 
 if __name__ == "__main__":

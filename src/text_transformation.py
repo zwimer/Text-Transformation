@@ -11,6 +11,11 @@ import markdown_sanitizer
 import text_sanitizer
 import ngram_creator
 
+# easy print to error
+# code from stackoverflow:
+# https://stackoverflow.com/questions/5574702/how-to-print-to-stderr-in-python
+def eprint(*args, **kwargs):
+    print(*args, file=sys.stderr, **kwargs)
 
 def arg():
     """
@@ -19,7 +24,7 @@ def arg():
     """
     # Get filename and type from CLI
     if len(sys.argv) != 3:
-        print("ERROR: Invalid usage:\nUSAGE: python3 " + sys.argv[0]
+        eprint("ERROR: Invalid usage:\nUSAGE: python3 " + sys.argv[0]
             + " <file name> <file type> [optional output file]\n"
             "Valid file extensions are: 'txt', 'md', 'html'" )
         sys.exit()
@@ -94,15 +99,15 @@ def get_ngrams(text):
     """
     # Get stopwords from indexing
     # TODO this is temporary, use real address
-    print("LOG:\tRequesting stop words from server")
+    eprint("LOG:\tRequesting stop words from server")
     r = requests.get("http://localhost:5000/stopWords")
     try:
         stopwords = r.json()
-        print("LOG:\tReceived stop words from server")
+        eprint("LOG:\tReceived stop words from server")
     except Exception as e:
-        print("ERROR: Failed to get stopwords from server")
+        eprint("ERROR: Failed to get stopwords from server")
         sys.exit()
-        
+
     # To load from file
     #stopwords = json.load( open("stopwords.json", "r") )
 
@@ -126,7 +131,7 @@ def main(arguments, output_fname=None):
 
     # Check for validity
     if len(arguments) != 2:
-        print("ERROR: Invalid usage\nCommand line usage: "
+        eprint("ERROR: Invalid usage\nCommand line usage: "
             "python3 text_transformation.py"
             "<file name> <file type> [optional output file]\n"
             "Valid file extensions are: 'txt', 'md', 'html'" )
@@ -136,19 +141,19 @@ def main(arguments, output_fname=None):
     filename = arguments[0]
     file_type = arguments[1]
 
-    print("\nLOG:\tfilename:", filename, "\n\tfile type:", file_type)
+    eprint("\nLOG:\tfilename:", filename, "\n\tfile type:", file_type)
 
     types_allowed = ("txt", "pdf", "md", "html")
 
     if file_type not in types_allowed:
-        print("ERROR: Unusable file type")
+        eprint("ERROR: Unusable file type")
         sys.exit()
 
     # Open and read in file
     try:
         f = open(filename, "r", encoding="utf-8")
     except Exception as e:
-        print("ERROR: File failed to open")
+        eprint("ERROR: File failed to open")
         f.close()
         sys.exit()
 
@@ -159,7 +164,7 @@ def main(arguments, output_fname=None):
     output = {}
 
     # parse text
-    print("LOG:\tParsing data")
+    eprint("LOG:\tParsing data")
     (title, metadata, text_list) = parse(text, file_type)
 
     # Get ngrams and add to output
@@ -174,7 +179,7 @@ def main(arguments, output_fname=None):
 
     # TODO this is temporary, change when receiving real URLs
     output["url"] = filename
-    print("LOG:\tCreated json output object")
+    eprint("LOG:\tCreated json output object")
 
     # If writing to file:
     """
@@ -185,7 +190,7 @@ def main(arguments, output_fname=None):
     try:
         fout = open(output_fname, "w")
     except Exception as e:
-        print("ERROR: Output file creation failed")
+        eprint("ERROR: Output file creation failed")
         sys.exit()
 
     json.dump(output, fout, sort_keys=True, indent=4,
@@ -198,12 +203,12 @@ def main(arguments, output_fname=None):
         "Content-Type":"application/json"}
     data = json.dumps(output)
 
-    print("LOG:\tSending json to server")
+    eprint("LOG:\tSending json to server")
 
     # TODO: real server request pls
     r = requests.post("http://localhost:5000/setToken", \
         data=data, headers=headers)
-    print("LOG:\tServer response:", r.text)
+    eprint("LOG:\tServer response:", r.text)
 
 
 if __name__ == "__main__":

@@ -3,9 +3,15 @@ from flask import request
 from flask import jsonify
 
 import json
-import subprocess
+from subprocess import Popen
 
 app = Flask(__name__)
+
+# easy print to error
+# code from stackoverflow:
+# https://stackoverflow.com/questions/5574702/how-to-print-to-stderr-in-python
+def eprint(*args, **kwargs):
+    print(*args, file=sys.stderr, **kwargs)
 
 # Default message for no additional address
 @app.route("/")
@@ -16,7 +22,7 @@ def welcome():
 @app.route("/stopWords", methods=["GET"])
 def return_stopwords():
     data = json.load( open("stopwords.json", "r") )
-    print("LOG: Sending stopwords to text_transformation")
+    eprint("LOG: Sending stopwords to text_transformation")
     return jsonify(data)
 
 # Test version of Indexing's /setToken
@@ -25,13 +31,13 @@ def receive_token():
     # While this works for my setup, it looks like indexing might have something
     # weird re: json vs plain text. TODO check with them
     if request.is_json:
-        print("LOG: Received json from text_transformation")
+        eprint("LOG: Received json from text_transformation")
         request_json = request.get_json()
         print( json.dumps(request_json, sort_keys=True, indent=4) )
-        print("LOG: JSON ^^^^^^^^^")
+        eprint("LOG: JSON ^^^^^^^^^")
         return "POST OK"
     else:
-        print("LOG: Received other from text_transformation")
+        eprint("LOG: Received other from text_transformation")
         return "WRONG FORMAT"
 
 # Used in /document calls to create a filename out of a URL
@@ -56,18 +62,18 @@ def get_document():
         fname = "../data/" + fname + ".txt"
         ftype = "html"
 
-        print("LOG: Starting text_transformation for", fname)
+        eprint("LOG: Starting text_transformation for", fname)
 
         outfile = open(fname, "w")
         json.dump(data["html"], outfile)
-        #subprocess.run(["python3", "../src/text_transformation.py", \
+        Popen(["python3", "../src/text_transformation.py", \
         #    fname, "html"])
 
         for attach in data["docs"]:
             fname = "../data/" + url_to_fname(attach[0]) + ".txt"
             ftype = attach[1]
 
-            print("LOG: Starting text_transformation for", fname)
+            eprint("LOG: Starting text_transformation for", fname)
 
             outfile = open(fname, "w")
             json.dump(attach[2], outfile)

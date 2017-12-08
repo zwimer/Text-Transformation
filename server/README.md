@@ -19,10 +19,12 @@ The Flask server. To make the server findable by Flask (assuming you have Flask 
 2. `http://<address>:8080/stopWords` is a testing function to replicate the call to Indexing to get stopwords. It takes GET requests only and returns JSON
 3. `http://<address>:8080/setToken` is a testing function to replicate the call to Indexing to give them our data. It takes POST requests only and returns 200 or 415  w/ relevant messages if it handles the response (other responses are handled by Flask)
 4. `http://<address>:8080/document` is a function to take in documents from crawling and save the document html and the body of each linked document in order to run text_transformation on each. It takes POST requests only and returns 200 or 415 w/ relevant messages if it handles the response (other responses are handled by Flask)
+5. `http://<address>:8080/log` returns the log (intended for browser)
+6. `http://<address>:8080/log/clear` clears previous log data
 
 # crawling.py
 
-A short program to send test crawling data to the server. Run `python3 crawling.py`. It should result in a response of `Received JSON` and nothing else. The server will have created files to send to text_transformation in the top-level `data` folder and a JSON output file `check.json` in the `server` folder.
+A short program to send test crawling data to the server. Run `python3 crawling.py`. It should result in a response of `Received JSON`. The server will have created files to send to text_transformation in the top-level `data` folder and a JSON output file `check.json` in the `server` folder.
 
 # text_transformation.py
 

@@ -25,7 +25,7 @@ def arg():
     """
     # Get filename and type from CLI
     if len(sys.argv) != 3:
-        eprint("ERROR: Invalid usage:\nUSAGE: python3 " + sys.argv[0]
+        eprint("ERROR: (text_t) Invalid usage:\nUSAGE: python3 " + sys.argv[0]
             + " <file name> <file type> [optional output file]\n"
             "Valid file extensions are: 'txt', 'md', 'html'" )
         sys.exit()
@@ -99,8 +99,9 @@ def get_ngrams(text):
         of terms
     """
     # Get stopwords from indexing
+    # eprint("LOG:\t(text_t)\tRequesting stop words from server")
+
     # TODO this is temporary, use real address
-    eprint("LOG:\t(text_t)\tRequesting stop words from server")
     r = requests.get("http://localhost:8080/stopWords")
     try:
         stopwords = r.json()
@@ -142,7 +143,7 @@ def main(arguments, output_fname=None):
     filename = arguments[0]
     file_type = arguments[1]
 
-    eprint("LOG:\t(text_t)\tfilename:", filename, "\n\t\t\tfile type:", file_type)
+    # eprint("LOG:\t(text_t)\tfilename:", filename, "\n\t\t\tfile type:", file_type)
 
     types_allowed = ("txt", "pdf", "md", "html")
 
@@ -167,7 +168,7 @@ def main(arguments, output_fname=None):
     output = {}
 
     # parse text
-    eprint("LOG:\t(text_t)\tParsing data")
+    # eprint("LOG:\t(text_t)\tParsing data")
     (title, metadata, text_list) = parse(text, file_type)
 
     # Get ngrams and add to output
@@ -182,7 +183,7 @@ def main(arguments, output_fname=None):
 
     # TODO this is temporary, change when receiving real URLs
     output["url"] = filename
-    eprint("LOG:\t(text_t)\tCreated json output object")
+    # eprint("LOG:\t(text_t)\tCreated json output object")
 
     # If writing to file:
     """
@@ -206,7 +207,7 @@ def main(arguments, output_fname=None):
         "Content-Type":"application/json"}
     data = json.dumps(output)
 
-    eprint("LOG:\t(text_t)\tSending json to server")
+    eprint("LOG:\t(text_t)\tSending json output to server")
 
     # TODO: real server request pls
     r = requests.post("http://localhost:8080/setToken", \

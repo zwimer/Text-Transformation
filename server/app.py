@@ -1,21 +1,41 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
+import jinja2
 
 import json
 import sys
+import os
 
 from subprocess import Popen
 
 app = Flask(__name__)
+app.config['DEBUG'] = True
 
-# Error handlers
-@app.errorhandler(404)
-def page_not_found(e):
-    return "That page doesn't exist\n" + usage(), 404
+def convert_log():
+    os.remove("templates/log.html")
+    outfile = open("templates/log.html", "a")
+    outfile.write("<!DOCTYPE html>\n<html lang='en'>\n<body>\n<p>\n")
+
+    for line in open("templates/log.txt", "r"):
+        html_line = "* " + line.replace("\n", " <br />\n")
+        outfile.write(html_line)
+    outfile.write("</p>\n</body>\n</html>\n")
+    outfile.close()
 
 # Default message for no additional address
 @app.route("/")
 def welcome():
-    return "LSPT Text Transformation (Z)\n" + usage()
+    return render_template("info.html")
+
+@app.route("/log")
+def show_log():
+    convert_log()
+    return render_template("log.html")
+
+@app.route("/log/clear")
+def clear_log():
+    f = open("templates/log.txt", "w")
+    f.close()
+    return render_template("log_cleared.html")
 
 # Our call to receive a document POST
 @app.route("/document", methods=["POST"])
@@ -76,7 +96,7 @@ def get_document():
 @app.route("/stopWords", methods=["GET"])
 def test_indexing_stopwords():
     data = json.load( open("stopwords.json", "r") )
-    eprint("LOG:\t(server)\tSending stopwords to text_transformation")
+    # eprint("LOG:\t(server)\tSending stopwords to text_transformation")
     return jsonify(data)
 
 # Test version of Indexing's /setToken
@@ -93,10 +113,10 @@ def test_indexing_set_token():
                   separators=(',', ':'))
 
         # Everything ok!
-        eprint("LOG:\t(server)\tReceived json data from text_transformation")
+        # eprint("LOG:\t(server)\tReceived json data from text_transformation")
         return "Received JSON"
     else:
-        eprint("LOG:\t(server)\tReceived other from text_transformation")
+        # eprint("LOG:\t(server)\tReceived other from text_transformation")
         return "Unsupported media type - data is not JSON", 415
 
 # =============================================================================
@@ -116,23 +136,3 @@ def url_to_fname(url):
         url = url.replace("__", "_")
     url = url.strip("_")
     return url
-
-# returns info string for server users
-def usage():
-    info = ("Pages:\n"
-            "\t/document :\n"
-            "\t\taccepts POST\n"
-            "\t\texpects type 'application/json'\n"
-            "\t\texpects fields:\n"
-            "\t\t{\n"
-            "\t\t\t'html' : html body of page\n"
-            "\t\t\t'docs' : [\n"
-            "\t\t\t\t[\n"
-            "\t\t\t\t\tlink to first attached document,\n"
-            "\t\t\t\t\tdocument extension/type,\n"
-            "\t\t\t\t\ttext body of document,\n"
-            "\t\t\t\t],\n"
-            "\t\t\t\tetc\n"
-            "\t\t\t],\n"
-            "\t\t\t'url' : site url\n" )
-    return info

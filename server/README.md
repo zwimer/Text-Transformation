@@ -21,6 +21,7 @@ The Flask server. To make the server findable by Flask (assuming you have Flask 
 4. `http://<address>:8080/document` is a function to take in documents from crawling and save the document html and the body of each linked document in order to run text_transformation on each. It takes POST requests only and returns 200 or 415 w/ relevant messages if it handles the response (other responses are handled by Flask)
 5. `http://<address>:8080/log` returns the log (intended for browser)
 6. `http://<address>:8080/log/clear` clears previous log data
+7. `http://<address>:8080/runTest` will run the crawling.py program to send crawling data to the server (kicking off text transformation), then display server response from receiving data
 
 # crawling.py
 

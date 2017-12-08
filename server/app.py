@@ -5,32 +5,23 @@ import json
 import sys
 import os
 
-from subprocess import Popen
+from subprocess import Popen, PIPE
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
-
-def convert_log():
-    os.remove("templates/log.html")
-    outfile = open("templates/log.html", "a")
-    outfile.write("<!DOCTYPE html>\n<html lang='en'>\n<body>\n<p>\n")
-
-    for line in open("templates/log.txt", "r"):
-        html_line = "* " + line.replace("\n", " <br />\n")
-        outfile.write(html_line)
-    outfile.write("</p>\n</body>\n</html>\n")
-    outfile.close()
 
 # Default message for no additional address
 @app.route("/")
 def welcome():
     return render_template("info.html")
 
+# View log
 @app.route("/log")
 def show_log():
     convert_log()
     return render_template("log.html")
 
+# Clear log
 @app.route("/log/clear")
 def clear_log():
     f = open("templates/log.txt", "w")
@@ -136,3 +127,14 @@ def url_to_fname(url):
         url = url.replace("__", "_")
     url = url.strip("_")
     return url
+
+def convert_log():
+    os.remove("templates/log.html")
+    outfile = open("templates/log.html", "a")
+    outfile.write("<!DOCTYPE html>\n<html lang='en'>\n<body>\n<p>\n")
+
+    for line in open("templates/log.txt", "r"):
+        html_line = "* " + line.replace("\n", " <br />\n")
+        outfile.write(html_line)
+    outfile.write("</p>\n</body>\n</html>\n")
+    outfile.close()

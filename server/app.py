@@ -7,13 +7,16 @@ import os
 
 from subprocess import Popen, PIPE
 
+
 app = Flask(__name__)
 app.config['DEBUG'] = True
+
 
 # Default message for no additional address
 @app.route("/")
 def welcome():
     return render_template("info.html")
+
 
 # View log
 @app.route("/log")
@@ -21,12 +24,14 @@ def show_log():
     convert_log()
     return render_template("log.html")
 
+
 # Clear log
 @app.route("/log/clear")
 def clear_log():
     f = open("templates/log.txt", "w")
     f.close()
     return render_template("log_cleared.html")
+
 
 # Our call to receive a document POST
 @app.route("/document", methods=["POST"])
@@ -37,7 +42,7 @@ def get_document():
 
         # Check for lack of fields
         for key in ["url", "html", "docs"]:
-            if not key in data:
+            if key not in data:
                 return "Required JSON fields not present", 400
 
         # Get file information for body
@@ -51,8 +56,8 @@ def get_document():
         json.dump(data["html"], outfile)
 
         # Start text_transformation subprocess
-        Popen(["python3", "../src/text_transformation.py", fname, "html"], \
-            shell=False, stdin=None, stdout=None, stderr=2)
+        Popen(["python3", "../src/text_transformation.py", fname, "html"],
+              shell=False, stdin=None, stdout=None, stderr=2)
 
         # For each attached document
         for attachment in data["docs"]:
@@ -72,8 +77,8 @@ def get_document():
             json.dump(attachment[2], outfile)
 
             # Start subprocess
-            Popen(["python3", "../src/text_transformation.py", fname, ftype], \
-                shell=False, stdin=None, stdout=None, stderr=2)
+            Popen(["python3", "../src/text_transformation.py", fname, ftype],
+                  shell=False, stdin=None, stdout=None, stderr=2)
 
         return "Received JSON"
     else:
@@ -83,18 +88,20 @@ def get_document():
 # TEST FUNCTIONS
 # =============================================================================
 
+
 # Test version of Indexing's /stopWords
 @app.route("/stopWords", methods=["GET"])
 def test_indexing_stopwords():
-    data = json.load( open("stopwords.json", "r") )
+    data = json.load(open("stopwords.json", "r"))
     # eprint("LOG:\t(server)\tSending stopwords to text_transformation")
     return jsonify(data)
+
 
 # Test version of Indexing's /setToken
 @app.route("/setToken", methods=["POST"])
 def test_indexing_set_token():
-    # While this works for my setup, it looks like indexing might have something
-    # weird re: json vs plain text. TODO check with them
+    # While this works for my setup, it looks like indexing might have
+    # something weird re: json vs plain text. TODO check with them
     if request.is_json:
         request_json = request.get_json()
 
@@ -114,19 +121,22 @@ def test_indexing_set_token():
 # UTILS
 # =============================================================================
 
+
 # print to error - code from stackoverflow:
 # https://stackoverflow.com/questions/5574702/how-to-print-to-stderr-in-python
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
 
+
 # Used in /document calls to create a filename out of a URL
 def url_to_fname(url):
-    for char in [".", "/", ":", "#",]:
+    for char in [".", "/", ":", "#"]:
         url = url.replace(char, "_")
     while "__" in url:
         url = url.replace("__", "_")
     url = url.strip("_")
     return url
+
 
 def convert_log():
     os.remove("templates/log.html")

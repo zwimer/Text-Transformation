@@ -12,11 +12,13 @@ import markdown_sanitizer
 import text_sanitizer
 import ngram_creator
 
+
 # easy print to error
 # code from stackoverflow:
 # https://stackoverflow.com/questions/5574702/how-to-print-to-stderr-in-python
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
+
 
 def arg():
     """
@@ -26,8 +28,8 @@ def arg():
     # Get filename and type from CLI
     if len(sys.argv) != 3:
         eprint("ERROR: (text_t) Invalid usage:\nUSAGE: python3 " + sys.argv[0]
-            + " <file name> <file type> [optional output file]\n"
-            "Valid file extensions are: 'txt', 'md', 'html'" )
+               + " <file name> <file type> [optional output file]\n" +
+               "Valid file extensions are: 'txt', 'md', 'html'")
         sys.exit()
 
     filename = sys.argv[1]
@@ -111,7 +113,7 @@ def get_ngrams(text):
         sys.exit()
 
     # To load from file
-    #stopwords = json.load( open("stopwords.json", "r") )
+    # stopwords = json.load( open("stopwords.json", "r") )
 
     stopwords = stopwords["stopwords"]
 
@@ -134,16 +136,17 @@ def main(arguments, output_fname=None):
     # Check for validity
     if len(arguments) != 2:
         eprint("ERROR: Invalid usage\nCommand line usage: "
-            "python3 text_transformation.py"
-            "<file name> <file type> [optional output file]\n"
-            "Valid file extensions are: 'txt', 'md', 'html'" )
+               "python3 text_transformation.py"
+               "<file name> <file type> [optional output file]\n"
+               "Valid file extensions are: 'txt', 'md', 'html'")
         sys.exit()
 
     # TODO this will come from a different source eventually
     filename = arguments[0]
     file_type = arguments[1]
 
-    # eprint("LOG:\t(text_t)\tfilename:", filename, "\n\t\t\tfile type:", file_type)
+    # eprint("LOG:\t(text_t)\tfilename:", filename,
+    # "\n\t\t\tfile type:", file_type)
 
     types_allowed = ("txt", "pdf", "md", "html")
 
@@ -203,15 +206,15 @@ def main(arguments, output_fname=None):
     """
 
     # If sending to server:
-    headers = {"Accept":"application/json", \
-        "Content-Type":"application/json"}
+    headers = {"Accept": "application/json",
+               "Content-Type": "application/json"}
     data = json.dumps(output)
 
     eprint("LOG:\t(text_t)\tSending json output to server")
 
     # TODO: real server request pls
-    r = requests.post("http://localhost:8080/setToken", \
-        data=data, headers=headers)
+    r = requests.post("http://localhost:8080/setToken",
+                      data=data, headers=headers)
     eprint("LOG:\t(text_t)\tServer response:", r.text)
 
 

@@ -49,14 +49,17 @@ def get_document():
         fname = url_to_fname(data["url"])
         fname = "../data/" + fname + ".txt"
         ftype = "html"
+        url = data["url"]
 
         eprint("LOG:\t(server)\tStarting text_transformation for", fname)
 
         outfile = open(fname, "w")
         json.dump(data["html"], outfile)
+        outfile.close();
 
         # Start text_transformation subprocess
-        Popen(["python3", "../src/text_transformation.py", fname, "html"],
+        Popen(["python3", "../src/text_transformation.py",
+              fname, ftype, url],
               shell=False, stdin=None, stdout=None, stderr=2)
 
         # For each attached document
@@ -70,14 +73,17 @@ def get_document():
             # Get file info
             fname = "../data/" + url_to_fname(attachment[0]) + ".txt"
             ftype = attachment[1]
+            url = attachment[0]
 
             eprint("LOG:\t(server)\tStarting text_transformation for", fname)
 
             outfile = open(fname, "w")
             json.dump(attachment[2], outfile)
+            outfile.close();
 
             # Start subprocess
-            Popen(["python3", "../src/text_transformation.py", fname, ftype],
+            Popen(["python3", "../src/text_transformation.py",
+                  fname, ftype, url],
                   shell=False, stdin=None, stdout=None, stderr=2)
 
         return "Received JSON"

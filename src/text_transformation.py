@@ -26,7 +26,7 @@ def arg():
         'html', or 'md')
     """
     # Get filename and type from CLI
-    if len(sys.argv) != 3:
+    if len(sys.argv) != 4:
         eprint("ERROR: (text_t) Invalid usage:\nUSAGE: python3 " + sys.argv[0]
                + " <file name> <file type> [optional output file]\n" +
                "Valid file extensions are: 'txt', 'md', 'html'")
@@ -34,8 +34,9 @@ def arg():
 
     filename = sys.argv[1]
     file_type = sys.argv[2]
+    url = sys.argv[3]
 
-    return filename, file_type
+    return filename, file_type, url
 
 
 def parse(text, file_type):
@@ -104,18 +105,13 @@ def get_ngrams(text):
     # eprint("LOG:\t(text_t)\tRequesting stop words from server")
 
     # TODO this is temporary, use real address
-    r = requests.get("http://localhost:8080/stopWords")
+    r = requests.get("http://teamq.cs.rpi.edu:8080/stopWords")
     try:
         stopwords = r.json()
         eprint("LOG:\t(text_t)\tReceived stop words from server")
     except Exception as e:
         eprint("ERROR: Failed to get stopwords from server")
         sys.exit()
-
-    # To load from file
-    # stopwords = json.load( open("stopwords.json", "r") )
-
-    stopwords = stopwords["stopwords"]
 
     # Compile ngram_creator's results
     return {1: ngram_creator.create(text, 1, stopwords, False),
@@ -134,16 +130,14 @@ def main(arguments, output_fname=None):
     """
 
     # Check for validity
-    if len(arguments) != 2:
+    if len(arguments) != 3:
         eprint("ERROR: Invalid usage\nCommand line usage: "
                "python3 text_transformation.py"
                "<file name> <file type> [optional output file]\n"
                "Valid file extensions are: 'txt', 'md', 'html'")
         sys.exit()
 
-    # TODO this will come from a different source eventually
-    filename = arguments[0]
-    file_type = arguments[1]
+    filename, file_type, url = arguments
 
     # eprint("LOG:\t(text_t)\tfilename:", filename,
     # "\n\t\t\tfile type:", file_type)
@@ -184,38 +178,20 @@ def main(arguments, output_fname=None):
     output["title"] = {"title": title}
     output["title"]["indices"] = get_title_indices(title, output["ngrams"][1])
 
-    # TODO this is temporary, change when receiving real URLs
-    output["url"] = filename
+    output["url"] = url
     # eprint("LOG:\t(text_t)\tCreated json output object")
-
-    # If writing to file:
-    """
-    # Write to file as JSON
-    if output_fname is None:
-        output_fname = ".".join(filename.split(".")[:-1]) + "_ouput.json"
-    # TODO output file name should be programmatically generated
-    try:
-        fout = open(output_fname, "w")
-    except Exception as e:
-        eprint("ERROR: Output file creation failed")
-        sys.exit()
-
-    json.dump(output, fout, sort_keys=True, indent=4,
-              separators=(',', ':'))
-    fout.close()
-    """
 
     # If sending to server:
     headers = {"Accept": "application/json",
-               "Content-Type": "application/json"}
+               "Content-Type": "text/plain"}
     data = json.dumps(output)
 
     eprint("LOG:\t(text_t)\tSending json output to server")
 
     # TODO: real server request pls
-    r = requests.post("http://localhost:8080/setToken",
+    r = requests.post("http://teamq.cs.rpi.edu:8080/setToken",
                       data=data, headers=headers)
-    eprint("LOG:\t(text_t)\tServer response:", r.text)
+    eprint("LOG:\t(text_t)\tServer response:", r.status_code, r.text)
 
 
 if __name__ == "__main__":

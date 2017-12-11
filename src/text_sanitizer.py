@@ -81,7 +81,7 @@ class TextSanitizer:
         # Second, need to "clean" out extraneous # and >
         # that were not part of stop punctuation from each block
         # Replace each occurence of them with a ' '
-        clean_block_list = [ re.sub("[#>]", " ", i) for i in block_list ]
+        clean_block_list = [re.sub("[#>]", " ", i) for i in block_list]
 
         # Remove invalid apostrophes/hyphens that are not apart of a word
         invalid_contractions = "\'\s+|\s+\'|-\s+|\s+-"

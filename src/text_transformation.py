@@ -18,9 +18,9 @@ def arg():
     """
     # Get filename and type from CLI
     if len(sys.argv) != 3:
-        print("ERROR: Invalid usage:\nUSAGE: python3 " + sys.argv[0]
-            + " <file name> <file type> [optional output file]\n"
-            "Valid file extensions are: 'txt', 'md', 'html'" )
+        print("ERROR: Invalid usage:\nUSAGE: python3 " + sys.argv[0] +
+              " <file name> <file type> [optional output file]\n"
+              "Valid file extensions are: 'txt', 'md', 'html'")
         sys.exit()
 
     filename = sys.argv[1]
@@ -118,9 +118,9 @@ def main(arguments, output_fname=None):
     # Check for validity
     if len(arguments) != 2:
         print("ERROR: Invalid usage\nCommand line usage: "
-            "python3 text_transformation.py"
-            "<file name> <file type> [optional output file]\n"
-            "Valid file extensions are: 'txt', 'md', 'html'" )
+              "python3 text_transformation.py"
+              "<file name> <file type> [optional output file]\n"
+              "Valid file extensions are: 'txt', 'md', 'html'")
         sys.exit()
 
     # TODO this will come from a different source eventually

@@ -11,6 +11,7 @@ import unittest
 sys.path.append('..')
 from markdown_sanitizer import MarkdownSanitizer
 
+
 class TestMarkdownSanitizer(unittest.TestCase):
     """
     This class is used to test the markdown parser class
@@ -30,7 +31,7 @@ class TestMarkdownSanitizer(unittest.TestCase):
         self.assertEqual(type(expected), type(actual))
 
         # If the types are jsons, make them strings
-        if type(actual) is [ list, dict ]:
+        if type(actual) is [list, dict]:
             expected = json_to_str(expected)
 
         # Test to ensure equality
@@ -66,7 +67,8 @@ class TestMarkdownSanitizer(unittest.TestCase):
         """
 
         # Test input and all expected outputs
-        md = ('\"Click ![here](www.freestuff.com/image_link) for free stuff\"\n')
+        md = (
+            '\"Click ![here](www.freestuff.com/image_link) for free stuff\"\n')
         output = ['\n\"Click !here for free stuff\"\n\n']
         metadata = None
         title = None
@@ -82,7 +84,8 @@ class TestMarkdownSanitizer(unittest.TestCase):
         """
 
         # Test input and all expected outputs
-        md = ('\"Click ![here](www.freestuff.com/image_link \"Title goes here\") for free stuff\"')
+        md = (
+            '\"Click ![here](www.freestuff.com/image_link \"Title goes here\") for free stuff\"')
         output = ['\n\"Click !here for free stuff\"\n']
         metadata = None
         title = None
@@ -146,7 +149,8 @@ class TestMarkdownSanitizer(unittest.TestCase):
         """
 
         # Test input and all expected outputs
-        md = ('\"Click [here][1] for free stuff\"\n\n[1]: https://www.google.com')
+        md = (
+            '\"Click [here][1] for free stuff\"\n\n[1]: https://www.google.com')
         output = ['\"Click here for free stuff\"\n\n']
         metadata = None
         title = None
@@ -162,7 +166,8 @@ class TestMarkdownSanitizer(unittest.TestCase):
         """
 
         # Test input and all expected outputs
-        md = ('\"Click [here][logo] for free stuff\"\n\n[logo]: https://www.google.com/my_image')
+        md = (
+            '\"Click [here][logo] for free stuff\"\n\n[logo]: https://www.google.com/my_image')
         output = ['\n\"Click here for free stuff\"\n\n']
         metadata = None
         title = None
@@ -217,6 +222,7 @@ class TestMarkdownSanitizer(unittest.TestCase):
 
         # Test the parser
         self.run_test_check_output(md, output)
+
 
 # Do not run on imports
 if __name__ == '__main__':

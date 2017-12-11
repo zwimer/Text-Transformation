@@ -32,11 +32,11 @@ class TestSystemIntegration(unittest.TestCase):
         """
 
         expected_f = open(expected_fname, 'r')
-        expected = json.load( expected_f )
+        expected = json.load(expected_f)
         expected_f.close()
 
         actual_f = open(actual_fname, 'r')
-        actual = json.load( actual_f )
+        actual = json.load(actual_f)
         actual_f.close()
 
         # Assert that the types match
@@ -58,7 +58,7 @@ class TestSystemIntegration(unittest.TestCase):
         self.assertFalse(os.path.isfile(filepath))
 
     def run_test_check_output(self, input_fname, input_type,
-      expected_output_fname, actual_output_fname):
+                              expected_output_fname, actual_output_fname):
         """
         param input_fname: filename of the json input file
         param input_type: file type of input
@@ -67,7 +67,8 @@ class TestSystemIntegration(unittest.TestCase):
         throws AssertionError: if test fails
         Test that the output matches the expected
         """
-        text_transformation.main( (input_fname, input_type), actual_output_fname)
+        text_transformation.main(
+            (input_fname, input_type), actual_output_fname)
         self.assert_equality(expected_output_fname, actual_output_fname)
 
     def run_test_no_output(self, input_fname, input_type, output_fname):
@@ -81,7 +82,7 @@ class TestSystemIntegration(unittest.TestCase):
         """
 
         with self.assertRaises(SystemExit):
-            text_transformation.main( (input_fname, input_type), output_fname)
+            text_transformation.main((input_fname, input_type), output_fname)
 
         self.assert_file_does_not_exist(output_fname)
 
@@ -99,8 +100,8 @@ class TestSystemIntegration(unittest.TestCase):
         # Specific test because specified arguemnts
         # Check for failure with one or three arguments
         with self.assertRaises(SystemExit):
-            text_transformation.main( (None,), output_fname )
-            text_transformation.main( (None, None, None), output_fname )
+            text_transformation.main((None,), output_fname)
+            text_transformation.main((None, None, None), output_fname)
 
         self.assert_file_does_not_exist(output_fname)
 
@@ -121,12 +122,12 @@ class TestSystemIntegration(unittest.TestCase):
         System test for binary files (should be ignored)
         """
         input_fname = "../../test-plans/System/Binary-File/input.jpg"
-        input_type = "txt" # So that file opening failure is tested instead of type checking
+        input_type = "txt"  # So that file opening failure is tested instead of type checking
         output_fname = "../../test-plans/System/Binary-File/output.txt"
 
         # Specific test because of binary reading error
         with self.assertRaises(UnicodeDecodeError):
-            text_transformation.main( (input_fname, input_type), output_fname)
+            text_transformation.main((input_fname, input_type), output_fname)
 
         self.assert_file_does_not_exist(output_fname)
 
@@ -141,7 +142,7 @@ class TestSystemIntegration(unittest.TestCase):
         actual_output_fname = "../../test-plans/System/Empty-Text-File/actual.txt"
 
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
 # ============================================================================
 # PLAINTEXT
@@ -159,7 +160,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_punctuation(self):
         """
@@ -173,7 +174,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_stop_punctuation(self):
         """
@@ -187,7 +188,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_stop_words(self):
         """
@@ -201,7 +202,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_whitespace(self):
         """
@@ -215,7 +216,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
 # ============================================================================
 # HTML
@@ -233,7 +234,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_html_duplicate_metadata(self):
         """
@@ -247,7 +248,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_html_duplicate_title(self):
         """
@@ -261,7 +262,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_html_general_1(self):
         """
@@ -275,7 +276,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_html_general_2(self):
         """
@@ -289,7 +290,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_html_inline_css(self):
         """
@@ -303,7 +304,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_html_inline_php(self):
         """
@@ -317,7 +318,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_html_Internal_css(self):
         """
@@ -331,7 +332,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_html_javascript_comments(self):
         """
@@ -345,7 +346,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_html_meta_title(self):
         """
@@ -359,7 +360,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_html_multiline_comments(self):
         """
@@ -373,7 +374,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_html_nested_html_comments(self):
         """
@@ -387,7 +388,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_html_no_meta_tags(self):
         """
@@ -401,7 +402,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_html_no_title(self):
         """
@@ -415,7 +416,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_html_plain_text(self):
         """
@@ -429,7 +430,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_html_script_tags(self):
         """
@@ -443,7 +444,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_html_single_line_comments(self):
         """
@@ -457,7 +458,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_html_special_characters(self):
         """
@@ -471,7 +472,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_html_tags(self):
         """
@@ -485,7 +486,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_html_title_meta_title(self):
         """
@@ -499,7 +500,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
 # ============================================================================
 # MARKDOWN
@@ -517,7 +518,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_md_inline_image(self):
         """
@@ -531,7 +532,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_md_inline_image_with_extra(self):
         """
@@ -545,7 +546,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_md_inline_link_style(self):
         """
@@ -559,7 +560,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_md_inline_line_style_with_extra(self):
         """
@@ -573,7 +574,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_md_multi_tick_code_blocks(self):
         """
@@ -587,7 +588,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_md_numbered_reference_style_link(self):
         """
@@ -601,7 +602,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_md_reference_image(self):
         """
@@ -615,7 +616,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_md_reference_image_with_extra(self):
         """
@@ -629,7 +630,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_md_reference_style_link(self):
         """
@@ -643,7 +644,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_md_relative_repository_reference_link(self):
         """
@@ -657,7 +658,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_md_self_reference_style_link(self):
         """
@@ -671,7 +672,7 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
 
     def test_md_single_tick_code_blocks(self):
         """
@@ -685,7 +686,8 @@ class TestSystemIntegration(unittest.TestCase):
 
         # Run the test!
         self.run_test_check_output(input_fname, input_type,
-            expected_output_fname, actual_output_fname)
+                                   expected_output_fname, actual_output_fname)
+
 
 if __name__ == "__main__":
     unittest.main()

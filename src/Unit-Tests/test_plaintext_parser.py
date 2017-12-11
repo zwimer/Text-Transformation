@@ -11,6 +11,7 @@ import unittest
 sys.path.append('..')
 from text_sanitizer import TextSanitizer
 
+
 class TestPlaintextSanitizer(unittest.TestCase):
     """
     This class is used to test the markdown parser class
@@ -30,7 +31,7 @@ class TestPlaintextSanitizer(unittest.TestCase):
         self.assertEqual(type(expected), type(actual))
 
         # If the types are jsons, make them strings
-        if type(actual) is [ list, dict ]:
+        if type(actual) is [list, dict]:
             expected = json_to_str(expected)
 
         # Test to ensure equality
@@ -122,7 +123,8 @@ class TestPlaintextSanitizer(unittest.TestCase):
 
         # Test the parser
         self.run_test_check_output(pt, output)
-        
+
+
 # Do not run on imports
 if __name__ == '__main__':
     unittest.main()

@@ -165,7 +165,7 @@ def main(arguments, output_fname=None):
 
     # Write to file as JSON
     if output_fname is None:
-        output_fname = ".".join(filename.split(".")[:-1]) + "_ouput.json"
+        output_fname = ".".join(filename.split(".")[:-1]) + "_output.json"
     # TODO output file name should be programmatically generated
     try:
         fout = open(output_fname, "w")
